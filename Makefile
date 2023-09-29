@@ -37,6 +37,9 @@ build: lint test ## Build the project
 	GOOS=linux GOARCH=amd64 go build -o $(BIN_DIR)/$(BINARY_NAME)-x86_64 .
 	GOOS=linux GOARCH=arm64 go build -o $(BIN_DIR)/$(BINARY_NAME)-arm64 .
 	GOOS=windows GOARCH=amd64 go build -o $(BIN_DIR)/$(BINARY_NAME)-windows-amd64.exe .
+	GOOS=darwin GOARCH=amd64 go build -o $(BIN_DIR)/$(BINARY_NAME)-macos-amd64 .
+	GOOS=darwin GOARCH=arm64 go build -o $(BIN_DIR)/$(BINARY_NAME)-macos-arm64 .
+
 
 
 release: build ## Create a GitHub release and upload the binary
@@ -47,7 +50,13 @@ release: build ## Create a GitHub release and upload the binary
 		gh release delete $(RELEASE_VERSION) -R $(GIT_REPO) --yes; \
 	fi
 	@echo "Creating a new release on GitHub..."
-	gh release create $(RELEASE_VERSION) $(BIN_DIR)/$(BINARY_NAME)-x86_64 $(BIN_DIR)/$(BINARY_NAME)-arm64 $(BIN_DIR)/$(BINARY_NAME)-windows-amd64.exe --title "Release $(RELEASE_VERSION)" --notes "Release notes for $(RELEASE_VERSION)" --repo $(GIT_REPO)
+	gh release create $(RELEASE_VERSION) \
+		$(BIN_DIR)/$(BINARY_NAME)-x86_64 \
+		$(BIN_DIR)/$(BINARY_NAME)-arm64 \
+		$(BIN_DIR)/$(BINARY_NAME)-windows-amd64.exe \
+		$(BIN_DIR)/$(BINARY_NAME)-macos-amd64 \
+		$(BIN_DIR)/$(BINARY_NAME)-macos-arm64 \
+		--title "Release $(RELEASE_VERSION)" --notes "Release notes for $(RELEASE_VERSION)" --repo $(GIT_REPO)
 
 
 # Clean up build output artifacts

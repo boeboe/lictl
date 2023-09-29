@@ -72,8 +72,10 @@ lictl/
 ├── bin                          # Created when building locally
 │   ├── lictl
 │   ├── lictl-arm64
+│   ├── lictl-macos-amd64
+│   ├── lictl-macos-arm64
 │   ├── lictl-windows-amd64.exe
-│   └── lictl-x86_64
+│   ├── lictl-x86_64
 ├── cmd/                         # Command-line related code
 ├── pkg/                         # Reusable packages (your LinkedIn interaction logic)
 └── testdata/                    # Test data used in testing (if any)
