@@ -8,6 +8,7 @@ import (
 	"strings"
 
 	"github.com/PuerkitoBio/goquery"
+	"github.com/boeboe/lictl/pkg/utils"
 )
 
 const baseURL = "https://www.linkedin.com/jobs-guest/jobs/api/seeMoreJobPostings/search?"
@@ -39,15 +40,15 @@ func SearchJobsOnline(regions []string, keywords []string) ([]Job, error) {
 		url := baseURL + "locations=" + strings.Join(regions, ",") + "&keywords=" + strings.Join(keywords, ",") + fmt.Sprintf("&start=%d", offset)
 		jobs, err := SearchJobsPerPage(url)
 		if err != nil {
+			if httpErr, ok := err.(*utils.HTTPError); ok && httpErr.StatusCode == http.StatusTooManyRequests {
+				return allJobs, err // Return the jobs fetched so far along with the error
+			}
 			return nil, err
 		}
 		if len(jobs) == 0 {
 			break
 		}
 		allJobs = append(allJobs, jobs...)
-	}
-	for _, job := range allJobs {
-		log.Println(job)
 	}
 	return allJobs, nil
 }
@@ -59,6 +60,14 @@ func SearchJobsPerPage(url string) ([]Job, error) {
 	}
 	defer resp.Body.Close()
 
+	// Check for non-2xx status codes
+	if resp.StatusCode < 200 || resp.StatusCode >= 300 {
+		return nil, &utils.HTTPError{
+			StatusCode: resp.StatusCode,
+			Message:    fmt.Sprintf("received non-2xx response: %d %s", resp.StatusCode, resp.Status),
+		}
+	}
+
 	doc, err := goquery.NewDocumentFromReader(resp.Body)
 	if err != nil {
 		return nil, fmt.Errorf("failed to parse HTML: %w", err)
@@ -68,32 +77,26 @@ func SearchJobsPerPage(url string) ([]Job, error) {
 	doc.Find("li").Each(func(i int, s *goquery.Selection) {
 		var job Job
 
-		// First structure
 		jobTitle := strings.TrimSpace(s.Find(".base-search-card__title").Text())
-		if jobTitle != "" {
-			job = Job{
-				JobTitle:           jobTitle,
-				CompanyName:        strings.TrimSpace(s.Find("h4").Text()),
-				CompanyLinkedInURL: cleanURL(s.Find("h4 a").AttrOr("href", "")),
-				Location:           strings.TrimSpace(s.Find(".job-search-card__location").Text()),
-				DatePosted:         strings.TrimSpace(s.Find(".job-search-card__listdate").AttrOr("datetime", "")),
-				JobLink:            cleanURL(s.Find(".base-card__full-link").AttrOr("href", "")),
-				JobURN:             strings.Split(s.Find("div").AttrOr("data-entity-urn", ""), ":")[3],
-			}
-		} else {
-			// Second structure (fallback)
-			jobTitle = strings.TrimSpace(s.Find(".other-job-title-selector").Text()) // Replace with the correct selector
-			if jobTitle != "" {
-				job = Job{
-					JobTitle:           jobTitle,
-					CompanyName:        strings.TrimSpace(s.Find("h4").Text()),
-					CompanyLinkedInURL: "",
-					Location:           strings.TrimSpace(s.Find(".job-search-card__location").Text()),
-					DatePosted:         strings.TrimSpace(s.Find(".job-search-card__listdate").AttrOr("datetime", "")),
-					JobLink:            cleanURL(s.Find(".other-job-title-selector").AttrOr("href", "")), // Replace with the correct selector
-					JobURN:             strings.Split(s.Find("a").AttrOr("data-entity-urn", ""), ":")[3],
-				}
-			}
+		companyName := strings.TrimSpace(s.Find("h4").Text())
+		location := strings.TrimSpace(s.Find(".job-search-card__location").Text())
+		datePosted := strings.TrimSpace(s.Find(".job-search-card__listdate").AttrOr("datetime", ""))
+		jobLink := cleanURL(s.Find(".base-card__full-link").AttrOr("href", ""))
+		jobURN := strings.Split(s.Find("div").AttrOr("data-entity-urn", ""), ":")[3]
+
+		var companyLinkedInURL string
+		if href, exists := s.Find("h4 a").Attr("href"); exists {
+			companyLinkedInURL = cleanURL(href)
+		}
+
+		job = Job{
+			JobTitle:           jobTitle,
+			CompanyName:        companyName,
+			CompanyLinkedInURL: companyLinkedInURL,
+			Location:           location,
+			DatePosted:         datePosted,
+			JobLink:            jobLink,
+			JobURN:             jobURN,
 		}
 
 		if job.JobTitle != "" { // Only append if we found a job title

@@ -4,53 +4,59 @@ import (
 	"fmt"
 	"net"
 	"net/http"
-	"os"
 	"path/filepath"
 	"runtime"
 	"testing"
 )
 
 func TestSearchJobsPerPage(t *testing.T) {
+	// Define the test matrix
+	tests := []struct {
+		fileName             string
+		expectedJobsCount    int
+		expectedEmptyCompany int
+	}{
+		{"search-result-0.html", 25, 0},
+		{"search-result-25.html", 25, 0},
+		{"search-result-50.html", 25, 0},
+		{"search-result-75.html", 25, 0},
+		{"search-result-100.html", 25, 0},
+		{"search-result-final.html", 16, 0}, // Adjust the expectedEmptyCompany as needed
+	}
+
 	// Directory containing test HTML files
-	_, filename, _, _ := runtime.Caller(0) // Get the current file's directory
-	basepath := filepath.Dir(filename)     // Get the directory of the current file
+	_, filename, _, _ := runtime.Caller(0)
+	basepath := filepath.Dir(filename)
 	testDir := filepath.Join(basepath, "../..", "testdata", "job")
 
 	// Start a local HTTP server to serve the test files
 	server, addr := startLocalHTTPServer(testDir)
 	defer server.Close()
 
-	// Iterate over all files in the test directory
-	err := filepath.Walk(testDir, func(path string, info os.FileInfo, err error) error {
-		if err != nil {
-			t.Errorf("Failed to access file: %s", err)
-			return err
-		}
+	// Iterate over the test matrix
+	for _, tt := range tests {
+		t.Run(tt.fileName, func(t *testing.T) {
+			fileURL := fmt.Sprintf("http://%s/%s", addr, tt.fileName)
+			jobs, err := SearchJobsPerPage(fileURL)
+			if err != nil {
+				t.Fatalf("Error in SearchJobsPerPage for file %s: %s", tt.fileName, err)
+			}
 
-		// Skip directories
-		if info.IsDir() {
-			return nil
-		}
+			if len(jobs) != tt.expectedJobsCount {
+				t.Errorf("Expected %d jobs for file %s, but got %d", tt.expectedJobsCount, tt.fileName, len(jobs))
+			}
 
-		// Construct the file URL for the local server
-		fileURL := fmt.Sprintf("http://%s/%s", addr, filepath.Base(path))
+			emptyCompanyCount := 0
+			for _, job := range jobs {
+				if job.CompanyLinkedInURL == "" {
+					emptyCompanyCount++
+				}
+			}
 
-		// Call the function with the file URL
-		jobs, err := SearchJobsPerPage(fileURL)
-		if err != nil {
-			t.Errorf("Error in SearchJobsPerPage for file %s: %s", path, err)
-		}
-
-		// Add any assertions you want, for example:
-		if len(jobs) == 0 {
-			t.Errorf("No jobs found for file %s", path)
-		}
-
-		return nil
-	})
-
-	if err != nil {
-		t.Errorf("Error walking the path %s: %v", testDir, err)
+			if emptyCompanyCount != tt.expectedEmptyCompany {
+				t.Errorf("Expected %d jobs with empty CompanyLinkedInURL for file %s, but got %d", tt.expectedEmptyCompany, tt.fileName, emptyCompanyCount)
+			}
+		})
 	}
 }
 

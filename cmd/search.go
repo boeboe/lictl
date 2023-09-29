@@ -3,8 +3,10 @@ package cmd
 import (
 	"encoding/json"
 	"fmt"
+	"net/http"
 
 	"github.com/boeboe/lictl/pkg/linkedin"
+	"github.com/boeboe/lictl/pkg/utils"
 	"github.com/spf13/cobra"
 )
 
@@ -25,7 +27,11 @@ var searchCmd = &cobra.Command{
 
 		jobs, err := linkedin.SearchJobsOnline(regions, keywords)
 		if err != nil {
-			fmt.Println("Error:", err)
+			if httpErr, ok := err.(*utils.HTTPError); ok && httpErr.StatusCode == http.StatusTooManyRequests {
+				fmt.Println("Warning: You've hit the rate limit (HTTP 429 Too Many Requests). Please avoid making further requests for some time.")
+			} else {
+				fmt.Println("Error:", err)
+			}
 			return
 		}
 
