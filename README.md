@@ -71,11 +71,11 @@ release                        Create a GitHub release and upload the binary
 lictl/
 ├── bin                          # Created when building locally
 │   ├── lictl
-│   ├── lictl-arm64
+│   ├── lictl-linux-arm64
+│   ├── lictl-linux-x86_64
 │   ├── lictl-macos-amd64
 │   ├── lictl-macos-arm64
-│   ├── lictl-windows-amd64.exe
-│   ├── lictl-x86_64
+│   └── lictl-windows-amd64.exe
 ├── cmd/                         # Command-line related code
 ├── pkg/                         # Reusable packages (your LinkedIn interaction logic)
 └── testdata/                    # Test data used in testing (if any)
