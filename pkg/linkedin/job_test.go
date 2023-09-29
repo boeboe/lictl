@@ -37,7 +37,7 @@ func TestSearchJobsPerPage(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(tt.fileName, func(t *testing.T) {
 			fileURL := fmt.Sprintf("http://%s/%s", addr, tt.fileName)
-			jobs, err := SearchJobsPerPage(fileURL)
+			jobs, err := SearchJobsPerPage(fileURL, false)
 			if err != nil {
 				t.Fatalf("Error in SearchJobsPerPage for file %s: %s", tt.fileName, err)
 			}

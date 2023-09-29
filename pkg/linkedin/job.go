@@ -6,6 +6,7 @@ import (
 	"net/http"
 	"net/url"
 	"strings"
+	"time"
 
 	"github.com/PuerkitoBio/goquery"
 	"github.com/boeboe/lictl/pkg/utils"
@@ -33,12 +34,16 @@ func cleanURL(link string) string {
 	return parsedURL.String()
 }
 
-func SearchJobsOnline(regions []string, keywords []string) ([]Job, error) {
+func SearchJobsOnline(regions []string, keywords []string, interval time.Duration, debug bool) ([]Job, error) {
 	var allJobs []Job
 
 	for offset := 0; offset <= 975; offset += 25 {
-		url := baseURL + "locations=" + strings.Join(regions, ",") + "&keywords=" + strings.Join(keywords, ",") + fmt.Sprintf("&start=%d", offset)
-		jobs, err := SearchJobsPerPage(url)
+		url := baseURL + "location=" + strings.Join(regions, ",") + "&keywords=" + strings.Join(keywords, ",") + fmt.Sprintf("&start=%d", offset)
+		if debug {
+			fmt.Printf("going to fetch search url %v", url)
+		}
+
+		jobs, err := SearchJobsPerPage(url, debug)
 		if err != nil {
 			if httpErr, ok := err.(*utils.HTTPError); ok && httpErr.StatusCode == http.StatusTooManyRequests {
 				return allJobs, err // Return the jobs fetched so far along with the error
@@ -49,11 +54,12 @@ func SearchJobsOnline(regions []string, keywords []string) ([]Job, error) {
 			break
 		}
 		allJobs = append(allJobs, jobs...)
+		time.Sleep(interval)
 	}
 	return allJobs, nil
 }
 
-func SearchJobsPerPage(url string) ([]Job, error) {
+func SearchJobsPerPage(url string, debug bool) ([]Job, error) {
 	resp, err := http.Get(url)
 	if err != nil {
 		return nil, fmt.Errorf("failed to fetch LinkedIn jobs: %w", err)
@@ -105,8 +111,10 @@ func SearchJobsPerPage(url string) ([]Job, error) {
 	})
 
 	// Print the jobs for testing
-	for _, job := range jobs {
-		log.Println(job)
+	if debug {
+		for _, job := range jobs {
+			log.Println(job)
+		}
 	}
 
 	return jobs, nil

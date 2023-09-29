@@ -12,7 +12,12 @@ var jobCmd = &cobra.Command{
 	Short: "Interact with LinkedIn job functionalities",
 	Long:  `The job command provides functionalities related to LinkedIn jobs.`,
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("Use a sub-command with 'job'. For help, use 'lictl job --help'")
+		if len(args) == 0 {
+			if err := cmd.Help(); err != nil {
+				fmt.Printf("Failed to display help: %v\n", err)
+			}
+			return
+		}
 	},
 }
 
