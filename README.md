@@ -1,4 +1,17 @@
-# LinkedIn CLI Tools
+# LinkedIn CLI Tool
+
+## Table of Contents
+- [Introduction](#introduction)
+- [Usage](#usage)
+  - [Global Flags](#global-flags)
+  - [Commands](#commands)
+    - [job](#1-job)
+    - [search](#2-search)
+- [Release/Download Information](#releasedownload-information)
+- [Development](#development)
+  - [Repository structure](#repository-structure)
+- [License](#license)
+- [Contributing](#contributing)
 
 ## Introduction
 `lictl` is a command-line tool designed to interact with LinkedIn functionalities. It provides a range of features that allow users to search for jobs, manage their LinkedIn profiles, and more, all from the comfort of their terminal.
