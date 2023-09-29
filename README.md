@@ -7,7 +7,7 @@
   - [Commands](#commands)
     - [job](#job)
       - [search](#search)
-- [Release/Download Information](#releasedownload-information)
+- [Download Information](#download-information)
 - [Development](#development)
   - [Repository structure](#repository-structure)
 - [License](#license)
@@ -45,7 +45,7 @@ lictl job search --regions "New York" --keywords "Software Engineer"
 lictl job search -r "San Francisco" -k "Data Scientist" -o "./results" -f "csv"
 ```
 
-## Release/Download Information
+## Download Information
 
 For the latest releases and download options, please visit the [releases section](https://github.com/boeboe/lictl/releases) of the `lictl` [GitHub repository](https://github.com/boeboe/lictl/releases).
 
