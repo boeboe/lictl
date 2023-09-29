@@ -5,8 +5,8 @@
 - [Usage](#usage)
   - [Global Flags](#global-flags)
   - [Commands](#commands)
-    - [job](#1-job)
-    - [search](#2-search)
+    - [job](#job)
+      - [search](#search)
 - [Release/Download Information](#releasedownload-information)
 - [Development](#development)
   - [Repository structure](#repository-structure)
@@ -23,11 +23,11 @@
 
 ### Commands:
 
-#### 1. job
+#### job
 - **Usage**: `lictl job`
 - **Description**: Interact with LinkedIn job functionalities.
 
-#### 2. search
+##### search
 - **Usage**: `lictl job search`
 - **Description**: Search for LinkedIn jobs based on regions and keywords.
 - **Flags**:
