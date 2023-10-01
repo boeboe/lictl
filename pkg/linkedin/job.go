@@ -38,7 +38,11 @@ func SearchJobsOnline(regions []string, keywords []string, interval time.Duratio
 	var allJobs []Job
 
 	for offset := 0; offset <= 975; offset += 25 {
-		url := baseURL + "location=" + strings.Join(regions, ",") + "&keywords=" + strings.Join(keywords, ",") + fmt.Sprintf("&start=%d", offset)
+		params := url.Values{}
+		params.Add("location", strings.Join(regions, ","))
+		params.Add("keywords", strings.Join(keywords, ","))
+		params.Add("start", fmt.Sprintf("%d", offset))
+		url := baseURL + params.Encode()
 		if debug {
 			fmt.Printf("going to fetch search url %v", url)
 		}
