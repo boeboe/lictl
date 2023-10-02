@@ -9,6 +9,103 @@ import (
 	"testing"
 )
 
+func TestJobCsvContent(t *testing.T) {
+	tests := []struct {
+		name     string
+		job      Job
+		expected string
+	}{
+		{
+			name: "happy path",
+			job: Job{
+				CompanyLinkedInURL: "https://linkedin.com/company/techcorp",
+				CompanyName:        "Techcorp",
+				DatePosted:         "2023-01-01",
+				JobLink:            "https://linkedin.com/jobs/view/123456",
+				JobTitle:           "Software|Engineer",
+				JobURN:             "urn:li:job:123456",
+				Location:           "San Francisco, CA",
+			},
+			expected: "https://linkedin.com/company/techcorp|Techcorp|2023-01-01|https://linkedin.com/jobs/view/123456|Software Engineer|urn:li:job:123456|San Francisco, CA",
+		},
+		{
+			name:     "empty job",
+			job:      Job{},
+			expected: "||||||",
+		},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			got := tt.job.CsvContent()
+			if got != tt.expected {
+				t.Errorf("expected %s, got %s", tt.expected, got)
+			}
+		})
+	}
+}
+
+func TestJobCsvHeader(t *testing.T) {
+	j := Job{}
+	expected := "companyLinkedInURL|companyName|datePosted|jobLink|jobTitle|jobURN|location"
+	got := j.CsvHeader()
+	if got != expected {
+		t.Errorf("expected %s, got %s", expected, got)
+	}
+}
+
+func TestJobJson(t *testing.T) {
+	tests := []struct {
+		name     string
+		job      Job
+		expected string
+	}{
+		{
+			name: "happy path",
+			job: Job{
+				JobTitle:           "Software Engineer",
+				CompanyName:        "Techcorp",
+				CompanyLinkedInURL: "https://linkedin.com/company/techcorp",
+				Location:           "San Francisco, CA",
+				DatePosted:         "2023-01-01",
+				JobLink:            "https://linkedin.com/jobs/view/123456",
+				JobURN:             "urn:li:job:123456",
+			},
+			expected: `{
+  "companyLinkedInURL": "https://linkedin.com/company/techcorp",
+  "companyName": "Techcorp",
+  "datePosted": "2023-01-01",
+  "jobLink": "https://linkedin.com/jobs/view/123456",
+  "jobTitle": "Software Engineer",
+  "jobURN": "urn:li:job:123456",
+  "location": "San Francisco, CA"
+}`,
+		},
+		{
+			name: "empty job",
+			job:  Job{},
+			expected: `{
+  "companyLinkedInURL": "",
+  "companyName": "",
+  "datePosted": "",
+  "jobLink": "",
+  "jobTitle": "",
+  "jobURN": "",
+  "location": ""
+}`,
+		},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			got := tt.job.Json()
+			if got != tt.expected {
+				t.Errorf("expected %s, got %s", tt.expected, got)
+			}
+		})
+	}
+}
+
 func TestSearchJobsPerPage(t *testing.T) {
 	// Define the test matrix
 	tests := []struct {
@@ -37,7 +134,7 @@ func TestSearchJobsPerPage(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(tt.fileName, func(t *testing.T) {
 			jobSearchURL := fmt.Sprintf("http://%s/%s", addr, tt.fileName)
-			jobs, err := SearchJobsPerPage(jobSearchURL, false)
+			jobs, err := GetJobsFromSearchUrl(jobSearchURL, false)
 			if err != nil {
 				t.Fatalf("Error in SearchJobsPerPage for file %s: %s", tt.fileName, err)
 			}

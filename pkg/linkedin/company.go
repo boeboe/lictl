@@ -1,7 +1,6 @@
 package linkedin
 
 import (
-	"encoding/json"
 	"fmt"
 	"log"
 	"net/http"
@@ -11,75 +10,111 @@ import (
 	"time"
 
 	"github.com/PuerkitoBio/goquery"
-	"github.com/boeboe/lictl/pkg/utils"
 	"github.com/corpix/uarand"
 )
 
 // Company represents the structure of a LinkedIn company.
 type Company struct {
-	FollowerCount int    `json:"followerCount"`
-	FoundedOn     string `json:"foundedOn"`
-	Headline      string `json:"headline"`
-	Headquarters  string `json:"headquarters"`
-	Industry      string `json:"industry"`
-	Name          string `json:"name"`
-	Size          string `json:"size"`
-	Specialties   string `json:"specialties"`
-	Type          string `json:"type"`
-	Website       string `json:"website"`
+	FollowerCount int    `json:"followerCount"  csv:"followerCount"`
+	FoundedOn     string `json:"foundedOn"      csv:"foundedOn"`
+	Headline      string `json:"headline"       csv:"headline"`
+	Headquarters  string `json:"headquarters"   csv:"headquarters"`
+	Industry      string `json:"industry"       csv:"industry"`
+	Name          string `json:"name"           csv:"name"`
+	Size          string `json:"size"           csv:"size"`
+	Specialties   string `json:"specialties"    csv:"specialties"`
+	Type          string `json:"type"           csv:"type"`
+	Website       string `json:"website"        csv:"website"`
 }
 
-func (c Company) Dump() string {
-	data, err := json.MarshalIndent(c, "", "  ")
+func (c *Company) CsvContent() string {
+	if c == nil {
+		return ""
+	}
+	return CsvContent(c)
+}
+
+func (c *Company) CsvHeader() string {
+	if c == nil {
+		return ""
+	}
+	return CsvHeader(c)
+}
+
+func (c *Company) Json() string {
+	if c == nil {
+		return ""
+	}
+	return Json(c)
+}
+
+type Companies []*Company
+
+func (cs Companies) Len() int {
+	return len(cs)
+}
+
+func (cs Companies) Get(i int) Serializable {
+	return Serializable(cs[i])
+}
+
+func SearchCompaniesOnline(keywords []string, interval time.Duration, debug bool) (Companies, error) {
+	var companies Companies
+	urls, err := GoogleGetLinkedInCompanyURLs(keywords, interval, debug)
 	if err != nil {
-		return fmt.Sprintf("error dumping company: %v", err)
+		return nil, fmt.Errorf("error fetching LinkedIn company URLs: %v", err)
 	}
-	return string(data)
-}
 
-func SearchCompaniesOnline(keywords []string, interval time.Duration, debug bool) ([]Company, error) {
-	return make([]Company, 0), nil
-}
-
-func GetCompaniesOnline(urls []string, interval time.Duration, debug bool) ([]Company, error) {
-	var allCompanies []Company
-
+	var errs []string
 	for _, url := range urls {
-		if debug {
-			fmt.Printf("going to fetch comany url %v", url)
-		}
-
-		req, err := http.NewRequest("GET", url, nil)
+		company, err := GetCompanyFromUrl(url, debug)
 		if err != nil {
-			return nil, err
+			errs = append(errs, fmt.Sprintf("error fetching company from URL %s: %v", url, err))
+			continue
 		}
-		req.Header.Set("Accept-Encoding", "identity")
-		req.Header.Set("User-Agent", uarand.GetRandom())
-
-		company, err := GetCompanyPage(req, debug)
-		if err != nil {
-			if httpErr, ok := err.(*utils.HTTPError); ok && httpErr.StatusCode == http.StatusTooManyRequests {
-				return allCompanies, err // Return the companies fetched so far along with the error
-			}
-			return nil, err
-		}
-		allCompanies = append(allCompanies, company)
-		time.Sleep(interval)
+		companies = append(companies, company)
 	}
-	return allCompanies, nil
+
+	if len(errs) > 0 {
+		return companies, fmt.Errorf("encountered errors: %s", strings.Join(errs, "; "))
+	}
+
+	return companies, nil
 }
 
-func GetCompanyPage(req *http.Request, debug bool) (Company, error) {
+func GetCompanyFromUrl(url string, debug bool) (*Company, error) {
+	if debug {
+		fmt.Printf("going to fetch company from url %v", url)
+	}
+
+	req, err := http.NewRequest("GET", url, nil)
+	if err != nil {
+		return &Company{}, err
+	}
+	req.Header.Set("Accept-Encoding", "identity")
+	req.Header.Set("User-Agent", uarand.GetRandom())
+
+	company, err := getCompanyFromRequest(req, debug)
+	if err != nil {
+		if httpErr, ok := err.(*HTTPError); ok && httpErr.StatusCode == http.StatusTooManyRequests {
+			return &Company{}, err
+		}
+		return &Company{}, err
+	}
+	return company, nil
+}
+
+func getCompanyFromRequest(req *http.Request, debug bool) (*Company, error) {
 	client := &http.Client{}
 	resp, err := client.Do(req)
 	if err != nil {
-		return Company{}, fmt.Errorf("failed to fetch LinkedIn company: %w", err)
+		return &Company{}, fmt.Errorf("failed to fetch LinkedIn company: %w", err)
 	}
 	defer resp.Body.Close()
 
 	// Check for non-2xx status codes
 	if resp.StatusCode < 200 || resp.StatusCode >= 300 {
-		return Company{}, &utils.HTTPError{
+		return &Company{}, &HTTPError{
 			StatusCode: resp.StatusCode,
 			Message:    fmt.Sprintf("received non-2xx response: %d %s", resp.StatusCode, resp.Status),
 		}
@@ -87,7 +122,7 @@ func GetCompanyPage(req *http.Request, debug bool) (Company, error) {
 
 	doc, err := goquery.NewDocumentFromReader(resp.Body)
 	if err != nil {
-		return Company{}, fmt.Errorf("failed to parse HTML: %w", err)
+		return &Company{}, fmt.Errorf("failed to parse HTML: %w", err)
 	}
 
 	var company Company
@@ -120,7 +155,7 @@ func GetCompanyPage(req *http.Request, debug bool) (Company, error) {
 		log.Printf("Company: %+v", company)
 	}
 
-	return company, nil
+	return &company, nil
 }
 
 func extractCompanyFollowers(s string) (int, error) {

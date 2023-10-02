@@ -5,7 +5,6 @@ import (
 	"net/http"
 
 	"github.com/boeboe/lictl/pkg/linkedin"
-	"github.com/boeboe/lictl/pkg/utils"
 	"github.com/spf13/cobra"
 )
 
@@ -13,17 +12,14 @@ import (
 var userSearchCmd = &cobra.Command{
 	Use:   "search",
 	Short: "Search for LinkedIn users based on keywords",
+	PreRunE: func(cmd *cobra.Command, args []string) error {
+		return ValidateFlags(cmd, args)
+	},
 	Run: func(cmd *cobra.Command, args []string) {
-		if err := checkSharedFlags(); err != nil {
-			if err := cmd.Help(); err != nil {
-				fmt.Printf("Failed to display help: %v\n", err)
-			}
-			return
-		}
-
+		// Fetching users
 		users, err := linkedin.SearchUsersOnline(keywords, interval, debug)
 		if err != nil {
-			if httpErr, ok := err.(*utils.HTTPError); ok && httpErr.StatusCode == http.StatusTooManyRequests {
+			if httpErr, ok := err.(*linkedin.HTTPError); ok && httpErr.StatusCode == http.StatusTooManyRequests {
 				fmt.Println("Warning: You've hit the rate limit (HTTP 429 Too Many Requests). Please avoid making further requests for some time.")
 			} else {
 				fmt.Println("Error:", err)
@@ -31,31 +27,31 @@ var userSearchCmd = &cobra.Command{
 			return
 		}
 
-		// Dump the users to the specified format
-		var dumpErr error
+		// Writing users to output file
+		var outErr error
 		var filePath string
+		format, _ := linkedin.SetFormat(formatString)
 
 		switch format {
-		case utils.JSON:
-			filePath, dumpErr = utils.DumpToJSON(users, output)
-		case utils.CSV:
-			filePath, dumpErr = utils.DumpToCSV(users, output)
+		case linkedin.JSON:
+			filePath, outErr = writeOutput(linkedin.ConvertToJSON(users), outputDir, "users", "json")
+		case linkedin.CSV:
+			filePath, outErr = writeOutput(linkedin.ConvertToCSV(users), outputDir, "users", "json")
 		}
 
-		if dumpErr != nil {
-			fmt.Println("Error dumping data:", dumpErr)
+		if outErr != nil {
+			fmt.Println("Error writing users:", outErr)
 			fmt.Println("Falling back to printing users:")
-			utils.DumpFallback(users)
+			fmt.Printf("Users: %+v\n", users)
 			return
 		}
 
-		fmt.Printf("Data dumped to: %s\n", filePath)
+		fmt.Printf("Users written to file %s\n", filePath)
 	},
 }
 
 func init() {
 	userCmd.AddCommand(userSearchCmd)
-
-	// Add flags
-	addSharedFlags(userSearchCmd)
+	addRequiredKeywordsFlag(userSearchCmd)
+	addIntervalFlag(userSearchCmd)
 }

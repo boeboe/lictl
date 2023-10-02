@@ -8,17 +8,17 @@ import (
 	"github.com/spf13/cobra"
 )
 
-// pulseSearchCmd represents the search command
-var pulseSearchCmd = &cobra.Command{
-	Use:   "search",
-	Short: "Search for LinkedIn pulses based on keywords",
+// postGetCmd represents the post get command
+var postGetCmd = &cobra.Command{
+	Use:   "get",
+	Short: "get LinkedIn post details",
 	PreRunE: func(cmd *cobra.Command, args []string) error {
 		return ValidateFlags(cmd, args)
 	},
 	Run: func(cmd *cobra.Command, args []string) {
 
-		// Fetching pulses
-		pulses, err := linkedin.SearchPulsesOnline(keywords, interval, debug)
+		// Fetching post details
+		post, err := linkedin.GetPostFromUrl(urlString, debug)
 		if err != nil {
 			if httpErr, ok := err.(*linkedin.HTTPError); ok && httpErr.StatusCode == http.StatusTooManyRequests {
 				fmt.Println("Warning: You've hit the rate limit (HTTP 429 Too Many Requests). Please avoid making further requests for some time.")
@@ -28,31 +28,30 @@ var pulseSearchCmd = &cobra.Command{
 			return
 		}
 
-		// Writing pulses to output file
+		// Writing post details to output file
 		var outErr error
 		var filePath string
 		format, _ := linkedin.SetFormat(formatString)
 
 		switch format {
 		case linkedin.JSON:
-			filePath, outErr = writeOutput(linkedin.ConvertToJSON(pulses), outputDir, "pulses", "json")
+			filePath, outErr = writeOutput(post.Json(), outputDir, "post", "json")
 		case linkedin.CSV:
-			filePath, outErr = writeOutput(linkedin.ConvertToCSV(pulses), outputDir, "pulses", "json")
+			filePath, outErr = writeOutput(post.CsvHeader()+"\n"+post.CsvContent(), outputDir, "post", "json")
 		}
 
 		if outErr != nil {
-			fmt.Println("Error writing pulses:", outErr)
-			fmt.Println("Falling back to printing pulses:")
-			fmt.Printf("Pulses: %+v\n", pulses)
+			fmt.Println("Error writing post details:", outErr)
+			fmt.Println("Falling back to printing post details:")
+			fmt.Printf("Post details: %+v\n", post)
 			return
 		}
 
-		fmt.Printf("Pulses written to file %s\n", filePath)
+		fmt.Printf("Post details written to file %s\n", filePath)
 	},
 }
 
 func init() {
-	pulseCmd.AddCommand(pulseSearchCmd)
-	addRequiredKeywordsFlag(pulseSearchCmd)
-	addIntervalFlag(pulseSearchCmd)
+	postCmd.AddCommand(postGetCmd)
+	addRequiredUrlFlag(postGetCmd)
 }

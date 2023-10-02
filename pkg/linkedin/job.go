@@ -1,7 +1,6 @@
 package linkedin
 
 import (
-	"encoding/json"
 	"fmt"
 	"log"
 	"net/http"
@@ -10,28 +9,50 @@ import (
 	"time"
 
 	"github.com/PuerkitoBio/goquery"
-	"github.com/boeboe/lictl/pkg/utils"
 )
 
 const baseURL = "https://www.linkedin.com/jobs-guest/jobs/api/seeMoreJobPostings/search?"
 
 // Job represents the structure of a LinkedIn job.
 type Job struct {
-	JobTitle           string `json:"jobTitle"`
-	CompanyName        string `json:"companyName"`
-	CompanyLinkedInURL string `json:"companyLinkedInURL"`
-	Location           string `json:"location"`
-	DatePosted         string `json:"datePosted"`
-	JobLink            string `json:"jobLink"`
-	JobURN             string `json:"jobURN"`
+	CompanyLinkedInURL string `json:"companyLinkedInURL" csv:"companyLinkedInURL"`
+	CompanyName        string `json:"companyName"        csv:"companyName"`
+	DatePosted         string `json:"datePosted"         csv:"datePosted"`
+	JobLink            string `json:"jobLink"            csv:"jobLink"`
+	JobTitle           string `json:"jobTitle"           csv:"jobTitle"`
+	JobURN             string `json:"jobURN"             csv:"jobURN"`
+	Location           string `json:"location"           csv:"location"`
 }
 
-func (j Job) Dump() string {
-	data, err := json.MarshalIndent(j, "", "  ")
-	if err != nil {
-		return fmt.Sprintf("error dumping job: %v", err)
+func (j *Job) CsvContent() string {
+	if j == nil {
+		return ""
 	}
-	return string(data)
+	return CsvContent(j)
+}
+
+func (j *Job) CsvHeader() string {
+	if j == nil {
+		return ""
+	}
+	return CsvHeader(j)
+}
+
+func (j *Job) Json() string {
+	if j == nil {
+		return ""
+	}
+	return Json(j)
+}
+
+type Jobs []*Job
+
+func (js Jobs) Len() int {
+	return len(js)
+}
+
+func (js Jobs) Get(i int) Serializable {
+	return Serializable(js[i])
 }
 
 func cleanURL(link string) string {
@@ -43,8 +64,8 @@ func cleanURL(link string) string {
 	return parsedURL.String()
 }
 
-func SearchJobsOnline(regions []string, keywords []string, interval time.Duration, debug bool) ([]Job, error) {
-	var allJobs []Job
+func SearchJobsOnline(regions []string, keywords []string, interval time.Duration, debug bool) (Jobs, error) {
+	var allJobs []*Job
 
 	for offset := 0; offset <= 975; offset += 25 {
 		params := url.Values{}
@@ -56,9 +77,9 @@ func SearchJobsOnline(regions []string, keywords []string, interval time.Duratio
 			fmt.Printf("going to fetch search url %v", url)
 		}
 
-		jobs, err := SearchJobsPerPage(url, debug)
+		jobs, err := GetJobsFromSearchUrl(url, debug)
 		if err != nil {
-			if httpErr, ok := err.(*utils.HTTPError); ok && httpErr.StatusCode == http.StatusTooManyRequests {
+			if httpErr, ok := err.(*HTTPError); ok && httpErr.StatusCode == http.StatusTooManyRequests {
 				return allJobs, err // Return the jobs fetched so far along with the error
 			}
 			return nil, err
@@ -72,7 +93,7 @@ func SearchJobsOnline(regions []string, keywords []string, interval time.Duratio
 	return allJobs, nil
 }
 
-func SearchJobsPerPage(url string, debug bool) ([]Job, error) {
+func GetJobsFromSearchUrl(url string, debug bool) (Jobs, error) {
 	resp, err := http.Get(url)
 	if err != nil {
 		return nil, fmt.Errorf("failed to fetch LinkedIn jobs: %w", err)
@@ -81,7 +102,7 @@ func SearchJobsPerPage(url string, debug bool) ([]Job, error) {
 
 	// Check for non-2xx status codes
 	if resp.StatusCode < 200 || resp.StatusCode >= 300 {
-		return nil, &utils.HTTPError{
+		return nil, &HTTPError{
 			StatusCode: resp.StatusCode,
 			Message:    fmt.Sprintf("received non-2xx response: %d %s", resp.StatusCode, resp.Status),
 		}
@@ -92,16 +113,16 @@ func SearchJobsPerPage(url string, debug bool) ([]Job, error) {
 		return nil, fmt.Errorf("failed to parse HTML: %w", err)
 	}
 
-	var jobs []Job
+	var jobs []*Job
 	doc.Find("li").Each(func(i int, s *goquery.Selection) {
 		var job Job
 
-		jobTitle := strings.TrimSpace(s.Find(".base-search-card__title").Text())
 		companyName := strings.TrimSpace(s.Find("h4").Text())
-		location := strings.TrimSpace(s.Find(".job-search-card__location").Text())
 		datePosted := strings.TrimSpace(s.Find(".job-search-card__listdate").AttrOr("datetime", ""))
 		jobLink := cleanURL(s.Find(".base-card__full-link").AttrOr("href", ""))
+		jobTitle := strings.TrimSpace(s.Find(".base-search-card__title").Text())
 		jobURN := strings.Split(s.Find("div").AttrOr("data-entity-urn", ""), ":")[3]
+		location := strings.TrimSpace(s.Find(".job-search-card__location").Text())
 
 		var companyLinkedInURL string
 		if href, exists := s.Find("h4 a").Attr("href"); exists {
@@ -109,17 +130,17 @@ func SearchJobsPerPage(url string, debug bool) ([]Job, error) {
 		}
 
 		job = Job{
-			JobTitle:           jobTitle,
-			CompanyName:        companyName,
 			CompanyLinkedInURL: companyLinkedInURL,
-			Location:           location,
+			CompanyName:        companyName,
 			DatePosted:         datePosted,
 			JobLink:            jobLink,
+			JobTitle:           jobTitle,
 			JobURN:             jobURN,
+			Location:           location,
 		}
 
 		if job.JobTitle != "" { // Only append if we found a job title
-			jobs = append(jobs, job)
+			jobs = append(jobs, &job)
 		}
 	})
 

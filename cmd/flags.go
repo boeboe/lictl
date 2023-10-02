@@ -3,52 +3,99 @@
 package cmd
 
 import (
+	"errors"
 	"fmt"
-	"os"
+	"log"
+	"net/url"
+	"strings"
 	"time"
 
-	"github.com/boeboe/lictl/pkg/utils"
+	"github.com/boeboe/licli/pkg/linkedin"
 	"github.com/spf13/cobra"
 )
 
 var (
 	debug        bool
-	format       utils.FormatType
 	formatString string
 	interval     time.Duration
 	keywords     []string
-	output       string
+	outputDir    string
+	urlString    string
 )
 
-func addSharedFlags(cmd *cobra.Command) {
+func addPersistentFlags(cmd *cobra.Command) {
 	cmd.Flags().BoolVarP(&debug, "debug", "d", false, "Enable or disable debug mode")
-	cmd.Flags().StringVarP(&formatString, "format", "f", "json", "Specify the format")
-	cmd.Flags().DurationVarP(&interval, "interval", "i", 100*time.Millisecond, "Specify the interval between web calls")
-	cmd.Flags().StringSliceVarP(&keywords, "keywords", "k", nil, "Specify one or more keywords")
-	cmd.Flags().StringVarP(&output, "output", "o", "", "Specify the output (default is current working directory)")
+	cmd.Flags().StringVarP(&formatString, "format", "f", "json", "Output format")
+	cmd.Flags().StringVarP(&outputDir, "output", "o", "", "Output folder (default is current folder)")
 }
 
-func checkSharedFlags() error {
-	var err error
-	if len(keywords) == 0 {
-		return fmt.Errorf("error: 'regions' flag is mandatory")
+func addIntervalFlag(cmd *cobra.Command) {
+	cmd.Flags().DurationVarP(&interval, "interval", "i", 100*time.Millisecond, "Interval between web calls")
+}
+
+func addRequiredKeywordsFlag(cmd *cobra.Command) {
+	cmd.Flags().StringSliceVarP(&keywords, "keywords", "k", nil, "One or more keywords")
+	if err := cmd.MarkFlagRequired("keywords"); err != nil {
+		log.Fatalf("Error marking keywords flag as required: %v", err)
 	}
-	format, err = utils.SetFormat(formatString)
+}
+
+func addRequiredRegionsFlag(cmd *cobra.Command) {
+	cmd.Flags().StringSliceVarP(&regions, "regions", "r", nil, "One or more regions")
+	if err := cmd.MarkFlagRequired("regions"); err != nil {
+		log.Fatalf("Error marking regions flag as required: %v", err)
+	}
+}
+
+func addRequiredUrlFlag(cmd *cobra.Command) {
+	cmd.Flags().StringVarP(&urlString, "url", "u", "", "Url of details page")
+	if err := cmd.MarkFlagRequired("url"); err != nil {
+		log.Fatalf("Error marking url flag as required: %v", err)
+	}
+}
+
+func ValidateFormatFlag() error {
+	_, err := linkedin.SetFormat(formatString)
 	if err != nil {
-		return fmt.Errorf("error parsing format: %w", err)
+		return fmt.Errorf("invalid format. Valid formats are: %s, %s", "json", "csv")
 	}
-	if output == "" {
-		output, err = os.Getwd()
-		if err != nil {
-			return fmt.Errorf("error getting current working directory: %w", err)
-		}
+	return nil
+}
+
+func ValidateUrlFlag() error {
+	if urlString == "" {
+		return errors.New("url cannot be empty")
 	}
-	if _, err := os.Stat(output); os.IsNotExist(err) {
-		err = os.MkdirAll(output, 0755)
-		if err != nil {
-			fmt.Println("Error creating directory:", err)
-			return fmt.Errorf("error creating directory: %w", err)
-		}
+
+	parsedUrl, err := url.ParseRequestURI(urlString)
+	if err != nil {
+		return errors.New("invalid URL format")
+	}
+
+	if !strings.HasPrefix(parsedUrl.Scheme, "http") {
+		return errors.New("url must start with http or https")
+	}
+
+	return nil
+}
+
+func ValidateIntervalFlag() error {
+	if interval <= 0 {
+		return errors.New("interval should be larger then 0")
+	}
+
+	return nil
+}
+
+func ValidateFlags(cmd *cobra.Command, args []string) error {
+	if err := ValidateFormatFlag(); err != nil {
+		return err
+	}
+	if err := ValidateUrlFlag(); err != nil {
+		return err
+	}
+	if err := ValidateIntervalFlag(); err != nil {
+		return err
 	}
 	return nil
 }

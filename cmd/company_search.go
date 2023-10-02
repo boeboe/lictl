@@ -5,25 +5,22 @@ import (
 	"net/http"
 
 	"github.com/boeboe/lictl/pkg/linkedin"
-	"github.com/boeboe/lictl/pkg/utils"
 	"github.com/spf13/cobra"
 )
 
-// companySearchCmd represents the search command
+// companySearchCmd represents the company search command
 var companySearchCmd = &cobra.Command{
 	Use:   "search",
 	Short: "Search for LinkedIn companies based on keywords",
+	PreRunE: func(cmd *cobra.Command, args []string) error {
+		return ValidateFlags(cmd, args)
+	},
 	Run: func(cmd *cobra.Command, args []string) {
-		if err := checkSharedFlags(); err != nil {
-			if err := cmd.Help(); err != nil {
-				fmt.Printf("Failed to display help: %v\n", err)
-			}
-			return
-		}
 
+		// Fetching companies
 		companies, err := linkedin.SearchCompaniesOnline(keywords, interval, debug)
 		if err != nil {
-			if httpErr, ok := err.(*utils.HTTPError); ok && httpErr.StatusCode == http.StatusTooManyRequests {
+			if httpErr, ok := err.(*linkedin.HTTPError); ok && httpErr.StatusCode == http.StatusTooManyRequests {
 				fmt.Println("Warning: You've hit the rate limit (HTTP 429 Too Many Requests). Please avoid making further requests for some time.")
 			} else {
 				fmt.Println("Error:", err)
@@ -31,31 +28,31 @@ var companySearchCmd = &cobra.Command{
 			return
 		}
 
-		// Dump the jobs to the specified format
-		var dumpErr error
+		// Writing companies to output file
+		var outErr error
 		var filePath string
+		format, _ := linkedin.SetFormat(formatString)
 
 		switch format {
-		case utils.JSON:
-			filePath, dumpErr = utils.DumpToJSON(companies, output)
-		case utils.CSV:
-			filePath, dumpErr = utils.DumpToCSV(companies, output)
+		case linkedin.JSON:
+			filePath, outErr = writeOutput(linkedin.ConvertToJSON(companies), outputDir, "companies", "json")
+		case linkedin.CSV:
+			filePath, outErr = writeOutput(linkedin.ConvertToCSV(companies), outputDir, "companies", "json")
 		}
 
-		if dumpErr != nil {
-			fmt.Println("Error dumping data:", dumpErr)
+		if outErr != nil {
+			fmt.Println("Error writing companies:", outErr)
 			fmt.Println("Falling back to printing companies:")
-			utils.DumpFallback(companies)
+			fmt.Printf("Companies: %+v\n", companies)
 			return
 		}
 
-		fmt.Printf("Data dumped to: %s\n", filePath)
+		fmt.Printf("Companies written to file %s\n", filePath)
 	},
 }
 
 func init() {
 	companyCmd.AddCommand(companySearchCmd)
-
-	// Add flags
-	addSharedFlags(companySearchCmd)
+	addRequiredKeywordsFlag(companySearchCmd)
+	addIntervalFlag(companySearchCmd)
 }

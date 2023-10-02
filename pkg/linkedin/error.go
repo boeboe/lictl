@@ -1,4 +1,4 @@
-package utils
+package linkedin
 
 import "net/http"
 

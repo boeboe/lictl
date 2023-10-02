@@ -8,7 +8,116 @@ import (
 	"testing"
 )
 
-func TestGetCompanyPage(t *testing.T) {
+func TestCsvContent(t *testing.T) {
+	tests := []struct {
+		name     string
+		company  Company
+		expected string
+	}{
+		{
+			name: "happy path",
+			company: Company{
+				FollowerCount: 1000,
+				FoundedOn:     "2000-01-01",
+				Headline:      "Tech Company",
+				Headquarters:  "San Francisco",
+				Industry:      "Technology",
+				Name:          "TechCorp",
+				Size:          "100-500",
+				Specialties:   "Software|Hardware",
+				Type:          "Private",
+				Website:       "https://techcorp.com",
+			},
+			expected: "1000|2000-01-01|Tech Company|San Francisco|Technology|TechCorp|100-500|Software Hardware|Private|https://techcorp.com",
+		},
+		{
+			name:     "empty company",
+			company:  Company{},
+			expected: "|||||||||",
+		},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			got := tt.company.CsvContent()
+			if got != tt.expected {
+				t.Errorf("expected %s, got %s", tt.expected, got)
+			}
+		})
+	}
+}
+
+func TestCsvHeader(t *testing.T) {
+	c := Company{}
+	expected := "followerCount|foundedOn|headline|headquarters|industry|name|size|specialties|type|website"
+	got := c.CsvHeader()
+	if got != expected {
+		t.Errorf("expected %s, got %s", expected, got)
+	}
+}
+
+func TestJson(t *testing.T) {
+	tests := []struct {
+		name     string
+		company  Company
+		expected string
+	}{
+		{
+			name: "happy path",
+			company: Company{
+				FollowerCount: 1000,
+				FoundedOn:     "2000-01-01",
+				Headline:      "Tech Company",
+				Headquarters:  "San Francisco",
+				Industry:      "Technology",
+				Name:          "TechCorp",
+				Size:          "100-500",
+				Specialties:   "Software|Hardware",
+				Type:          "Private",
+				Website:       "https://techcorp.com",
+			},
+			expected: `{
+  "followerCount": 1000,
+  "foundedOn": "2000-01-01",
+  "headline": "Tech Company",
+  "headquarters": "San Francisco",
+  "industry": "Technology",
+  "name": "TechCorp",
+  "size": "100-500",
+  "specialties": "Software|Hardware",
+  "type": "Private",
+  "website": "https://techcorp.com"
+}`,
+		},
+		{
+			name:    "empty company",
+			company: Company{},
+			expected: `{
+  "followerCount": 0,
+  "foundedOn": "",
+  "headline": "",
+  "headquarters": "",
+  "industry": "",
+  "name": "",
+  "size": "",
+  "specialties": "",
+  "type": "",
+  "website": ""
+}`,
+		},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			got := tt.company.Json()
+			if got != tt.expected {
+				t.Errorf("expected %s, got %s", tt.expected, got)
+			}
+		})
+	}
+}
+
+func TestGetCompanyFromRequest(t *testing.T) {
 	// Define the test matrix
 	tests := []struct {
 		fileName              string
@@ -42,7 +151,7 @@ func TestGetCompanyPage(t *testing.T) {
 			if err != nil {
 				t.Fatalf("Error creating HTTP request: %v", err)
 			}
-			company, err := GetCompanyPage(req, false)
+			company, err := getCompanyFromRequest(req, false)
 			if err != nil {
 				t.Fatalf("Error in SearchJobsPerPage for file %s: %s", tt.fileName, err)
 			}
