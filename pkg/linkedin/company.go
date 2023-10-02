@@ -14,7 +14,7 @@ import (
 	"github.com/corpix/uarand"
 )
 
-// Job represents the structure of a LinkedIn job.
+// Company represents the structure of a LinkedIn company.
 type Company struct {
 	FollowerCount int    `json:"followerCount"`
 	FoundedOn     string `json:"foundedOn"`
@@ -26,6 +26,10 @@ type Company struct {
 	Specialties   string `json:"specialties"`
 	Type          string `json:"type"`
 	Website       string `json:"website"`
+}
+
+func SearchCompaniesOnline(keywords []string, interval time.Duration, debug bool) ([]Company, error) {
+	return make([]Company, 0), nil
 }
 
 func GetCompaniesOnline(urls []string, interval time.Duration, debug bool) ([]Company, error) {
