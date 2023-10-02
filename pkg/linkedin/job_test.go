@@ -16,12 +16,12 @@ func TestSearchJobsPerPage(t *testing.T) {
 		expectedJobsCount    int
 		expectedEmptyCompany int
 	}{
-		{"search-result-0.html", 25, 0},
-		{"search-result-25.html", 25, 0},
-		{"search-result-50.html", 25, 0},
-		{"search-result-75.html", 25, 0},
-		{"search-result-100.html", 25, 0},
-		{"search-result-final.html", 16, 0},
+		{"jobs-0.html", 25, 0},
+		{"jobs-25.html", 25, 0},
+		{"jobs-50.html", 25, 0},
+		{"jobs-75.html", 25, 0},
+		{"jobs-100.html", 25, 0},
+		{"jobs-final.html", 16, 0},
 	}
 
 	// Directory containing test HTML files

@@ -42,7 +42,7 @@ func TestGetCompanyPage(t *testing.T) {
 			if err != nil {
 				t.Fatalf("Error creating HTTP request: %v", err)
 			}
-			company, err := GetCompanyPage(req, true)
+			company, err := GetCompanyPage(req, false)
 			if err != nil {
 				t.Fatalf("Error in SearchJobsPerPage for file %s: %s", tt.fileName, err)
 			}
