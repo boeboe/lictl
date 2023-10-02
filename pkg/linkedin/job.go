@@ -117,7 +117,7 @@ func SearchJobsPerPage(url string, debug bool) ([]Job, error) {
 	// Print the jobs for testing
 	if debug {
 		for _, job := range jobs {
-			log.Println(job)
+			log.Printf("Job: %+v", job)
 		}
 	}
 

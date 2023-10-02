@@ -21,7 +21,7 @@ func TestSearchJobsPerPage(t *testing.T) {
 		{"search-result-50.html", 25, 0},
 		{"search-result-75.html", 25, 0},
 		{"search-result-100.html", 25, 0},
-		{"search-result-final.html", 16, 0}, // Adjust the expectedEmptyCompany as needed
+		{"search-result-final.html", 16, 0},
 	}
 
 	// Directory containing test HTML files
@@ -36,8 +36,8 @@ func TestSearchJobsPerPage(t *testing.T) {
 	// Iterate over the test matrix
 	for _, tt := range tests {
 		t.Run(tt.fileName, func(t *testing.T) {
-			fileURL := fmt.Sprintf("http://%s/%s", addr, tt.fileName)
-			jobs, err := SearchJobsPerPage(fileURL, false)
+			jobSearchURL := fmt.Sprintf("http://%s/%s", addr, tt.fileName)
+			jobs, err := SearchJobsPerPage(jobSearchURL, false)
 			if err != nil {
 				t.Fatalf("Error in SearchJobsPerPage for file %s: %s", tt.fileName, err)
 			}
