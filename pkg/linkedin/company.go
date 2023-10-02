@@ -1,6 +1,7 @@
 package linkedin
 
 import (
+	"encoding/json"
 	"fmt"
 	"log"
 	"net/http"
@@ -26,6 +27,14 @@ type Company struct {
 	Specialties   string `json:"specialties"`
 	Type          string `json:"type"`
 	Website       string `json:"website"`
+}
+
+func (c Company) Dump() string {
+	data, err := json.MarshalIndent(c, "", "  ")
+	if err != nil {
+		return fmt.Sprintf("error dumping company: %v", err)
+	}
+	return string(data)
 }
 
 func SearchCompaniesOnline(keywords []string, interval time.Duration, debug bool) ([]Company, error) {

@@ -87,6 +87,30 @@ func DumpToCSV(data interface{}, dir string) (string, error) {
 	return file.Name(), nil
 }
 
+type Dumper interface {
+	Dump() string
+}
+
+func DumpFallback(slice interface{}) {
+	fmt.Println("Falling back to printing users:")
+
+	s := reflect.ValueOf(slice)
+
+	if s.Kind() != reflect.Slice {
+		fmt.Println("Error: provided item is not a slice")
+		return
+	}
+
+	for i := 0; i < s.Len(); i++ {
+		item := s.Index(i).Interface()
+		if dumper, ok := item.(Dumper); ok {
+			fmt.Println(dumper.Dump())
+		} else {
+			fmt.Println("Error: item does not implement Dumper interface")
+		}
+	}
+}
+
 func createUniqueFile(structName, extension, dir string) (*os.File, error) {
 	currentTime := time.Now()
 	timestamp := fmt.Sprintf("%s-%d", currentTime.Format("2006-01-02T15-04-05"), currentTime.Nanosecond())

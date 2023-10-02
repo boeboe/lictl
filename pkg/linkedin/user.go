@@ -1,6 +1,10 @@
 package linkedin
 
-import "time"
+import (
+	"encoding/json"
+	"fmt"
+	"time"
+)
 
 // User represents the structure of a LinkedIn user.
 type User struct {
@@ -10,6 +14,14 @@ type User struct {
 	Location        string `json:"location"`
 	Name            string `json:"name"`
 	UserLink        string `json:"userLink"`
+}
+
+func (u User) Dump() string {
+	data, err := json.MarshalIndent(u, "", "  ")
+	if err != nil {
+		return fmt.Sprintf("error dumping user: %v", err)
+	}
+	return string(data)
 }
 
 func SearchUsersOnline(keywords []string, interval time.Duration, debug bool) ([]User, error) {

@@ -1,7 +1,6 @@
 package cmd
 
 import (
-	"encoding/json"
 	"fmt"
 	"net/http"
 
@@ -46,15 +45,7 @@ var postSearchCmd = &cobra.Command{
 		if dumpErr != nil {
 			fmt.Println("Error dumping data:", dumpErr)
 			fmt.Println("Falling back to printing posts:")
-
-			for _, post := range posts {
-				postJSON, err := json.MarshalIndent(post, "", "  ")
-				if err != nil {
-					fmt.Println("Error:", err)
-					return
-				}
-				fmt.Println(string(postJSON))
-			}
+			utils.DumpFallback(posts)
 			return
 		}
 

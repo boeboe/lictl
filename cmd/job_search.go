@@ -1,7 +1,6 @@
 package cmd
 
 import (
-	"encoding/json"
 	"fmt"
 	"net/http"
 
@@ -56,15 +55,8 @@ var jobSearchCmd = &cobra.Command{
 		if dumpErr != nil {
 			fmt.Println("Error dumping data:", dumpErr)
 			fmt.Println("Falling back to printing jobs:")
+			utils.DumpFallback(jobs)
 
-			for _, job := range jobs {
-				jobJSON, err := json.MarshalIndent(job, "", "  ")
-				if err != nil {
-					fmt.Println("Error:", err)
-					return
-				}
-				fmt.Println(string(jobJSON))
-			}
 			return
 		}
 

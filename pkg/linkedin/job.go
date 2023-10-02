@@ -1,6 +1,7 @@
 package linkedin
 
 import (
+	"encoding/json"
 	"fmt"
 	"log"
 	"net/http"
@@ -23,6 +24,14 @@ type Job struct {
 	DatePosted         string `json:"datePosted"`
 	JobLink            string `json:"jobLink"`
 	JobURN             string `json:"jobURN"`
+}
+
+func (j Job) Dump() string {
+	data, err := json.MarshalIndent(j, "", "  ")
+	if err != nil {
+		return fmt.Sprintf("error dumping job: %v", err)
+	}
+	return string(data)
 }
 
 func cleanURL(link string) string {

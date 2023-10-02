@@ -1,7 +1,6 @@
 package cmd
 
 import (
-	"encoding/json"
 	"fmt"
 	"net/http"
 
@@ -46,15 +45,7 @@ var companySearchCmd = &cobra.Command{
 		if dumpErr != nil {
 			fmt.Println("Error dumping data:", dumpErr)
 			fmt.Println("Falling back to printing companies:")
-
-			for _, company := range companies {
-				companyJSON, err := json.MarshalIndent(company, "", "  ")
-				if err != nil {
-					fmt.Println("Error:", err)
-					return
-				}
-				fmt.Println(string(companyJSON))
-			}
+			utils.DumpFallback(companies)
 			return
 		}
 

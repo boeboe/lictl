@@ -1,6 +1,10 @@
 package linkedin
 
-import "time"
+import (
+	"encoding/json"
+	"fmt"
+	"time"
+)
 
 // Pulse represents the structure of a LinkedIn pulse.
 type Pulse struct {
@@ -12,6 +16,14 @@ type Pulse struct {
 	PublishDate  string   `json:"publishDate"`
 	PulseLink    string   `json:"pulseLink"`
 	Title        string   `json:"title"`
+}
+
+func (p Pulse) Dump() string {
+	data, err := json.MarshalIndent(p, "", "  ")
+	if err != nil {
+		return fmt.Sprintf("error dumping pulse: %v", err)
+	}
+	return string(data)
 }
 
 func SearchPulsesOnline(keywords []string, interval time.Duration, debug bool) ([]Pulse, error) {
