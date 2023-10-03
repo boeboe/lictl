@@ -3,9 +3,19 @@ package linkedin
 import (
 	"encoding/json"
 	"fmt"
+	"net/url"
 	"reflect"
 	"strings"
 )
+
+func cleanURL(link string) string {
+	parsedURL, err := url.Parse(link)
+	if err != nil {
+		return link
+	}
+	parsedURL.RawQuery = ""
+	return parsedURL.String()
+}
 
 const CSVSeparator = '|'
 

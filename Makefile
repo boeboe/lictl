@@ -13,8 +13,8 @@ help: ## This help
 .PHONY: lint test build release clean
 
 # Variables
-BIN_DIR     		?= ./bin
-BINARY_NAME 		:= lictl
+BIN_DIR         ?= ./bin
+BINARY_NAME     := lictl
 GIT_REPO        := boeboe/lictl
 RELEASE_VERSION ?= v0.1.0
 
@@ -46,17 +46,17 @@ release: build ## Create a GitHub release and upload the binary
 	@which gh >/dev/null || (echo "gh is not installed" && exit 1)
 	@echo "Checking if release $(RELEASE_VERSION) already exists..."
 	@if gh release view $(RELEASE_VERSION) -R $(GIT_REPO) > /dev/null 2>&1; then \
-		echo "Release $(RELEASE_VERSION) exists. Deleting it..."; \
-		gh release delete $(RELEASE_VERSION) -R $(GIT_REPO) --yes; \
+	  echo "Release $(RELEASE_VERSION) exists. Deleting it..."; \
+	  gh release delete $(RELEASE_VERSION) -R $(GIT_REPO) --yes; \
 	fi
 	@echo "Creating a new release on GitHub..."
 	gh release create $(RELEASE_VERSION) \
-		$(BIN_DIR)/$(BINARY_NAME)-linux-x86_64 \
-		$(BIN_DIR)/$(BINARY_NAME)-linux-arm64 \
-		$(BIN_DIR)/$(BINARY_NAME)-windows-amd64.exe \
-		$(BIN_DIR)/$(BINARY_NAME)-macos-amd64 \
-		$(BIN_DIR)/$(BINARY_NAME)-macos-arm64 \
-		--title "Release $(RELEASE_VERSION)" --notes "Release notes for $(RELEASE_VERSION)" --repo $(GIT_REPO)
+	  $(BIN_DIR)/$(BINARY_NAME)-linux-x86_64 \
+	  $(BIN_DIR)/$(BINARY_NAME)-linux-arm64 \
+	  $(BIN_DIR)/$(BINARY_NAME)-windows-amd64.exe \
+	  $(BIN_DIR)/$(BINARY_NAME)-macos-amd64 \
+	  $(BIN_DIR)/$(BINARY_NAME)-macos-arm64 \
+	  --title "Release $(RELEASE_VERSION)" --notes "Release notes for $(RELEASE_VERSION)" --repo $(GIT_REPO)
 
 
 # Clean up build output artifacts

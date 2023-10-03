@@ -33,7 +33,7 @@ func TestUserCsvContent(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			got := tt.user.CsvContent()
 			if got != tt.expected {
-				t.Errorf("expected %s, got %s", tt.expected, got)
+				t.Errorf("expected %q, got %q", tt.expected, got)
 			}
 		})
 	}
@@ -44,7 +44,7 @@ func TestUserCsvHeader(t *testing.T) {
 	expected := "connectionCount|followerCount|userTitle|location|name|userLink"
 	got := u.CsvHeader()
 	if got != expected {
-		t.Errorf("expected %s, got %s", expected, got)
+		t.Errorf("expected %q, got %q", expected, got)
 	}
 }
 

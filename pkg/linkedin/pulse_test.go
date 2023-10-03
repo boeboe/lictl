@@ -35,7 +35,7 @@ func TestPulseCsvContent(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			got := tt.pulse.CsvContent()
 			if got != tt.expected {
-				t.Errorf("expected %s, got %s", tt.expected, got)
+				t.Errorf("expected %q, got %q", tt.expected, got)
 			}
 		})
 	}
@@ -46,7 +46,7 @@ func TestPulseCsvHeader(t *testing.T) {
 	expected := "author|authorTitle|commmentCount|hashTags|likesCount|publishDate|pulseLink|title"
 	got := p.CsvHeader()
 	if got != expected {
-		t.Errorf("expected %s, got %s", expected, got)
+		t.Errorf("expected %q, got %q", expected, got)
 	}
 }
 

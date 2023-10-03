@@ -55,15 +55,6 @@ func (js Jobs) Get(i int) Serializable {
 	return Serializable(js[i])
 }
 
-func cleanURL(link string) string {
-	parsedURL, err := url.Parse(link)
-	if err != nil {
-		return link
-	}
-	parsedURL.RawQuery = ""
-	return parsedURL.String()
-}
-
 func SearchJobsOnline(regions []string, keywords []string, interval time.Duration, debug bool) (Jobs, error) {
 	var allJobs []*Job
 

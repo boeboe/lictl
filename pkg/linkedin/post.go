@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"regexp"
+	"strconv"
 	"strings"
 	"time"
 
@@ -13,13 +15,17 @@ import (
 
 // Post represents the structure of a LinkedIn post.
 type Post struct {
-	Author       int    `json:"author"         csv:"author"`
-	AuthorTitle  string `json:"authorTitle"    csv:"authorTitle"`
-	CommentCount int    `json:"commmentCount"  csv:"commmentCount"`
-	HashTags     string `json:"hashTags"       csv:"hashTags"`
-	LikesCount   int    `json:"likesCount"     csv:"likesCount"`
-	PostLink     string `json:"postLink"       csv:"postLink"`
-	PublishDate  string `json:"publishDate"    csv:"publishDate"`
+	ActivityURN          string `json:"activityURN"            csv:"activityURN"`
+	Author               string `json:"author"                 csv:"author"`
+	AuthorLinkedInUrl    string `json:"authorLinkedInUrl"      csv:"authorLinkedInUrl"`
+	AuthorTitle          string `json:"authorTitle"            csv:"authorTitle"`
+	CommentCount         int    `json:"commmentCount"          csv:"commmentCount"`
+	CompanyFollowerCount int    `json:"companyFollowerCount"   csv:"companyFollowerCount"`
+	Freshness            string `json:"freshness"              csv:"freshness"`
+	LikesCount           int    `json:"likesCount"             csv:"likesCount"`
+	PostLink             string `json:"postLink"               csv:"postLink"`
+	PublishDate          string `json:"publishDate"            csv:"publishDate"`
+	ShareURN             string `json:"shareURN"               csv:"shareURN"`
 }
 
 func (p *Post) CsvContent() string {
@@ -121,35 +127,72 @@ func getPostFromRequest(req *http.Request, debug bool) (*Post, error) {
 	}
 
 	var post Post
-	extractCompanyFollowers(strings.TrimSpace(doc.Find(".top-card-layout__first-subline").Text()))
-	// followerCount, _ := extractPostFollowers(strings.TrimSpace(doc.Find(".top-card-layout__first-subline").Text()))
-	// foundedOn := strings.TrimSpace(doc.Find("div[data-test-id='about-us__foundedOn'] dd").Text())
-	// headline := strings.TrimSpace(doc.Find(".top-card-layout__second-subline").Text())
-	// headquarters := strings.TrimSpace(doc.Find("div[data-test-id='about-us__headquarters'] dd").Text())
-	// industry := strings.TrimSpace(doc.Find("div[data-test-id='about-us__industry'] dd").Text())
-	// name := strings.TrimSpace(doc.Find(".top-card-layout__title").Text())
-	// size := strings.TrimSpace(doc.Find("div[data-test-id='about-us__size'] dd").Text())
-	// specialties := strings.TrimSpace(doc.Find("div[data-test-id='about-us__specialties'] dd").Text())
-	// postType := strings.TrimSpace(doc.Find("div[data-test-id='about-us__organizationType'] dd").Text())
-	// website := strings.TrimSpace(doc.Find("div[data-test-id='about-us__website'] dd").Text())
+	stopIteration := false
+	doc.Find("article").Each(func(i int, s *goquery.Selection) {
+		if stopIteration {
+			return
+		}
+		header := s.Find("div[data-test-id=main-feed-activity-card__entity-lockup]")
+		footer := s.Find(".main-feed-activity-card__social-actions")
 
-	post = Post{
-		// FollowerCount: followerCount,
-		// FoundedOn:     foundedOn,
-		// Headquarters:  headquarters,
-		// Headline:      headline,
-		// Industry:      industry,
-		// Name:          name,
-		// Size:          size,
-		// Specialties:   specialties,
-		// Type:          postType,
-		// Website:       website,
-	}
+		activityURN := strings.TrimSpace(s.AttrOr("data-activity-urn", ""))
+		author := strings.TrimSpace(header.Find(".leading-open").Text())
+		authorLinkedInUrl := cleanURL(strings.TrimSpace(header.Find(".leading-open").AttrOr("href", "")))
+		commmentCount, _ := extractPostComments(strings.TrimSpace(footer.Find("span[data-test-id=social-actions__comments]").Text()))
+		freshness := strings.Split(strings.TrimSpace(header.Find("div span time").Text()), "\n")[0]
+		likesCount, _ := extractPostLikes(strings.TrimSpace(footer.Find("span[data-test-id=social-actions__reaction-count]").Text()))
+		postLink := doc.Find("head link").AttrOr("href", "")
+		shareURN := strings.TrimSpace(s.AttrOr("data-attributed-urn", ""))
 
-	// Print the post for testing
-	if debug {
-		log.Printf("Post: %+v", post)
-	}
+		var companyFollowerCount int
+		var authorTitle string
+		if strings.Contains(authorLinkedInUrl, "linkedin.com/company") {
+			authorTitle = ""
+			companyFollowerCount, _ = extractCompanyFollowers(strings.TrimSpace(header.Find("div p").Text()))
+		} else {
+			authorTitle = strings.TrimSpace(header.Find("div p").Text())
+			companyFollowerCount = 0
+		}
 
+		post = Post{
+			ActivityURN:          activityURN,
+			Author:               author,
+			AuthorLinkedInUrl:    authorLinkedInUrl,
+			AuthorTitle:          authorTitle,
+			CommentCount:         commmentCount,
+			CompanyFollowerCount: companyFollowerCount,
+			Freshness:            freshness,
+			LikesCount:           likesCount,
+			PostLink:             postLink,
+			ShareURN:             shareURN,
+		}
+
+		// Print the post for testing
+		if debug {
+			log.Printf("Post: %+v", post)
+		}
+
+		stopIteration = true
+	})
 	return &post, nil
+}
+
+func extractPostLikes(s string) (int, error) {
+	// Remove commas and convert to integer
+	numStr := strings.ReplaceAll(s, ",", "")
+	return strconv.Atoi(numStr)
+}
+
+func extractPostComments(s string) (int, error) {
+	// Define a regex pattern to match numbers
+	re := regexp.MustCompile(`(\d+,?\d*)\s*Comments`)
+	match := re.FindStringSubmatch(s)
+
+	if len(match) < 2 {
+		return 0, fmt.Errorf("no match found")
+	}
+
+	// Remove commas and convert to integer
+	numStr := strings.ReplaceAll(match[1], ",", "")
+	return strconv.Atoi(numStr)
 }

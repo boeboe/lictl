@@ -39,7 +39,7 @@ func TestJobCsvContent(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			got := tt.job.CsvContent()
 			if got != tt.expected {
-				t.Errorf("expected %s, got %s", tt.expected, got)
+				t.Errorf("expected %q, got %q", tt.expected, got)
 			}
 		})
 	}
@@ -50,7 +50,7 @@ func TestJobCsvHeader(t *testing.T) {
 	expected := "companyLinkedInURL|companyName|datePosted|jobLink|jobTitle|jobURN|location"
 	got := j.CsvHeader()
 	if got != expected {
-		t.Errorf("expected %s, got %s", expected, got)
+		t.Errorf("expected %q, got %q", expected, got)
 	}
 }
 

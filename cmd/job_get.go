@@ -20,12 +20,12 @@ var jobGetCmd = &cobra.Command{
 		// job, err := linkedin.GetJobFromUrl(urlString, debug)
 		job := linkedin.Job{}
 		// if err != nil {
-		// 	if httpErr, ok := err.(*linkedin.HTTPError); ok && httpErr.StatusCode == http.StatusTooManyRequests {
-		// 		fmt.Println("Warning: You've hit the rate limit (HTTP 429 Too Many Requests). Please avoid making further requests for some time.")
-		// 	} else {
-		// 		fmt.Println("Error:", err)
-		// 	}
-		// 	return
+		//   if httpErr, ok := err.(*linkedin.HTTPError); ok && httpErr.StatusCode == http.StatusTooManyRequests {
+		//     fmt.Println("Warning: You've hit the rate limit (HTTP 429 Too Many Requests). Please avoid making further requests for some time.")
+		//   } else {
+		//     fmt.Println("Error:", err)
+		//   }
+		//   return
 		// }
 
 		// Writing job details to output file
