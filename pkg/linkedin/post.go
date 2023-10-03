@@ -141,7 +141,7 @@ func getPostFromRequest(req *http.Request, debug bool) (*Post, error) {
 		commmentCount, _ := extractPostComments(strings.TrimSpace(footer.Find("span[data-test-id=social-actions__comments]").Text()))
 		freshness := strings.Split(strings.TrimSpace(header.Find("div span time").Text()), "\n")[0]
 		likesCount, _ := extractPostLikes(strings.TrimSpace(footer.Find("span[data-test-id=social-actions__reaction-count]").Text()))
-		postLink := doc.Find("head link").AttrOr("href", "")
+		postLink := cleanURL(doc.Find("head link").AttrOr("href", ""))
 		shareURN := strings.TrimSpace(s.AttrOr("data-attributed-urn", ""))
 
 		var companyFollowerCount int

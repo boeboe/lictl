@@ -161,7 +161,8 @@ func TestGetPostFromRequest(t *testing.T) {
 			"https://www.linkedin.com/posts/sasja-nothacker-a051648a_all-161-things-we-announced-at-google-cloud-activity-7105127933211467777-POG4",
 			"urn:li:share:7105127931164676096",
 		},
-		{"post-2.html",
+		{
+			"post-2.html",
 			"urn:li:activity:7051984245006753792",
 			"Ignasi Barrera",
 			"https://es.linkedin.com/in/ignasibarrera",
@@ -173,7 +174,8 @@ func TestGetPostFromRequest(t *testing.T) {
 			"https://www.linkedin.com/posts/ignasibarrera_introducing-tetrate-service-express-activity-7051984245006753792-0CTS",
 			"urn:li:share:7051984244465647616",
 		},
-		{"post-3.html",
+		{
+			"post-3.html",
 			"urn:li:activity:7039669241490415616",
 			"solo.io",
 			"https://www.linkedin.com/company/solo.io",
@@ -185,7 +187,8 @@ func TestGetPostFromRequest(t *testing.T) {
 			"https://www.linkedin.com/posts/solo%2Eio_compare-top-api-gateways-activity-7039669241490415616-DNov",
 			"urn:li:share:7039669240731238401",
 		},
-		{"post-4.html",
+		{
+			"post-4.html",
 			"urn:li:activity:6979083456680984576",
 			"Amazon Web Services (AWS)",
 			"https://www.linkedin.com/company/amazon-web-services",
@@ -197,7 +200,8 @@ func TestGetPostFromRequest(t *testing.T) {
 			"https://www.linkedin.com/posts/amazon-web-services_learn-more-about-data-protection-at-aws-activity-6979083456680984576-k1b2",
 			"urn:li:ugcPost:6979083432681197568",
 		},
-		{"post-5.html",
+		{
+			"post-5.html",
 			"urn:li:activity:7087150407113719808",
 			"Max Uritsky",
 			"https://www.linkedin.com/in/max-uritsky-170a441",

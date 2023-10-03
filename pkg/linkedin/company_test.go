@@ -158,7 +158,8 @@ func TestGetCompanyFromRequest(t *testing.T) {
 			"Privately Held",
 			"http://www.biospace.com/",
 		},
-		{"company-2.html",
+		{
+			"company-2.html",
 			4699,
 			"1858",
 			"Premier beverage production & packaging facility headquartered in La Crosse WI with three additional sites across the US",
@@ -170,7 +171,8 @@ func TestGetCompanyFromRequest(t *testing.T) {
 			"Privately Held",
 			"http://www.citybrewery.com",
 		},
-		{"company-3.html",
+		{
+			"company-3.html",
 			3848,
 			"2002",
 			"",
@@ -182,7 +184,8 @@ func TestGetCompanyFromRequest(t *testing.T) {
 			"Privately Held",
 			"http://www.gradepotentialtutoring.com/",
 		},
-		{"company-4.html",
+		{
+			"company-4.html",
 			6938,
 			"2022",
 			"K12 educational services company with a vision to end generational poverty and eliminate racial achievement gaps",
@@ -194,7 +197,8 @@ func TestGetCompanyFromRequest(t *testing.T) {
 			"Self-Owned",
 			"https://www.instructionalempowerment.com/",
 		},
-		{"company-5.html",
+		{
+			"company-5.html",
 			15789,
 			"2018",
 			"Going beyond to advance treatments for patients with acid-related disorders",

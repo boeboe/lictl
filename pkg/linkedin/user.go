@@ -13,8 +13,8 @@ import (
 
 // User represents the structure of a LinkedIn user.
 type User struct {
-	ConnectionCount int    `json:"connectionCount" csv:"connectionCount"`
-	FollowerCount   int    `json:"followerCount"   csv:"followerCount"`
+	ConnectionCount string `json:"connectionCount" csv:"connectionCount"`
+	FollowerCount   string `json:"followerCount"   csv:"followerCount"`
 	UserTitle       string `json:"userTitle"       csv:"userTitle"`
 	Location        string `json:"location"        csv:"location"`
 	Name            string `json:"name"            csv:"name"`
@@ -121,28 +121,20 @@ func getUserFromRequest(req *http.Request, debug bool) (*User, error) {
 
 	var user User
 	extractCompanyFollowers(strings.TrimSpace(doc.Find(".top-card-layout__first-subline").Text()))
-	// followerCount, _ := extractCompanyFollowers(strings.TrimSpace(doc.Find(".top-card-layout__first-subline").Text()))
-	// foundedOn := strings.TrimSpace(doc.Find("div[data-test-id='about-us__foundedOn'] dd").Text())
-	// headline := strings.TrimSpace(doc.Find(".top-card-layout__second-subline").Text())
-	// headquarters := strings.TrimSpace(doc.Find("div[data-test-id='about-us__headquarters'] dd").Text())
-	// industry := strings.TrimSpace(doc.Find("div[data-test-id='about-us__industry'] dd").Text())
-	// name := strings.TrimSpace(doc.Find(".top-card-layout__title").Text())
-	// size := strings.TrimSpace(doc.Find("div[data-test-id='about-us__size'] dd").Text())
-	// specialties := strings.TrimSpace(doc.Find("div[data-test-id='about-us__specialties'] dd").Text())
-	// companyType := strings.TrimSpace(doc.Find("div[data-test-id='about-us__organizationType'] dd").Text())
-	// website := strings.TrimSpace(doc.Find("div[data-test-id='about-us__website'] dd").Text())
+	connectionCount := strings.TrimSpace(doc.Find(".top-card-layout__first-subline span").Eq(0).Text())
+	followerCount := strings.TrimSpace(doc.Find(".top-card-layout__first-subline span").Eq(1).Text())
+	userTitle := strings.TrimSpace(doc.Find(".top-card-layout__headline").Text())
+	location := strings.TrimSpace(doc.Find(".top-card-layout__first-subline div").Text())
+	name := strings.TrimSpace(doc.Find(".top-card-layout__title").Text())
+	userLink := cleanURL(doc.Find("head link").AttrOr("href", ""))
 
 	user = User{
-		// FollowerCount: followerCount,
-		// FoundedOn:     foundedOn,
-		// Headquarters:  headquarters,
-		// Headline:      headline,
-		// Industry:      industry,
-		// Name:          name,
-		// Size:          size,
-		// Specialties:   specialties,
-		// Type:          companyType,
-		// Website:       website,
+		ConnectionCount: connectionCount,
+		FollowerCount:   followerCount,
+		UserTitle:       userTitle,
+		Location:        location,
+		Name:            name,
+		UserLink:        userLink,
 	}
 
 	// Print the user for testing
