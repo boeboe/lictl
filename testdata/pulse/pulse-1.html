@@ -1,0 +1,3263 @@
+<!DOCTYPE html>
+
+    
+    
+    
+    
+
+    
+
+    
+    <html lang="en" class="cls-fix-enabled">
+      <head>
+        <meta name="pageKey" content="d_flagship2_pulse_read">
+<!---->        <meta name="locale" content="en_US">
+        <meta id="config" data-app-version="0.0.2495" data-call-tree-id="AAYGxKM/jCJVy6VEW7rUHg==" data-multiproduct-name="article-ssr-frontend" data-service-name="article-ssr-frontend" data-browser-id="615f55fb-a872-4ec0-8e2e-ad1695edc174" data-enable-page-view-heartbeat-tracking data-page-instance="urn:li:page:d_flagship2_pulse_read;2FOtT0O9QWmI15kFW99tlw==" data-theme="light" data-disable-jsbeacon-pagekey-suffix="false" data-member-id="0" data-logout-url="https://www.linkedin.com/uas/logout?session_full_logout=true&amp;csrfToken=ajax%3A2694320563746513925">
+
+        <link rel="canonical" href="https://www.linkedin.com/pulse/istio-service-mesh-kubernetes-avinash-kumar-chandran">
+<!----><!---->
+<!---->
+<!---->
+<!---->
+<!---->
+          <link rel="icon" href="https://static.licdn.com/aero-v1/sc/h/al2o9zrvru7aqj8e1x2rzsrca">
+
+        <script>
+          function getDfd() {let yFn,nFn;const p=new Promise(function(y, n){yFn=y;nFn=n;});p.resolve=yFn;p.reject=nFn;return p;}
+          window.lazyloader = getDfd();
+          window.tracking = getDfd();
+          window.impressionTracking = getDfd();
+          window.ingraphTracking = getDfd();
+          window.appDetection = getDfd();
+          window.pemTracking = getDfd();
+        </script>
+
+<!---->
+        
+        <title>Istio Service Mesh on Kubernetes       </title>
+        <link rel="stylesheet" href="https://static.licdn.com/aero-v1/sc/h/4h8mvmsteh4b3o2m2qklqs5on">
+        
+    
+    
+    
+
+    <meta name="description" content="The Istio service mesh Istio addresses the challenges developers and operators face with a distributed or microservices architecture. Whether you're building from scratch or migrating existing applications to cloud native, Istio can help.">
+    <meta property="og:title" content="Istio Service Mesh on Kubernetes       ">
+    <meta property="og:description" content="The Istio service mesh Istio addresses the challenges developers and operators face with a distributed or microservices architecture. Whether you're building from scratch or migrating existing applications to cloud native, Istio can help.">
+    <meta property="og:image" content="https://media.licdn.com/dms/image/D5612AQET_9ZL8CpiNA/article-cover_image-shrink_600_2000/0/1684671860545?e=2147483647&amp;v=beta&amp;t=WK6Gj4e2JTHi9SXxx3yA5HOFD5PFRIfEtzUSUsfXSyQ">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://www.linkedin.com/pulse/istio-service-mesh-kubernetes-avinash-kumar-chandran">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@LinkedInEditors">
+    <meta name="twitter:title" content="Istio Service Mesh on Kubernetes       ">
+    <meta name="twitter:description" content="The Istio service mesh Istio addresses the challenges developers and operators face with a distributed or microservices architecture. Whether you're building from scratch or migrating existing applications to cloud native, Istio can help.">
+    <meta name="twitter:image" content="https://media.licdn.com/dms/image/D5612AQET_9ZL8CpiNA/article-cover_image-shrink_600_2000/0/1684671860545?e=2147483647&amp;v=beta&amp;t=WK6Gj4e2JTHi9SXxx3yA5HOFD5PFRIfEtzUSUsfXSyQ">
+    <meta name="robots" content="noarchive, max-image-preview:large">
+    <meta name="appId">
+      <meta name="twitter:label1" content="Written by">
+      <meta name="twitter:data1" content="Avinash Kumar Chandran">
+      <meta name="twitter:label2" content="Reading time">
+      <meta name="twitter:data2" content="19 min read">
+
+    <meta name="clientSideIngraphs" content="1" data-gauge-metric-endpoint="/pulse/api/ingraphs/gauge" data-counter-metric-endpoint="/pulse/api/ingraphs/counter">
+  
+          
+    
+      <script type="application/ld+json">
+        {"@context":"http://schema.org","@type":"Article","headline":"The Istio service mesh Istio addresses the challenges developers and operators face with a distributed or microservices architecture. Whether you're building from scratch or migrating existing applications to cloud native, Istio can help.","url":"https://www.linkedin.com/pulse/istio-service-mesh-kubernetes-avinash-kumar-chandran","publisher":null,"name":"Istio Service Mesh on Kubernetes       ","commentCount":0,"interactionStatistic":[{"interactionType":"http://schema.org/LikeAction","userInteractionCount":9,"@type":"InteractionCounter"},{"interactionType":"http://schema.org/CommentAction","userInteractionCount":0,"@type":"InteractionCounter"}],"author":{"name":"Avinash Kumar Chandran","url":"https://in.linkedin.com/in/avinash-kumar-chandran-b8500017a","image":"https://media.licdn.com/dms/image/C5603AQF4XyT7NgDFTQ/profile-displayphoto-shrink_400_400/0/1625380155107?e=1701907200&v=beta&t=2kyl5MfG1Y2yrw5c1KDN3Nk1FVB74wuZupM9OZdxq5E","@type":"Person"},"datePublished":1686075057000,"mainEntityOfPage":"https://www.linkedin.com/pulse/istio-service-mesh-kubernetes-avinash-kumar-chandran","isAccessibleForFree":true,"image":{"url":"https://media.licdn.com/dms/image/D5612AQET_9ZL8CpiNA/article-cover_image-shrink_600_2000/0/1684671860545?e=2147483647&v=beta&t=WK6Gj4e2JTHi9SXxx3yA5HOFD5PFRIfEtzUSUsfXSyQ","@type":"ImageObject"}}
+      </script>
+  
+  
+      
+<!---->      </head>
+      <body dir="ltr">
+<!----><!---->          
+      
+    <div id="artdeco-global-alert-container" aria-live="assertive" role="alert" class="global-alert-banner">
+<!---->    </div>
+      <div id="artdeco-global-alerts-cls-offset">
+<!---->      </div>
+  
+  
+
+        
+          
+    
+    
+    
+    <code id="google-one-tap-enabled" style="display: none"><!--true--></code>
+    <form class="google-auth" action="https://www.linkedin.com/uas/login-submit" method="post">
+      <input name="loginCsrfParam" value="615f55fb-a872-4ec0-8e2e-ad1695edc174" type="hidden">
+
+        <input name="session_redirect" value="https://www.linkedin.com/pulse/istio-service-mesh-kubernetes-avinash-kumar-chandran" type="hidden">
+
+      <input name="trk" value="pulse-article_google-one-tap-submit" type="hidden">
+<!---->      
+    <div class="loader loader--full-screen">
+      <div class="loader__container mb-2 overflow-hidden">
+        <icon class="loader__icon inline-block loader__icon--default text-color-progress-loading" data-delayed-url="https://static.licdn.com/aero-v1/sc/h/ddi43qwelxeqjxdd45pe3fvs1" data-svg-class-name="loader__icon-svg--large fill-currentColor h-[60px] min-h-[60px] w-[60px] min-w-[60px]"></icon>
+      </div>
+    </div>
+  
+    </form>
+
+    <script data-delayed-url="https://static.licdn.com/aero-v1/sc/h/8m736dfzskmdn6bwwqz67iiki" data-module-id="google-gsi-lib"></script>
+    <code id="enableGoogleAutoSelect" style="display: none"><!--true--></code>
+    <code id="googleAuthLibraryPath" style="display: none"><!--"https://static.licdn.com/aero-v1/sc/h/8m736dfzskmdn6bwwqz67iiki"--></code>
+    <code id="isLinkedInAppWebView" style="display: none"><!--false--></code>
+    <code id="isTermsAndConditionsSkipEnabledOneTap" style="display: none"><!--false--></code>
+  
+          
+  <code id="isGuest" style="display: none"><!--true--></code>
+  <code id="isLite" style="display: none"><!--false--></code>
+  <code id="articleViewEventData" style="display: none"><!--"{\"articleId\":7066023015595069000,\"authorId\":710665877,\"linkedInArticleUrn\":\"urn:li:linkedInArticle:7066023015595069440\",\"articleUrn\":\"urn:li:article:8594687418027832896\"}"--></code>
+  <code id="articleUrn" style="display: none"><!--"urn:li:linkedInArticle:7066023015595069440"--></code>
+    <code id="legacyArticleUrn" style="display: none"><!--"urn:li:article:8594687418027832896"--></code>
+  
+              
+        
+    
+      <code id="isClsFixActive" style="display: none"><!--true--></code>
+      
+    
+
+    <a href="#main-content" class="skip-link btn-md btn-primary absolute z-11 -top-[100vh] focus:top-0">
+      Skip to main content
+    </a>
+  
+    <header class="header base-detail-page__header px-mobile-container-padding bg-color-background-container global-alert-offset sticky-header">
+      
+        
+
+    
+    
+    
+    
+
+    <nav class="nav pt-1.5 pb-2 flex items-center justify-between relative flex-nowrap mamabear:flex-wrap mamabear:gap-y-1 babybear:flex-wrap babybear:py-1.5
+         nav--minified-mobile babybear:flex-wrap" aria-label="Primary">
+
+      <a href="/?trk=article-ssr-frontend-pulse_nav-header-logo" class="nav__logo-link link-no-visited-state z-1 mr-auto babybear:z-0 babybear:mr-0 babybear:flex-1 hover:no-underline focus:no-underline active:no-underline" data-tracking-control-name="article-ssr-frontend-pulse_nav-header-logo" data-tracking-will-navigate>
+          
+              
+    
+    <span class="sr-only">LinkedIn</span>
+      <icon class="nav-logo--inbug flex text-color-brand
+          papabear:hidden mamabear:hidden" data-svg-class-name="h-[34px] w-[34px] babybear:h-[27px] babybear:w-[27px]" data-delayed-url="https://static.licdn.com/aero-v1/sc/h/4zqr0f9jf98vi2nkijyc3bex2"></icon>
+      <icon class="block text-color-brand w-[84px] h-[21px] papabear:w-[135px] papabear:h-[34px]
+          babybear:hidden" data-test-id="nav-logo" data-delayed-url="https://static.licdn.com/aero-v1/sc/h/8fkga714vy9b2wk5auqo5reeb"></icon>
+  
+          
+      </a>
+
+<!---->
+        
+    
+    
+    
+    
+    
+    
+    <ul class="top-nav-menu flex items-center mr-0.5 babybear:hidden mamabear:hidden
+        after:up-down-divider after:!h-[37px]
+         nav__menu order-3">
+        <li class>
+          
+    <a href="https://www.linkedin.com/pulse/topics/home/?trk=article-ssr-frontend-pulse_guest_nav_menu_articles" data-tracking-control-name="article-ssr-frontend-pulse_guest_nav_menu_articles" data-tracking-will-navigate class="top-nav-link flex justify-center items-center h-[52px] hover:text-color-text visited:hover:text-color-text hover:no-underline
+        w-[64px]
+        flex-col mx-1
+        text-color-text-secondary visited:text-color-text-secondary">
+      <icon class="top-nav-link__icon flex h-3 w-3 flex-shrink-0 " data-delayed-url="https://static.licdn.com/aero-v1/sc/h/6ulnj3n2ijcmhej768y6oj1hr">
+      </icon>
+      <span class="top-nav-link__label-text font-sans text-xs leading-regular text-center
+          font-regular">
+        Articles
+      </span>
+    </a>
+  
+        </li>
+        <li class>
+          
+    <a href="https://www.linkedin.com/pub/dir/+/+?trk=article-ssr-frontend-pulse_guest_nav_menu_people" data-tracking-control-name="article-ssr-frontend-pulse_guest_nav_menu_people" data-tracking-will-navigate class="top-nav-link flex justify-center items-center h-[52px] hover:text-color-text visited:hover:text-color-text hover:no-underline
+        w-[64px]
+        flex-col mx-1
+        text-color-text-secondary visited:text-color-text-secondary">
+      <icon class="top-nav-link__icon flex h-3 w-3 flex-shrink-0 " data-delayed-url="https://static.licdn.com/aero-v1/sc/h/7kb6sn3tm4cx918cx9a5jlb0">
+      </icon>
+      <span class="top-nav-link__label-text font-sans text-xs leading-regular text-center
+          font-regular">
+        People
+      </span>
+    </a>
+  
+        </li>
+        <li class>
+          
+    <a href="https://www.linkedin.com/learning/search?trk=article-ssr-frontend-pulse_guest_nav_menu_learning" data-tracking-control-name="article-ssr-frontend-pulse_guest_nav_menu_learning" data-tracking-will-navigate class="top-nav-link flex justify-center items-center h-[52px] hover:text-color-text visited:hover:text-color-text hover:no-underline
+        w-[64px]
+        flex-col mx-1
+        text-color-text-secondary visited:text-color-text-secondary">
+      <icon class="top-nav-link__icon flex h-3 w-3 flex-shrink-0 " data-delayed-url="https://static.licdn.com/aero-v1/sc/h/8wykgzgbqy0t3fnkgborvz54u">
+      </icon>
+      <span class="top-nav-link__label-text font-sans text-xs leading-regular text-center
+          font-regular">
+        Learning
+      </span>
+    </a>
+  
+        </li>
+        <li class>
+          
+    <a href="https://www.linkedin.com/jobs/search?trk=article-ssr-frontend-pulse_guest_nav_menu_jobs" data-tracking-control-name="article-ssr-frontend-pulse_guest_nav_menu_jobs" data-tracking-will-navigate class="top-nav-link flex justify-center items-center h-[52px] hover:text-color-text visited:hover:text-color-text hover:no-underline
+        w-[64px]
+        flex-col mx-1
+        text-color-text-secondary visited:text-color-text-secondary">
+      <icon class="top-nav-link__icon flex h-3 w-3 flex-shrink-0 " data-delayed-url="https://static.licdn.com/aero-v1/sc/h/92eb1xekc34eklevj0io6x4ki">
+      </icon>
+      <span class="top-nav-link__label-text font-sans text-xs leading-regular text-center
+          font-regular">
+        Jobs
+      </span>
+    </a>
+  
+        </li>
+    </ul>
+  
+
+      <div class="nav__cta-container order-3 flex gap-x-1 justify-end min-w-[100px] flex-nowrap flex-shrink-0 babybear:flex-wrap flex-2">
+        
+    
+    <a class="nav__button-tertiary btn-md btn-tertiary" href="https://www.linkedin.com/signup/cold-join?session_redirect=%2Fpulse%2Fistio-service-mesh-kubernetes-avinash-kumar-chandran&amp;trk=article-ssr-frontend-pulse_nav-header-join" data-tracking-control-name="article-ssr-frontend-pulse_nav-header-join" data-test-live-nav-primary-cta data-tracking-will-navigate>
+      Join now
+    </a>
+
+
+        
+  
+  
+
+      
+      <a class="nav__button-secondary btn-md btn-secondary-emphasis" href="https://www.linkedin.com/uas/login?session_redirect=%2Fpulse%2Fistio-service-mesh-kubernetes-avinash-kumar-chandran&amp;fromSignIn=true&amp;trk=article-ssr-frontend-pulse_nav-header-signin" data-tracking-control-name="article-ssr-frontend-pulse_nav-header-signin" data-tracking-will-navigate>
+          Sign in
+      </a>
+
+
+          <a aria-label="Sign in" class="nav__link-person papabear:hidden mamabear:hidden" data-tracking-control-name="article-ssr-frontend-pulse_nav-header-signin" data-tracking-will-navigate href="https://www.linkedin.com/uas/login?session_redirect=%2Fpulse%2Fistio-service-mesh-kubernetes-avinash-kumar-chandran&amp;fromSignIn=true&amp;trk=article-ssr-frontend-pulse_nav-header-signin">
+            
+      <img class="inline-block relative
+          rounded-[50%]
+          w-4 h-4
+          bg-color-entity-ghost-background" data-delayed-url="https://static.licdn.com/aero-v1/sc/h/9c8pery4andzj6ohjkjp54ma2" data-ghost-classes="bg-color-entity-ghost-background" data-ghost-url="https://static.licdn.com/aero-v1/sc/h/9c8pery4andzj6ohjkjp54ma2" alt>
+  
+          </a>
+      </div>
+
+<!---->
+<!---->    </nav>
+  
+      
+    </header>
+
+    
+<!---->      
+
+<!---->
+    <main class="main papabear:flex papabear:w-content-max-w papabear:mx-auto papabear:pt-desktop-content-top-margin mamabear:pt-desktop-content-top-margin
+        " id="main-content" role="main">
+      <section class="core-rail mx-auto papabear:w-core-rail-width mamabear:max-w-[790px] babybear:max-w-[790px]">
+        
+        
+      
+
+        <div class="details mx-details-container-padding">
+          
+        
+            
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+<!---->    <code id="isGuest" style="display: none"><!--true--></code>
+    <article class="article-main relative flex-grow pulse">
+<!----><!---->          
+    <figure class="cover-img">
+<!---->      <div class="cover-img__image-frame relative w-full overflow-hidden pb-[calc((134/782)*100%)]">
+        <div class="cover-img__image-position absolute top-0 right-0 bottom-0 left-0
+            ">
+            <img class="cover-img__image relative w-full h-full object-cover" src="https://media.licdn.com/dms/image/D5612AQET_9ZL8CpiNA/article-cover_image-shrink_600_2000/0/1684671860545?e=2147483647&amp;v=beta&amp;t=WK6Gj4e2JTHi9SXxx3yA5HOFD5PFRIfEtzUSUsfXSyQ" fetchpriority="high" data-embed-id="cover-image" alt="Istio Service Mesh on Kubernetes       ">
+        </div>
+      </div>
+        <figcaption class="cover-img__caption text-sm text-color-text-secondary pt-2">https://blog.container-solutions.com/</figcaption>
+    </figure>
+  
+      
+      <header>
+        <section class="core-section-container relative my-3">
+            
+            
+  <h1 class="pulse-title text-display-md text-color-text lg:text-display-lg font-bold w-11/12">Istio Service Mesh on Kubernetes       </h1>
+
+              
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+      <div class="ellipsis-menu absolute right-0 top-0">
+        
+
+    
+
+    <div class="collapsible-dropdown flex items-center relative hyphens-auto">
+          
+            <button class="ellipsis-menu__trigger
+                collapsible-dropdown__button btn-md btn-tertiary cursor-pointer
+                !py-[6px] !px-1 flex items-center rounded-[50%]
+                
+                " aria-expanded="false" aria-label="Open menu" data-tracking-control-name="article-ssr-frontend-pulse_ellipsis-menu-trigger">
+              <icon class="ellipsis-menu__trigger-icon m-0 p-0 centered-icon" data-delayed-url="https://static.licdn.com/aero-v1/sc/h/671xosfpvk4c0kqtyl87hashi"></icon>
+            </button>
+          
+
+        <ul class="collapsible-dropdown__list hidden container-raised absolute w-auto overflow-y-auto flex-col items-stretch z-1 bottom-auto top-[100%]" role="menu" tabindex="-1">
+          
+              
+
+                <li class="ellipsis-menu__item border-t-1 border-solid border-color-border-low-emphasis first-of-type:border-none flex">
+                  
+
+    
+    
+
+    
+
+    
+
+    <a href="/uas/login?session_redirect=https%3A%2F%2Fwww.linkedin.com%2Fpulse%2Fistio-service-mesh-kubernetes-avinash-kumar-chandran&amp;trk=article-ssr-frontend-pulse_ellipsis-menu-semaphore-sign-in-redirect&amp;guestReportContentType=PONCHO_ARTICLE&amp;_f=guest-reporting" data-tracking-control-name="article-ssr-frontend-pulse_ellipsis-menu-semaphore-sign-in-redirect" data-tracking-will-navigate data-item-type="semaphore" data-semaphore-content-type="PONCHO_ARTICLE" data-semaphore-content-urn="urn:li:linkedInArticle:7066023015595069440" data-semaphore-tracking-prefix="article-ssr-frontend-pulse_ellipsis-menu-semaphore" data-is-logged-in="false" data-modal="semaphore__toggle" class="semaphore__toggle visited:text-color-text-secondary ellipsis-menu__semaphore ellipsis-menu__item-button flex items-center w-full p-1 cursor-pointer font-sans text-sm font-bold link-styled focus:link-styled link:no-underline active:bg-color-background-container-tint focus:bg-color-background-container-tint hover:bg-color-background-container-tint outline-offset-[-2px]">
+<!---->        
+                      <icon class="ellipsis-menu__item-icon text-color-text h-[24px] w-[24px] mr-1" data-delayed-url="https://static.licdn.com/aero-v1/sc/h/iq0x9q37wj214o129ai1yjut">
+                      </icon>
+                      Report this article
+                    
+    </a>
+
+<!---->  
+                </li>
+<!---->          
+        </ul>
+
+<!---->    </div>
+  
+
+      </div>
+  
+        
+
+          <div class="core-section-container__content break-words">
+            
+<!----><!---->            
+    
+    
+
+    
+    
+    
+      <div class="base-card relative w-full hover:no-underline focus:no-underline base-card--link base-main-card flex flex-wrap py-2 pr-2 babybear:pr-0
+        
+        base-main-card--link publisher-author-card">
+        
+
+        <a class="base-card__full-link absolute top-0 right-0 bottom-0 left-0 p-0 z-[2]" href="https://in.linkedin.com/in/avinash-kumar-chandran-b8500017a?trk=article-ssr-frontend-pulse_publisher-author-card" data-tracking-control-name="article-ssr-frontend-pulse_publisher-author-card" data-tracking-will-navigate>
+          
+          <span class="sr-only">
+              
+          
+        Avinash Kumar Chandran
+      
+      
+          </span>
+        </a>
+
+      
+          
+      <img class="inline-block relative
+          rounded-[50%]
+          w-6 h-6
+          " data-delayed-url="https://media.licdn.com/dms/image/C5603AQF4XyT7NgDFTQ/profile-displayphoto-shrink_400_400/0/1625380155107?e=1701907200&amp;v=beta&amp;t=2kyl5MfG1Y2yrw5c1KDN3Nk1FVB74wuZupM9OZdxq5E" data-ghost-classes="bg-color-entity-ghost-background" data-ghost-url="https://static.licdn.com/aero-v1/sc/h/9c8pery4andzj6ohjkjp54ma2" alt="Avinash Kumar Chandran">
+  
+
+        <div class="base-main-card__info self-center ml-1 flex-1 relative break-words papabear:min-w-0 mamabear:min-w-0 babybear:w-full">
+          <h3 class="base-main-card__title font-sans text-[18px] font-bold text-color-text overflow-hidden
+              ">
+            
+        Avinash Kumar Chandran
+      
+          </h3>
+          
+
+            <h4 class="base-main-card__subtitle body-text text-color-text overflow-hidden">
+              
+          Kubernetes Fever
+      
+            </h4>
+
+<!---->
+              <div class="body-text text-color-text-low-emphasis base-main-card__metadata">
+                
+          Published Jun 6, 2023
+      
+              </div>
+        </div>
+
+          <div class="base-main-card__ctas z-[3] self-center ml-3 babybear:ml-1 babybear:self-start">
+            
+          <a class="base-main-card__cta btn-sm btn-secondary" href="https://www.linkedin.com/signup/cold-join?session_redirect=%2Fpulse%2Fistio-service-mesh-kubernetes-avinash-kumar-chandran&amp;trk=article-ssr-frontend-pulse_publisher-author-card" data-tracking-control-name="article-ssr-frontend-pulse_publisher-author-card" data-tracking-will-navigate>
+            + Follow
+          </a>
+      
+          </div>
+      
+    
+      </div>
+  
+  
+  
+  
+        
+          </div>
+        </section>
+      </header>
+      
+            <div class="article-main__content max-w-[744px]"><h2>The Istio service mesh</h2><p>Istio addresses the challenges developers and operators face with a distributed or microservices architecture. Whether you're building from scratch or migrating existing applications to cloud native, Istio can help.</p><h2>What is a Service Mesh?</h2><p>Modern applications are typically architected as distributed collections of microservices, with each collection of microservices performing some discrete business function. A service mesh is a dedicated infrastructure layer that you can add to your applications. It allows you to transparently add capabilities like observability, traffic management, and security, without adding them to your own code. The term “service mesh” describes both the type of software you use to implement this pattern, and the security or network domain that is created when you use that software.</p><p>As the deployment of distributed services, such as in a Kubernetes-based system, grows in size and complexity, it can become harder to understand and manage. Its requirements can include discovery, load balancing, failure recovery, metrics, and monitoring. A service mesh also often addresses more complex operational requirements, like A/B testing, canary deployments, rate limiting, access control, encryption, and end-to-end authentication.</p><h2>What is Istio?</h2><p>Istio is an open source service mesh that layers transparently onto existing distributed applications. Istio’s powerful features provide a uniform and more efficient way to secure, connect, and monitor services. Istio is the path to load balancing, service-to-service authentication, and monitoring – with few or no service code changes. Its powerful control plane brings vital features, including:</p><ul><li>Secure service-to-service communication in a cluster with TLS encryption, strong identity-based authentication and authorization</li><li>Automatic load balancing for HTTP, gRPC, WebSocket, and TCP traffic</li><li>Fine-grained control of traffic behavior with rich routing rules, retries, failovers, and fault injection</li><li>A pluggable policy layer and configuration API supporting access controls, rate limits and quotas</li><li>Automatic metrics, logs, and traces for all traffic within a cluster, including cluster ingress and egress</li></ul><p><strong><u>Istio offers the following service mesh management features</u></strong>:</p><ul><li><strong>Traffic management&nbsp;</strong>– Istio lets you control traffic flows and service-to-service API calls by configuring rules and routing traffic. It makes the configuration of retries, timeouts, and circuit-breakers simpler.</li><li><strong>Security</strong>&nbsp;– Istio provides the backbone for communications and manages security controls such as service communication encryption, authentication, and authorization at scale. It consistently enforces policies across runtimes and protocols and helps secure communication between Kubernetes pods and services at the application and network layers.</li><li><strong>Observability</strong>&nbsp;– Istio provides insights into service mesh deployments using monitoring and logging features. Monitoring provides visibility into how service behavior impacts upstream and downstream performance. Istio offers custom dashboards to track performance across all services.</li></ul><p><br></p><p>                                               <a href="https://www.solo.io/topics/istio-architecture/" target="_blank" rel="nofollow noopener">Istio architecture</a></p><figure class="slate-resizable-image-embed slate-image-embed__resize-full-width"><img alt="No alt text provided for this image" data-media-urn="" data-li-src="https://media.licdn.com/dms/image/D5612AQGwCRjbVf4KhA/article-inline_image-shrink_1000_1488/0/1685339441999?e=1701302400&amp;v=beta&amp;t=tSx-dqSWPKZCdFpnh-OsU31FOIuGkRFa3jEGmOYGaUU" src="//:0"><figcaption>https://www.solo.io/wp-content/uploads/2022/06/Istio_How_It_Works.svg</figcaption></figure><p>Key components in the&nbsp;<a href="https://www.solo.io/topics/istio-architecture/" target="_blank" rel="nofollow noopener">Istio architecture</a>&nbsp;include:</p><ul><li>The open source Envoy Proxy&nbsp;(a graduated project in the Cloud Native Computing Foundation – CNCF), which handles activities like connections and security. The Envoy proxies are usually deployed as sidecars within Kubernetes clusters that support the microservices applications, while</li><li>The Istio data plane, which is made up of the set of all Envoy proxies running alongside applications in the cluster.</li><li>The Istio control plane, which acts as a configuration and management layer to give instructions to Envoy proxies in the data plane. The control plane typically runs in a separate cluster.</li></ul><p><br></p><p><br></p><p>*&nbsp;<strong><u>Prerequisites For This Setup</u></strong></p><ol><li>Kubernetes Cluster ( Refer this below link to setup Kubernetes Cluster)</li><li>Ansible in Base machine (To setup cluster and all other resources)</li></ol><iframe frameborder="0" allowfullscreen="true" src="about:blank" height="149" width="720" title="Kubernetes Cluster Setup Using Ansible Playbooks" data-li-src="https://www.linkedin.com/embeds/publishingEmbed.html?articleId=8517068600548532954&amp;li_theme=light"></iframe><p>3. MetalLB</p><p>4. Istio Setup</p><p>5. Demo App</p><p><br></p><p>*&nbsp;<strong><u>Before start ensure K8s cluster is up and ready status</u></strong></p><figure class="slate-resizable-image-embed slate-image-embed__resize-full-width"><img alt="No alt text provided for this image" data-media-urn="" data-li-src="https://media.licdn.com/dms/image/D5612AQFWPnlo_y0L4A/article-inline_image-shrink_1000_1488/0/1685341236574?e=1701302400&amp;v=beta&amp;t=ZOyLy1C1QIX86FvDkmUzjdk_2zyNPv3hkDhbAGfwi20" src="//:0"></figure><p><br></p><p>*&nbsp;<strong><u>All dependencies setup are automated by Ansible playbooks</u></strong></p><p>Clone the git repo (&nbsp;<strong>https://github.com/avi1512/Istio-demoApp.git </strong>) and run the playbook to deploy for&nbsp;<strong>MetalLB, Istio setup</strong>.</p><figure class="slate-resizable-image-embed slate-image-embed__resize-full-width"><img alt="No alt text provided for this image" data-media-urn="" data-li-src="https://media.licdn.com/dms/image/D5612AQFx5vB_RVpvqA/article-inline_image-shrink_1000_1488/0/1685341733419?e=1701302400&amp;v=beta&amp;t=nQcteGxqL4nkB5ZtaCtQ_7EwhqvTr5NMsQeB2p5EI8c" src="//:0"></figure><p><br></p><p>*&nbsp;<strong><u>MetalLB</u></strong></p><p>MetalLB is a load-balancer implementation for bare metal Kubernetes&nbsp;clusters, using standard routing protocols.</p><figure class="slate-resizable-image-embed slate-image-embed__resize-full-width"><img alt="No alt text provided for this image" data-media-urn="" data-li-src="https://media.licdn.com/dms/image/D5612AQEzBNPKWNFhIA/article-inline_image-shrink_1500_2232/0/1685341827740?e=1701302400&amp;v=beta&amp;t=iRjcUC-fk5Qi8e4kkaWdvovsuMTtsVSP1jVwMoDgouo" src="//:0"></figure><p>Here Playbook will ask the network range for our lab setup to configure the MetalLB and this IP range will be auto assign when service will expose as a LoadBalancer. For my network range will be&nbsp;<strong>192.168.89.150-192.168.89.200</strong></p><p>Also as we can see in above image playbook failed at task ( <strong>Deploying MetalLB IPAddressPool and L2Advertisement</strong> ) on first time this is due to <strong>MetalLB speaker</strong> container is not ready. To rerun the playbook will resolve the issue.</p><p>Also if you want to identify the network range of your network setup. Please refer this <a href="https://www.redhat.com/sysadmin/how-use-sipcalc" target="_blank" rel="nofollow noopener">spicalc</a> tools.</p><p>Once the playbook is completed without issues we can see&nbsp;<strong>MetalLB controller and Speaker DaemonSet</strong>&nbsp;container is up and running.</p><p>And also we can see the&nbsp;MetalLB I<strong>PAddressPool and L2Advertisement</strong>&nbsp;in <strong>metallb-system</strong> namespace.</p><figure class="slate-resizable-image-embed slate-image-embed__resize-full-width"><img alt="No alt text provided for this image" data-media-urn="" data-li-src="https://media.licdn.com/dms/image/D5612AQHSqLAF5juwuw/article-inline_image-shrink_1500_2232/0/1685342799530?e=1701302400&amp;v=beta&amp;t=XOVoHmfMP6QYJKEnolmlwFJ7fFehQgIrExWNf3aczEo" src="//:0"></figure><p><br></p><p>* <strong><u>Istio Setup</u></strong></p><p>This playbook will install Istio CRD's like ( <strong>destnationRule, virtualService, gateway, etc</strong> ), <strong>Istiod control plane</strong> and <strong>Istio Ingressgateway</strong>. Also Istio dashboard addons like <strong>Grafana, Kiali, Jaeger</strong> etc.. </p><figure class="slate-resizable-image-embed slate-image-embed__resize-full-width"><img alt="No alt text provided for this image" data-media-urn="" data-li-src="https://media.licdn.com/dms/image/D5612AQEBwMAiPnFptQ/article-inline_image-shrink_1500_2232/0/1685342834501?e=1701302400&amp;v=beta&amp;t=iX8rBXwFbgeSwux5PRFew9scWwUdV_xPABiOVKJ5wTw" src="//:0"></figure><p>Once the playbook completed without any issues. We can see Istio workload container are up and running like below image.</p><figure class="slate-resizable-image-embed slate-image-embed__resize-full-width"><img alt="No alt text provided for this image" data-media-urn="" data-li-src="https://media.licdn.com/dms/image/D5612AQEqj0msjvnhwg/article-inline_image-shrink_1500_2232/0/1685343300487?e=1701302400&amp;v=beta&amp;t=QIyz_HQSKuDGIMYVI5TrvLXOo6kVabg6-ES17U9IyqE" src="//:0"></figure><p><br></p><p>* <strong><u>Demo App</u></strong></p><p>Clone the git repo (&nbsp;<strong>https://github.com/avi1512/Istio-demoApp.git</strong> ) There are two demo apps. </p><p>Let's deploy demo1 apps and verify what are the objects are there.</p><figure class="slate-resizable-image-embed slate-image-embed__resize-full-width"><img alt="No alt text provided for this image" data-media-urn="" data-li-src="https://media.licdn.com/dms/image/D5612AQFjVQDkGN2vuA/article-inline_image-shrink_1500_2232/0/1685347547239?e=1701302400&amp;v=beta&amp;t=HXSnLnQkNK5NxFYFNAhCTajQ0P49qSQKPhqgAFIIItA" src="//:0"></figure><p>There are two normal deployment and services under demo namespace. And Istio CRD's like destinationRule, virtualService, gateway. Let's review one by one. </p><pre spellcheck="false">[root@k8smaster Istio-demoApp]# ls -l demo1/
+total 24
+-rw-r--r-- 1 root root 1035 May 29 04:02 blue-app.yaml
+-rw-r--r-- 1 root root 1216 May 29 04:02 destinationRule.yaml
+-rw-r--r-- 1 root root&nbsp; 313 May 29 04:02 gateway.yaml
+-rw-r--r-- 1 root root 1046 May 29 04:02 green-app.yaml
+-rw-r--r-- 1 root root&nbsp; 655 May 29 04:02 virtualService-hostBased-Routing.yaml
+-rw-r--r-- 1 root root&nbsp; 566 May 29 04:02 virtualService-pathBased-Routing.yaml
+</pre><p><br></p><p>First we will see the blue &amp; green deployment and services under demo namespace. If you notice this demo namespace having istio labels like ( <strong>istio-injection: enabled</strong> ) this label will enabled service mesh on namespace level. Like any pod created on this namespace Istio mutation web hook ( <strong>istio-sidecar-injector </strong>) will inject the istio proxy sidecar in to that pod and then it sent to API server.</p><p>This istio proxy container will underlying the application pod and this sidecar proxies&nbsp;to capture traffic and, where possible, automatically program the networking layer to route traffic through those proxies without any changes to the deployed application code.</p><p><br></p><p><strong><u>Blue Deployment and Service</u></strong></p><pre spellcheck="false">[root@k8smaster Istio-demoApp]# cat demo1/blue-app.yaml
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+&nbsp; name: demo
+&nbsp; labels:
+&nbsp; &nbsp; istio-injection: enabled
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+&nbsp; name: blue-app
+&nbsp; labels:
+&nbsp; &nbsp; app: blue
+&nbsp; namespace: demo
+spec:
+&nbsp; replicas: 1
+&nbsp; selector:
+&nbsp; &nbsp; matchLabels:
+&nbsp; &nbsp; &nbsp; app: blue
+&nbsp; template:
+&nbsp; &nbsp; metadata:
+&nbsp; &nbsp; &nbsp; labels:
+&nbsp; &nbsp; &nbsp; &nbsp; app: blue
+&nbsp; &nbsp; spec:
+&nbsp; &nbsp; &nbsp; initContainers:
+&nbsp; &nbsp; &nbsp; - name: temp
+&nbsp; &nbsp; &nbsp; &nbsp; image: busybox
+&nbsp; &nbsp; &nbsp; &nbsp; command:
+&nbsp; &nbsp; &nbsp; &nbsp; - "/bin/sh"
+&nbsp; &nbsp; &nbsp; &nbsp; - "-c"
+&nbsp; &nbsp; &nbsp; &nbsp; - |
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;echo '&lt;h1 style="font-size: 6rem; color:blue"&gt;Hello There Welcome To Blue&lt;/h1&gt;' &gt; /data/index.html
+&nbsp; &nbsp; &nbsp; &nbsp; volumeMounts:
+&nbsp; &nbsp; &nbsp; &nbsp; - name: data
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; mountPath: /data
+&nbsp; &nbsp; &nbsp; containers:
+&nbsp; &nbsp; &nbsp; - name: nginx-app1
+&nbsp; &nbsp; &nbsp; &nbsp; image: nginx:alpine
+&nbsp; &nbsp; &nbsp; &nbsp; volumeMounts:
+&nbsp; &nbsp; &nbsp; &nbsp; - name: data
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; mountPath: /usr/share/nginx/html
+&nbsp; &nbsp; &nbsp; volumes:
+&nbsp; &nbsp; &nbsp; - name: data
+&nbsp; &nbsp; &nbsp; &nbsp; emptyDir: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+&nbsp; name: blue-svc
+&nbsp; labels:
+&nbsp; &nbsp; app: blue
+&nbsp; namespace: demo
+spec:
+&nbsp; selector:
+&nbsp; &nbsp; app: blue
+&nbsp; ports:
+&nbsp; - port: 80
+&nbsp; &nbsp; targetPort: 80
+</pre><p><strong><u>Green Deployment and Service</u></strong></p><pre spellcheck="false">[root@k8smaster Istio-demoApp]# cat demo1/green-app.yaml
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+&nbsp; name: demo
+&nbsp; labels:
+&nbsp; &nbsp; istio-injection: enabled
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+&nbsp; name: green-app
+&nbsp; labels:
+&nbsp; &nbsp; app: green
+&nbsp; namespace: demo
+spec:
+&nbsp; replicas: 1
+&nbsp; selector:
+&nbsp; &nbsp; matchLabels:
+&nbsp; &nbsp; &nbsp; app: green
+&nbsp; template:
+&nbsp; &nbsp; metadata:
+&nbsp; &nbsp; &nbsp; labels:
+&nbsp; &nbsp; &nbsp; &nbsp; app: green
+&nbsp; &nbsp; spec:
+&nbsp; &nbsp; &nbsp; initContainers:
+&nbsp; &nbsp; &nbsp; - name: temp
+&nbsp; &nbsp; &nbsp; &nbsp; image: busybox
+&nbsp; &nbsp; &nbsp; &nbsp; command:
+&nbsp; &nbsp; &nbsp; &nbsp; - "/bin/sh"
+&nbsp; &nbsp; &nbsp; &nbsp; - "-c"
+&nbsp; &nbsp; &nbsp; &nbsp; - |
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;echo '&lt;h1 style="font-size: 6rem; color:green"&gt;Hello There Welcome To Green&lt;/h1&gt;' &gt; /data/index.html
+&nbsp; &nbsp; &nbsp; &nbsp; volumeMounts:
+&nbsp; &nbsp; &nbsp; &nbsp; - name: data
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; mountPath: /data
+&nbsp; &nbsp; &nbsp; containers:
+&nbsp; &nbsp; &nbsp; - name: nginx-app1
+&nbsp; &nbsp; &nbsp; &nbsp; image: nginx:alpine
+&nbsp; &nbsp; &nbsp; &nbsp; volumeMounts:
+&nbsp; &nbsp; &nbsp; &nbsp; - name: data
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; mountPath: /usr/share/nginx/html
+&nbsp; &nbsp; &nbsp; volumes:
+&nbsp; &nbsp; &nbsp; - name: data
+&nbsp; &nbsp; &nbsp; &nbsp; emptyDir: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+&nbsp; name: green-svc
+&nbsp; labels:
+&nbsp; &nbsp; app: green
+&nbsp; namespace: demo
+spec:
+&nbsp; selector:
+&nbsp; &nbsp; app: green
+&nbsp; ports:
+&nbsp; - port: 80
+&nbsp; &nbsp; targetPort: 80
+</pre><p><br></p><p><strong><u>DestinationRule</u></strong></p><p>DestinationRule&nbsp;defines policies that apply to traffic intended for a service after routing has occurred. These rules specify configuration through <strong>trafficPolicy for Security option like ( mutual TLS ), load balancing algorithm like ( ROUND_ROBIN, LEAST_CONN, RANDOM</strong> )<strong> and connection pool setting like ( maxConnections, connectTimeout, tcpKeepalive ) </strong>from the sidecar, and outlier detection settings to detect and evict unhealthy hosts from the load balancing pool.</p><p>Version specific policies can be specified by defining a named&nbsp;subset&nbsp;and overriding the settings specified at the service level. The following rule uses a round robin load balancing policy for all traffic going to a subset named <strong>blue-app and green-app</strong> that is composed of endpoints (e.g., pods) with labels ( <strong>blue, green </strong>).</p><pre spellcheck="false">[root@k8smaster Istio-demoApp]# cat demo1/destinationRule.yaml
+---
+apiVersion: networking.istio.io/v1beta1
+kind: DestinationRule
+metadata:
+&nbsp; name: green-dr
+&nbsp; namespace: demo
+spec:
+&nbsp; host: green-svc.demo.svc.cluster.local
+&nbsp; trafficPolicy:
+
+### Security Option ###
+&nbsp; &nbsp; tls:
+&nbsp; &nbsp; &nbsp; mode: ISTIO_MUTUAL
+
+### Connection Pool Settings ###
+&nbsp; &nbsp; connectionPool:
+&nbsp; &nbsp; &nbsp; tcp:
+&nbsp; &nbsp; &nbsp; &nbsp; maxConnections: 100
+&nbsp; &nbsp; &nbsp; &nbsp; connectTimeout: 30ms
+&nbsp; &nbsp; &nbsp; &nbsp; tcpKeepalive:
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; time: 7200s
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; interval: 75s
+
+### LoadBalancing Algorithms ###
+&nbsp; &nbsp; loadBalancer:
+&nbsp; &nbsp; &nbsp; simple: ROUND_ROBIN
+#&nbsp; &nbsp; &nbsp; simple: LEAST_CONN
+#&nbsp; &nbsp; &nbsp; simple: RANDOM
+
+&nbsp; subsets:
+&nbsp; - name: green-app
+&nbsp; &nbsp; labels:
+&nbsp; &nbsp; &nbsp; app: green
+
+---
+apiVersion: networking.istio.io/v1beta1
+kind: DestinationRule
+metadata:
+&nbsp; name: blue-dr
+&nbsp; namespace: demo
+spec:
+&nbsp; host: blue-svc.demo.svc.cluster.local
+&nbsp; trafficPolicy:
+
+### Security Option ###
+&nbsp; &nbsp; tls:
+&nbsp; &nbsp; &nbsp; mode: ISTIO_MUTUAL
+
+### Connection Pool Settings ###
+&nbsp; &nbsp; connectionPool:
+&nbsp; &nbsp; &nbsp; tcp:
+&nbsp; &nbsp; &nbsp; &nbsp; maxConnections: 100
+&nbsp; &nbsp; &nbsp; &nbsp; connectTimeout: 30ms
+&nbsp; &nbsp; &nbsp; &nbsp; tcpKeepalive:
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; time: 7200s
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; interval: 75s
+
+### LoadBalancing Algorithms ###
+&nbsp; &nbsp; loadBalancer:
+&nbsp; &nbsp; &nbsp; simple: ROUND_ROBIN
+#&nbsp; &nbsp; &nbsp; simple: LEAST_CONN
+#&nbsp; &nbsp; &nbsp; simple: RANDOM
+
+&nbsp; subsets:
+&nbsp; - name: blue-app
+&nbsp; &nbsp; labels:
+&nbsp; &nbsp; &nbsp; app: blue
+</pre><p><strong><u>VirtualService</u></strong></p><p>A&nbsp;VirtualService&nbsp;defines a set of traffic routing rules to apply when a host is addressed. Each routing rule defines matching criteria for traffic of a specific protocol. If the traffic is matched, then it is sent to a named destination service (or subset/version of it) defined in the registry.</p><p>The source of traffic can also be matched in a routing rule. This allows routing to be customized for specific client contexts.</p><h3>Hosts</h3><ul><li>The application traffic created by hosts, clients, servers, and applications that use the network as a transport is contained in the physical network data plane (also known as the forwarding plane). As a result, data plane traffic should never have source or destination IP addresses that are assigned to network elements like routers and switches; instead, it should be originated from and delivered to end devices like PCs and servers. To forward data plane traffic as swiftly as possible, routers and switches use hardware chips called application-specific integrated circuits (ASICs). A forwarding information base is referenced by the physical networking data plane (FIB).</li><li>The destination hosts to which traffic is being sent it could be a DNS name with wildcard prefix or an IP address depending on the platform.</li></ul><h3>Gateways</h3><ul><li>The names of gateways and sidecars that should apply all these routes. Gateways in other namespaces may be referred to by&nbsp;gateway namespace&gt;/gateway name&nbsp;; specifying a gateway with no namespace qualifier is the same as specifying the VirtualService’s namespace.</li></ul><h3>HTTP</h3><ul><li>An ordered list of route rules for HTTP traffic. The HTTP routes will be applied to the platform service ports named&nbsp;‘http-’/‘http2-’/‘grpc-*’, gateway ports with protocol HTTP/HTTP2/GRPC/ TLS-terminated-HTTPS&nbsp;and service entry ports using HTTP/HTTP2/GRPC protocols.</li><li>The first rule is matching an incoming request which is used.</li></ul><h3>TCP</h3><ul><li>An ordered list of all the routing rules for opaque TCP traffic. TCP routes will be applied to any of the port which is not a HTTP or TLS port.</li></ul><p><br></p><p><strong><u>Host Based Routing</u></strong></p><pre spellcheck="false">[root@k8smaster demo1]# cat virtualService-hostBased-Routing.yaml
+---
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+&nbsp; name: hostbased-green-vs
+&nbsp; namespace: demo
+spec:
+&nbsp; hosts:
+&nbsp; - green.local.com
+&nbsp; gateways:
+&nbsp; - demo1-gateway
+&nbsp; http:
+&nbsp; - route:
+&nbsp; &nbsp; - destination:
+&nbsp; &nbsp; &nbsp; &nbsp; host: green-svc.demo.svc.cluster.local
+&nbsp; &nbsp; &nbsp; &nbsp; port:
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; number: 80
+&nbsp; &nbsp; &nbsp; &nbsp; subset: green-app
+---
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+&nbsp; name: hostbased-blue-vs
+&nbsp; namespace: demo
+spec:
+&nbsp; hosts:
+&nbsp; - blue.local.com
+&nbsp; gateways:
+&nbsp; - demo1-gateway
+&nbsp; http:
+&nbsp; - route:
+&nbsp; &nbsp; - destination:
+&nbsp; &nbsp; &nbsp; &nbsp; host: blue-svc.demo.svc.cluster.local
+&nbsp; &nbsp; &nbsp; &nbsp; port:
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; number: 80
+&nbsp; &nbsp; &nbsp; &nbsp; subset: blue-app
+</pre><p><strong><u>Path Based Routing</u></strong></p><pre spellcheck="false">[root@k8smaster demo1]# cat virtualService-pathBased-Routing.yaml
+---
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+&nbsp; name: pathbased-vs
+&nbsp; namespace: demo
+spec:
+&nbsp; hosts:
+&nbsp; - demo1.local.com
+
+&nbsp; gateways:
+&nbsp; - demo1-gateway
+
+&nbsp; http:
+&nbsp; - name: green
+&nbsp; &nbsp; match:
+&nbsp; &nbsp; - uri:
+&nbsp; &nbsp; &nbsp; &nbsp; prefix: /green
+&nbsp; &nbsp; rewrite:
+&nbsp; &nbsp; &nbsp; uri: /
+&nbsp; &nbsp; route:
+&nbsp; &nbsp; - destination:
+&nbsp; &nbsp; &nbsp; &nbsp; host: green-svc.demo.svc.cluster.local
+&nbsp; &nbsp; &nbsp; &nbsp; subset: green-app
+
+&nbsp; - name: blue
+&nbsp; &nbsp; match:
+&nbsp; &nbsp; - uri:
+&nbsp; &nbsp; &nbsp; &nbsp; prefix: /blue
+&nbsp; &nbsp; rewrite:
+&nbsp; &nbsp; &nbsp; uri: /
+&nbsp; &nbsp; route:
+&nbsp; &nbsp; - destination:
+&nbsp; &nbsp; &nbsp; &nbsp; host: blue-svc.demo.svc.cluster.local
+&nbsp; &nbsp; &nbsp; &nbsp; subset: blue-app
+</pre><p><strong><u>Gateway</u></strong></p><p>Gateway&nbsp;describes a load balancer operating at the edge of the mesh receiving incoming or outgoing HTTP/TCP connections. The specification describes a set of ports that should be exposed, the type of protocol to use, SNI configuration for the load balancer, etc.</p><p>A&nbsp;<a href="https://istio.io/docs/reference/config/networking/v1alpha3/gateway/" target="_blank" rel="nofollow noopener">Gateway</a>&nbsp;is a standalone set of Envoy proxies that load-balance inbound traffic. Istio deploys a default&nbsp;IngressGateway&nbsp;with a public IP address, which you can configure to expose applications inside your service mesh to the Internet.</p><p>Istio Gateways have two key advantages over traditional Kubernetes Ingress. Because a Gateway is another Envoy proxy, you can use Istio to configure Gateway traffic in the same way you would configure east-west traffic between services (traffic splitting, redirects, retry logic).</p><pre spellcheck="false">[root@k8smaster demo1]# cat gateway.yaml
+---
+apiVersion: networking.istio.io/v1beta1
+kind: Gateway
+metadata:
+&nbsp; name: demo1-gateway
+&nbsp; namespace: demo
+spec:
+&nbsp; selector:
+&nbsp; &nbsp; istio: ingressgateway
+&nbsp; servers:
+&nbsp; - port:
+&nbsp; &nbsp; &nbsp; name: http
+&nbsp; &nbsp; &nbsp; number: 80
+&nbsp; &nbsp; &nbsp; protocol: HTTP
+&nbsp; &nbsp; hosts:
+&nbsp; &nbsp; - demo1.local.com
+&nbsp; &nbsp; - green.local.com
+&nbsp; &nbsp; - blue.local.com
+</pre><p>Also we can see the Istio config object like destinationRule, virtualService, gateway.</p><figure class="slate-resizable-image-embed slate-image-embed__resize-full-width"><img alt="No alt text provided for this image" data-media-urn="" data-li-src="https://media.licdn.com/dms/image/D5612AQHPQ489N_6Dfw/article-inline_image-shrink_1500_2232/0/1685363843585?e=1701302400&amp;v=beta&amp;t=aGLLjD0b9jnxCj-jWqYuOzdvOTNInvNJyjnLvlUpYog" src="//:0"></figure><p><br></p><p><br></p><p>* Let's verify the blue and green application with host based and path based routing. </p><p><strong><u>Host Based Routing</u></strong></p><figure class="slate-resizable-image-embed slate-image-embed__resize-full-width"><img alt="No alt text provided for this image" data-media-urn="" data-li-src="https://media.licdn.com/dms/image/D5612AQFawBiD00dDZg/article-inline_image-shrink_1500_2232/0/1685361398658?e=1701302400&amp;v=beta&amp;t=siLxlUggH-ytpU9SQaT6Ffd-uQDXl9iVYfX3tZUM04w" src="//:0"></figure><figure class="slate-resizable-image-embed slate-image-embed__resize-full-width"><img alt="No alt text provided for this image" data-media-urn="" data-li-src="https://media.licdn.com/dms/image/D5612AQFkY7yquqgHEA/article-inline_image-shrink_1500_2232/0/1685361445692?e=1701302400&amp;v=beta&amp;t=ym4FEcf2B0AWONeaW5dkFtisZmhszfyT0K-nP9TLKQQ" src="//:0"></figure><p><br></p><p><strong><u>Path Based Routing</u></strong></p><figure class="slate-resizable-image-embed slate-image-embed__resize-full-width"><img alt="No alt text provided for this image" data-media-urn="" data-li-src="https://media.licdn.com/dms/image/D5612AQFxRCcCWM8FxA/article-inline_image-shrink_1500_2232/0/1685361852828?e=1701302400&amp;v=beta&amp;t=vLWLXyaE65O-sIAKkmo9eJFDrkXb6jL-hvvvA4FeSj4" src="//:0"></figure><figure class="slate-resizable-image-embed slate-image-embed__resize-full-width"><img alt="No alt text provided for this image" data-media-urn="" data-li-src="https://media.licdn.com/dms/image/D5612AQEWl8zsnbW9Wg/article-inline_image-shrink_1500_2232/0/1685361891078?e=1701302400&amp;v=beta&amp;t=wDfwFPbL5mcEkgxEIsn6Bl6dYELeYjvsn2ubu6hHhDs" src="//:0"></figure><p><br></p><p>* Let's verify our blue and green application in Istio addons dashboard like <strong>Grafana, Kiali, Jaeger.</strong> </p><p><br></p><p>* <strong><u>Grafana</u></strong></p><p>Istio offers a set of preconfigured dashboards for all of the most important metrics for the mesh and for the control plane.</p><ul><li><a href="https://grafana.com/grafana/dashboards/7639" target="_blank" rel="nofollow noopener">Mesh Dashboard</a>&nbsp;provides an overview of all services in the mesh.</li><li><a href="https://grafana.com/grafana/dashboards/7636" target="_blank" rel="nofollow noopener">Service Dashboard</a>&nbsp;provides a detailed breakdown of metrics for a service.</li><li><a href="https://grafana.com/grafana/dashboards/7630" target="_blank" rel="nofollow noopener">Workload Dashboard</a>&nbsp;provides a detailed breakdown of metrics for a workload.</li><li><a href="https://grafana.com/grafana/dashboards/11829" target="_blank" rel="nofollow noopener">Performance Dashboard</a>&nbsp;monitors the resource usage of the mesh.</li><li><a href="https://grafana.com/grafana/dashboards/7645" target="_blank" rel="nofollow noopener">Control Plane Dashboard</a>&nbsp;monitors the health and performance of the control plane.</li></ul><p><br></p><p>* <strong><u>Grafana Istio Mesh Dashboard</u></strong></p><p>Here we can see the global request and success rate of our blue and green application also we can see any 4xx and 5xx error for our application in real time. Also we can see our istio config like destinationRule, virtualService, gateway.</p><figure class="slate-resizable-image-embed slate-image-embed__resize-full-width"><img alt="No alt text provided for this image" data-media-urn="" data-li-src="https://media.licdn.com/dms/image/D5612AQEk6vfxnqTwFw/article-inline_image-shrink_1500_2232/0/1685364394472?e=1701302400&amp;v=beta&amp;t=9dNVW4bbbRpdPvszemLIaJqej1WwENlAPvYmAePpnyM" src="//:0"></figure><p><strong><u>Istio Service Dashboard</u></strong></p><p><strong><u>Blue App</u></strong></p><figure class="slate-resizable-image-embed slate-image-embed__resize-full-width"><img alt="No alt text provided for this image" data-media-urn="" data-li-src="https://media.licdn.com/dms/image/D5612AQFEMsT3VOgEkg/article-inline_image-shrink_1500_2232/0/1685366817293?e=1701302400&amp;v=beta&amp;t=W28_xZdd9dwSUyft5Yb8_dGWjdGhty9s2HVsAG9Ls-4" src="//:0"></figure><p><strong><u>Green App</u></strong></p><figure class="slate-resizable-image-embed slate-image-embed__resize-full-width"><img alt="No alt text provided for this image" data-media-urn="" data-li-src="https://media.licdn.com/dms/image/D5612AQEknFx4-EfCBw/article-inline_image-shrink_1500_2232/0/1685366926166?e=1701302400&amp;v=beta&amp;t=PZwggyd3ZWfbDEyPC4uDIrBng_28YHpXRxrTBLoWfJE" src="//:0"></figure><p><strong><u>Istio Workload Dashboard</u></strong></p><p><strong><u>Blue App</u></strong></p><figure class="slate-resizable-image-embed slate-image-embed__resize-full-width"><img alt="No alt text provided for this image" data-media-urn="" data-li-src="https://media.licdn.com/dms/image/D5612AQGDJGSfNPq4-Q/article-inline_image-shrink_1500_2232/0/1685367105549?e=1701302400&amp;v=beta&amp;t=9NWycxQ69zBn0t31xfmn0HVJKxxjS8GvcZQ2oCgN_LE" src="//:0"></figure><p><strong><u>Green App</u></strong></p><figure class="slate-resizable-image-embed slate-image-embed__resize-full-width"><img alt="No alt text provided for this image" data-media-urn="" data-li-src="https://media.licdn.com/dms/image/D5612AQGPggwxsd6fgg/article-inline_image-shrink_1500_2232/0/1685367141496?e=1701302400&amp;v=beta&amp;t=GDbtizLzzk0KEmjfYKYOHqMPSaHYrZi3cLtY7IgD94Q" src="//:0"></figure><p><br></p><p><strong><u>Kiali Console</u></strong></p><p>Kiali is<strong>&nbsp;</strong>an observability console for Istio with service mesh configuration and validation capabilities. It helps you understand the structure and health of your service mesh by monitoring traffic flow to infer the topology and report errors.</p><p>Here we can see our blue and green application traffic flow and end to end connection are encrypted by mutual TLS. Also we can see traffic throughout like request and response rate. </p><figure class="slate-resizable-image-embed slate-image-embed__resize-full-width"><img alt="No alt text provided for this image" data-media-urn="" data-li-src="https://media.licdn.com/dms/image/D5612AQFKqW5QrWbxGA/article-inline_image-shrink_1500_2232/0/1685367625341?e=1701302400&amp;v=beta&amp;t=4PcoNDQS0DD_YQupzs8Hvjvswf_kDqmyJo5UdRY0e_k" src="//:0"></figure><figure class="slate-resizable-image-embed slate-image-embed__resize-full-width"><img alt="No alt text provided for this image" data-media-urn="" data-li-src="https://media.licdn.com/dms/image/D5612AQEwhVHSkmAhNQ/article-inline_image-shrink_1500_2232/0/1685368153735?e=1701302400&amp;v=beta&amp;t=-WH3MxrS9RFD0Kc_ZHK4zXAMEMBz7tTElIpJTFBM13Q" src="//:0"></figure><figure class="slate-resizable-image-embed slate-image-embed__resize-full-width"><img alt="No alt text provided for this image" data-media-urn="" data-li-src="https://media.licdn.com/dms/image/D5612AQFXrLnS4751JQ/article-inline_image-shrink_1500_2232/0/1685370605300?e=1701302400&amp;v=beta&amp;t=G9-X1WohWnZbgIQxojY0OskWEFMlMABwq-ftwcCj1ew" src="//:0"></figure><figure class="slate-resizable-image-embed slate-image-embed__resize-full-width"><img alt="No alt text provided for this image" data-media-urn="" data-li-src="https://media.licdn.com/dms/image/D5612AQFTvB849psPzg/article-inline_image-shrink_1500_2232/0/1685370776898?e=1701302400&amp;v=beta&amp;t=TVG_XK49jT83b2gVh2xTe5Ll0_KTaH_tU5Ymu4y_tVk" src="//:0"></figure><p><br></p><p><strong><u>Jaeger UI</u></strong></p><p>Zipkin and Jaeger are&nbsp;implementations of distributed tracing, and Istio uses them to provide observability into requests throughout a system of microservices. Let's explore what distributed tracing.</p><p>Let's verify our blue and green application backend traces. Like the request first reached Istio ingressgateway ( <strong>router~10.244.8.2~istio-ingressgateway-864bb94897-bvbl5.istio-system~istio-system.svc.cluster.local ) </strong>and then it reached to backend pod ( <strong>sidecar~10.244.8.7~blue-app-64b9868ccf-8jsg2.demo~demo.svc.cluster.local </strong>)</p><p><br></p><p>* <strong><u>Blue App</u></strong></p><figure class="slate-resizable-image-embed slate-image-embed__resize-full-width"><img alt="No alt text provided for this image" data-media-urn="" data-li-src="https://media.licdn.com/dms/image/D5612AQGWRHjM3j9UUQ/article-inline_image-shrink_1500_2232/0/1685369563506?e=1701302400&amp;v=beta&amp;t=AXcKdRwhmNVFiy0E_VaSBI49fhdmE0agbGJDdPk3hlo" src="//:0"></figure><figure class="slate-resizable-image-embed slate-image-embed__resize-full-width"><img alt="No alt text provided for this image" data-media-urn="" data-li-src="https://media.licdn.com/dms/image/D5612AQG_GN2EXcnWQA/article-inline_image-shrink_1500_2232/0/1685369741128?e=1701302400&amp;v=beta&amp;t=Xv36xqA3Jkmhp0MsR3yBLHuhi0qeRnv08e7xYtgYvQY" src="//:0"></figure><figure class="slate-resizable-image-embed slate-image-embed__resize-full-width"><img alt="No alt text provided for this image" data-media-urn="" data-li-src="https://media.licdn.com/dms/image/D5612AQG3I64wNqKqcg/article-inline_image-shrink_1500_2232/0/1685369887814?e=1701302400&amp;v=beta&amp;t=lyFrOhRXrG8CxH0frdpbyGibEJjlrl7wixiNi-HZ2Bg" src="//:0"></figure><p>* <strong><u>Green App</u></strong></p><figure class="slate-resizable-image-embed slate-image-embed__resize-full-width"><img alt="No alt text provided for this image" data-media-urn="" data-li-src="https://media.licdn.com/dms/image/D5612AQGcsaeV80FmoA/article-inline_image-shrink_1500_2232/0/1685369947031?e=1701302400&amp;v=beta&amp;t=vx6ZmWAaQFKiuPtV8Y02FKTSd6Rhz0PoGaBS6IHMZEk" src="//:0"></figure><figure class="slate-resizable-image-embed slate-image-embed__resize-full-width"><img alt="No alt text provided for this image" data-media-urn="" data-li-src="https://media.licdn.com/dms/image/D5612AQGJJsqKC3x_aQ/article-inline_image-shrink_1500_2232/0/1685370062102?e=1701302400&amp;v=beta&amp;t=4GZf_ngGBvqLxSTrIsEkrw_gbJo3uJtrYQ_npmcPXAA" src="//:0"></figure><figure class="slate-resizable-image-embed slate-image-embed__resize-full-width"><img alt="No alt text provided for this image" data-media-urn="" data-li-src="https://media.licdn.com/dms/image/D5612AQHpqULmwDNuOg/article-inline_image-shrink_1500_2232/0/1685370088415?e=1701302400&amp;v=beta&amp;t=7GR097nQ_GIa1NDg1fhWbAh8Xv2OhjjDsve15GATRB0" src="//:0"></figure><p><br></p><p>* <strong><u>Testing And Debugging </u></strong></p><p>Let's do some test like if application having any issue how to debug using istio addons. For example we can do purposely our blue application to not working like we can add below sleep command in our blue deployment and verify the app functionality. </p><pre spellcheck="false">command: ["/bin/sh"]
+args: ["-c", "while true; do echo hello; sleep 10;done"] 
+</pre><p>After added sleep commands in blue app and redeployed. Let's verify the app is working or not.</p><figure class="slate-resizable-image-embed slate-image-embed__resize-full-width"><img alt="No alt text provided for this image" data-media-urn="" data-li-src="https://media.licdn.com/dms/image/D5612AQH2WV6CVaQ7eA/article-inline_image-shrink_1500_2232/0/1685371487241?e=1701302400&amp;v=beta&amp;t=XVk3u6x4Vks88jTFbBovkXLHRqkyfSTDyinJz5BAgmI" src="//:0"></figure><p><strong><u>Blue App</u></strong></p><p>As we expected blue app is not working after added sleep commands in application container. </p><figure class="slate-resizable-image-embed slate-image-embed__resize-full-width"><img alt="No alt text provided for this image" data-media-urn="" data-li-src="https://media.licdn.com/dms/image/D5612AQHp3AR-sC8Glw/article-inline_image-shrink_1500_2232/0/1685371889192?e=1701302400&amp;v=beta&amp;t=ySOke8KT12jBvF6bTMGip67fmRwC6tq_qCuOAIG_2Rs" src="//:0"></figure><p><strong><u>Green App</u></strong></p><p>We can see our green app is healthy.</p><figure class="slate-resizable-image-embed slate-image-embed__resize-full-width"><img alt="No alt text provided for this image" data-media-urn="" data-li-src="https://media.licdn.com/dms/image/D5612AQGitNDD-INBNw/article-inline_image-shrink_1500_2232/0/1685371952982?e=1701302400&amp;v=beta&amp;t=rIWDeYEB1WIK8bnC0O7De0tqdP_o-K7Y9Eh5NZXbKRg" src="//:0"></figure><p><br></p><p><br></p><p>Let's verify our blue and green app in istio addons dashboard. </p><p><strong><u>Grafana</u></strong></p><p><strong><u>Istio Mesh Dashboard</u></strong></p><p>Here we can see <strong>blue app is success rate is 0.00% and green app is 100%</strong>. Also we can see some <strong>5xx errors 0.273 ops/s</strong> for blue app.</p><figure class="slate-resizable-image-embed slate-image-embed__resize-full-width"><img alt="No alt text provided for this image" data-media-urn="" data-li-src="https://media.licdn.com/dms/image/D5612AQEDP8gFRfGHoQ/article-inline_image-shrink_1500_2232/0/1685372095057?e=1701302400&amp;v=beta&amp;t=5nhEXqOSwabDXwrGcrT7vYsIeWLo4yhuZScCONqTylI" src="//:0"></figure><p><br></p><p><strong><u>Istio Service Dashboard</u></strong></p><p>Service dashboard we can see <strong>blue app having 0% client and server request. also the same for client and server success rate is 0%.</strong> If you notice blue app image <strong>incoming request by response code having 503</strong> (<strong>service unavailable</strong>)</p><p>We can see image of <strong>green app having both request and success rate is 100%</strong>. Also <strong>incoming request by response code having 200</strong>.</p><p><strong><u>Blue App</u></strong></p><figure class="slate-resizable-image-embed slate-image-embed__resize-full-width"><img alt="No alt text provided for this image" data-media-urn="" data-li-src="https://media.licdn.com/dms/image/D5612AQHpEfz9CarC3Q/article-inline_image-shrink_1500_2232/0/1685372595662?e=1701302400&amp;v=beta&amp;t=q9fO2CU-a8S5GdcuYwbckPc_y82HCS_5cXAzIt_ePxU" src="//:0"></figure><p><strong><u>Green App</u></strong></p><figure class="slate-resizable-image-embed slate-image-embed__resize-full-width"><img alt="No alt text provided for this image" data-media-urn="" data-li-src="https://media.licdn.com/dms/image/D5612AQFbkzGTMJyCUA/article-inline_image-shrink_1500_2232/0/1685372651829?e=1701302400&amp;v=beta&amp;t=IrIRj5rCCMj2VKXGT_CCdD9FVCNE4HGdVDafjgYIzqc" src="//:0"></figure><p><br></p><p><strong><u>Istio Workloads Dashboard</u></strong></p><p>As we can see same result in workload dashboard like whatever seen in service dashboard. <strong>blue app having 0% client and server request. also the same for client and server success rate is 0%. and incoming request by response code having 503 (service unavailable).</strong></p><p><strong>green app having both request and success rate is 100%. Also incoming request by response code having 200.</strong></p><p><strong><u>Blue App</u></strong></p><figure class="slate-resizable-image-embed slate-image-embed__resize-full-width"><img alt="No alt text provided for this image" data-media-urn="" data-li-src="https://media.licdn.com/dms/image/D5612AQGRI_jpo9N7PA/article-inline_image-shrink_1500_2232/0/1685374023619?e=1701302400&amp;v=beta&amp;t=mQh6ZLcads5pNGbVa9G73CEMtZzE4i9eFtdzJZR2zks" src="//:0"></figure><p><strong><u>Green App</u></strong></p><figure class="slate-resizable-image-embed slate-image-embed__resize-full-width"><img alt="No alt text provided for this image" data-media-urn="" data-li-src="https://media.licdn.com/dms/image/D5612AQEQLwwQkcEGow/article-inline_image-shrink_1500_2232/0/1685374057805?e=1701302400&amp;v=beta&amp;t=C9ErtUZm8P130gqeeZYM0Y4ulbe1Uk1stZTnz9s_gxk" src="//:0"></figure><p><br></p><p><strong><u>Kiali Console</u></strong></p><p>Graph dashboard we can see our blue app is having failure with red colour highlighted. Also all incoming request having 5xx errors on blue app. And we can see our green is healthy.</p><figure class="slate-resizable-image-embed slate-image-embed__resize-full-width"><img alt="No alt text provided for this image" data-media-urn="" data-li-src="https://media.licdn.com/dms/image/D5612AQFyqGyFvtsE3w/article-inline_image-shrink_1500_2232/0/1685374924091?e=1701302400&amp;v=beta&amp;t=tMeOGSiKB3z778BtTUlDQfbN8WovfBV1H27_1pgVknI" src="//:0"></figure><figure class="slate-resizable-image-embed slate-image-embed__resize-full-width"><img alt="No alt text provided for this image" data-media-urn="" data-li-src="https://media.licdn.com/dms/image/D5612AQG_hGOn7-aC2A/article-inline_image-shrink_1500_2232/0/1685374957013?e=1701302400&amp;v=beta&amp;t=fb5t9_nOkEuqa_fJ4d1xi1mg6enZ7BTnR5NUraXUGN0" src="//:0"></figure><figure class="slate-resizable-image-embed slate-image-embed__resize-full-width"><img alt="No alt text provided for this image" data-media-urn="" data-li-src="https://media.licdn.com/dms/image/D5612AQFfp7WEI8Gtmw/article-inline_image-shrink_1500_2232/0/1685374986155?e=1701302400&amp;v=beta&amp;t=eM_6wLHxmSinhgyYaf23WATAPB_i1Bro2G0p8Nl_MpM" src="//:0"></figure><p><br></p><p>J<strong><u>aeger UI</u></strong></p><p>When I search our blue service with http.status_code=503 we can see some traces and the second image we can see request reached backend blue app pod and it return back with error and response code 503 service unavailable.</p><figure class="slate-resizable-image-embed slate-image-embed__resize-full-width"><img alt="No alt text provided for this image" data-media-urn="" data-li-src="https://media.licdn.com/dms/image/D5612AQFJYu4InpesBQ/article-inline_image-shrink_1500_2232/0/1685375684404?e=1701302400&amp;v=beta&amp;t=zNRohvqN4YLYN90ZOpqReVTC9Q9aY9gtGuhqAqU2TUY" src="//:0"></figure><figure class="slate-resizable-image-embed slate-image-embed__resize-full-width"><img alt="No alt text provided for this image" data-media-urn="" data-li-src="https://media.licdn.com/dms/image/D5612AQFiYmCB15lGvQ/article-inline_image-shrink_1500_2232/0/1685375713287?e=1701302400&amp;v=beta&amp;t=sTcnsUIATWHhESNL2NjFGDLWWk6sWx7u0HkVovLWVpA" src="//:0"></figure><p><br></p><p><br></p><p>*</p><p><strong><u> Demo 2 App</u></strong></p><p> Let's delete the demo app1 and deploy demo2 app. In this demo2 app we can see route the traffic between app1 and app2 with 50% weight option in virtual service and single host in gateway.</p><figure class="slate-resizable-image-embed slate-image-embed__resize-full-width"><img alt="No alt text provided for this image" data-media-urn="" data-li-src="https://media.licdn.com/dms/image/D5612AQHR4lOXFBy1fA/article-inline_image-shrink_1500_2232/0/1685378119170?e=1701302400&amp;v=beta&amp;t=aw9hOy0JtdoYH_9TNwkHFqw9xvvl6Huz2XL0NgAfvRA" src="//:0"></figure><p>* There are two normal deployment and services under demo namespace. And Istio CRD's like destinationRule, virtualService, gateway. Let's review one by one.</p><p>Two deployment like app1 and app2 under demo namespaces and it's having istio labels ( <strong>istio-injection: enabled </strong>).</p><p><br></p><p><strong><u>app1 deployment </u></strong></p><pre spellcheck="false">[root@k8smaster demo2]# cat app1.yaml
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+&nbsp; name: demo
+&nbsp; labels:
+&nbsp; &nbsp; istio-injection: enabled
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+&nbsp; name: app1
+&nbsp; labels:
+&nbsp; &nbsp; app: app1
+&nbsp; namespace: demo
+spec:
+&nbsp; replicas: 1
+&nbsp; selector:
+&nbsp; &nbsp; matchLabels:
+&nbsp; &nbsp; &nbsp; app: app1
+&nbsp; template:
+&nbsp; &nbsp; metadata:
+&nbsp; &nbsp; &nbsp; labels:
+&nbsp; &nbsp; &nbsp; &nbsp; app: app1
+&nbsp; &nbsp; spec:
+&nbsp; &nbsp; &nbsp; initContainers:
+&nbsp; &nbsp; &nbsp; - name: temp
+&nbsp; &nbsp; &nbsp; &nbsp; image: busybox
+&nbsp; &nbsp; &nbsp; &nbsp; command:
+&nbsp; &nbsp; &nbsp; &nbsp; - "/bin/sh"
+&nbsp; &nbsp; &nbsp; &nbsp; - "-c"
+&nbsp; &nbsp; &nbsp; &nbsp; - |
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;echo '&lt;h1 style="font-size: 6rem; color:black"&gt;Hello There Welcome To App1&lt;/h1&gt;' &gt; /data/index.html
+&nbsp; &nbsp; &nbsp; &nbsp; volumeMounts:
+&nbsp; &nbsp; &nbsp; &nbsp; - name: data
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; mountPath: /data
+&nbsp; &nbsp; &nbsp; containers:
+&nbsp; &nbsp; &nbsp; - name: nginx-app1
+&nbsp; &nbsp; &nbsp; &nbsp; image: nginx:alpine
+&nbsp; &nbsp; &nbsp; &nbsp; volumeMounts:
+&nbsp; &nbsp; &nbsp; &nbsp; - name: data
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; mountPath: /usr/share/nginx/html
+&nbsp; &nbsp; &nbsp; volumes:
+&nbsp; &nbsp; &nbsp; - name: data
+&nbsp; &nbsp; &nbsp; &nbsp; emptyDir: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+&nbsp; name: app1-svc
+&nbsp; labels:
+&nbsp; &nbsp; app: app1
+&nbsp; namespace: demo
+spec:
+&nbsp; selector:
+&nbsp; &nbsp; app: app1
+&nbsp; ports:
+&nbsp; - port: 80
+&nbsp; &nbsp; targetPort: 80
+</pre><p><strong><u>app2 deployment</u></strong></p><pre spellcheck="false">[root@k8smaster demo2]# cat app2.yaml
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+&nbsp; name: demo
+&nbsp; labels:
+&nbsp; &nbsp; istio-injection: enabled
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+&nbsp; name: app2
+&nbsp; labels:
+&nbsp; &nbsp; app: app2
+&nbsp; namespace: demo
+spec:
+&nbsp; replicas: 1
+&nbsp; selector:
+&nbsp; &nbsp; matchLabels:
+&nbsp; &nbsp; &nbsp; app: app2
+&nbsp; template:
+&nbsp; &nbsp; metadata:
+&nbsp; &nbsp; &nbsp; labels:
+&nbsp; &nbsp; &nbsp; &nbsp; app: app2
+&nbsp; &nbsp; spec:
+&nbsp; &nbsp; &nbsp; initContainers:
+&nbsp; &nbsp; &nbsp; - name: temp
+&nbsp; &nbsp; &nbsp; &nbsp; image: busybox
+&nbsp; &nbsp; &nbsp; &nbsp; command:
+&nbsp; &nbsp; &nbsp; &nbsp; - "/bin/sh"
+&nbsp; &nbsp; &nbsp; &nbsp; - "-c"
+&nbsp; &nbsp; &nbsp; &nbsp; - |
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;echo '&lt;h1 style="font-size: 6rem; color:black"&gt;Hello There Welcome To App2&lt;/h1&gt;' &gt; /data/index.html
+&nbsp; &nbsp; &nbsp; &nbsp; volumeMounts:
+&nbsp; &nbsp; &nbsp; &nbsp; - name: data
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; mountPath: /data
+&nbsp; &nbsp; &nbsp; containers:
+&nbsp; &nbsp; &nbsp; - name: nginx-app1
+&nbsp; &nbsp; &nbsp; &nbsp; image: nginx:alpine
+&nbsp; &nbsp; &nbsp; &nbsp; volumeMounts:
+&nbsp; &nbsp; &nbsp; &nbsp; - name: data
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; mountPath: /usr/share/nginx/html
+&nbsp; &nbsp; &nbsp; volumes:
+&nbsp; &nbsp; &nbsp; - name: data
+&nbsp; &nbsp; &nbsp; &nbsp; emptyDir: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+&nbsp; name: app2-svc
+&nbsp; labels:
+&nbsp; &nbsp; app: app2
+&nbsp; namespace: demo
+spec:
+&nbsp; selector:
+&nbsp; &nbsp; app: app2
+&nbsp; ports:
+&nbsp; - port: 80
+&nbsp; &nbsp; targetPort: 80
+</pre><p><strong><u>destinationRule</u></strong></p><pre spellcheck="false">[root@k8smaster demo2]# cat destinationRule.yaml
+---
+apiVersion: networking.istio.io/v1beta1
+kind: DestinationRule
+metadata:
+&nbsp; name: app1-dr
+&nbsp; namespace: demo
+spec:
+&nbsp; host: app1-svc.demo.svc.cluster.local
+&nbsp; trafficPolicy:
+
+### Security Option ###
+&nbsp; &nbsp; tls:
+&nbsp; &nbsp; &nbsp; mode: ISTIO_MUTUAL
+
+### Connection Pool Settings ###
+&nbsp; &nbsp; connectionPool:
+&nbsp; &nbsp; &nbsp; tcp:
+&nbsp; &nbsp; &nbsp; &nbsp; maxConnections: 100
+&nbsp; &nbsp; &nbsp; &nbsp; connectTimeout: 30ms
+&nbsp; &nbsp; &nbsp; &nbsp; tcpKeepalive:
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; time: 7200s
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; interval: 75s
+
+### LoadBalancing Algorithms ###
+&nbsp; &nbsp; loadBalancer:
+&nbsp; &nbsp; &nbsp; simple: ROUND_ROBIN
+#&nbsp; &nbsp; &nbsp; simple: LEAST_CONN
+#&nbsp; &nbsp; &nbsp; simple: RANDOM
+
+&nbsp; subsets:
+&nbsp; - name: app1
+&nbsp; &nbsp; labels:
+&nbsp; &nbsp; &nbsp; app: app1
+
+
+---
+apiVersion: networking.istio.io/v1beta1
+kind: DestinationRule
+metadata:
+&nbsp; name: app2-dr
+&nbsp; namespace: demo
+spec:
+&nbsp; host: app2-svc.demo.svc.cluster.local
+&nbsp; trafficPolicy:
+
+### Security Option ###
+&nbsp; &nbsp; tls:
+&nbsp; &nbsp; &nbsp; mode: ISTIO_MUTUAL
+
+### Connection Pool Settings ###
+&nbsp; &nbsp; connectionPool:
+&nbsp; &nbsp; &nbsp; tcp:
+&nbsp; &nbsp; &nbsp; &nbsp; maxConnections: 100
+&nbsp; &nbsp; &nbsp; &nbsp; connectTimeout: 30ms
+&nbsp; &nbsp; &nbsp; &nbsp; tcpKeepalive:
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; time: 7200s
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; interval: 75s
+
+### LoadBalancing Algorithms ###
+&nbsp; &nbsp; loadBalancer:
+&nbsp; &nbsp; &nbsp; simple: ROUND_ROBIN
+#&nbsp; &nbsp; &nbsp; simple: LEAST_CONN
+#&nbsp; &nbsp; &nbsp; simple: RANDOM
+
+&nbsp; subsets:
+&nbsp; - name: app2
+&nbsp; &nbsp; labels:
+&nbsp; &nbsp; &nbsp; app: app2l
+</pre><p><strong><u>virtualService</u></strong></p><p>In this virtual service we are just routing the traffic between app1 and app2 using weight option like 50% traffic will serve app1 and 50% traffic will serve app2 with common hostname and single gateway.</p><pre spellcheck="false">[root@k8smaster demo2]# cat virtualService.yaml
+---
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+&nbsp; name: apps-vs
+&nbsp; namespace: demo
+spec:
+&nbsp; hosts:
+&nbsp; - demo2.local.com
+
+&nbsp; gateways:
+&nbsp; - demo2-gateway
+
+&nbsp; http:
+&nbsp; - route:
+&nbsp; &nbsp; &nbsp; - destination:
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; host: app1-svc.demo.svc.cluster.local
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; port:
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; number: 80
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; subset: app1
+&nbsp; &nbsp; &nbsp; &nbsp; weight: 50
+
+&nbsp; &nbsp; &nbsp; - destination:
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; host: app2-svc.demo.svc.cluster.local
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; port:
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; number: 80
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; subset: app2
+&nbsp; &nbsp; &nbsp; &nbsp; weight: 50
+</pre><p><strong><u>gateway</u></strong></p><pre spellcheck="false">[root@k8smaster demo2]# cat gateway.yaml
+---
+apiVersion: networking.istio.io/v1beta1
+kind: Gateway
+metadata:
+&nbsp; name: demo2-gateway
+&nbsp; namespace: demo
+spec:
+&nbsp; selector:
+&nbsp; &nbsp; istio: ingressgateway
+&nbsp; servers:
+&nbsp; - port:
+&nbsp; &nbsp; &nbsp; name: http
+&nbsp; &nbsp; &nbsp; number: 80
+&nbsp; &nbsp; &nbsp; protocol: HTTP
+&nbsp; &nbsp; hosts:
+&nbsp; &nbsp; - demo2.local.com
+</pre><p><br></p><p>* Let's verify the app1 and app2 with the single hostname ( <strong>demo2.local.com</strong> ) to load balance traffic between this two app1 and app2.</p><p>When I hit the endpoint ( <strong>demo2.local.com</strong> ) first time the request reach to app1 and second time refresh the same endpoint the request reach to app2.</p><figure class="slate-resizable-image-embed slate-image-embed__resize-full-width"><img alt="No alt text provided for this image" data-media-urn="" data-li-src="https://media.licdn.com/dms/image/D5612AQH4em_QmqfL3A/article-inline_image-shrink_1500_2232/0/1685380028299?e=1701302400&amp;v=beta&amp;t=X6yY3KoeGtmq4rblHb1ys38AUMiyt0muAC58OwPnrDY" src="//:0"></figure><figure class="slate-resizable-image-embed slate-image-embed__resize-full-width"><img alt="No alt text provided for this image" data-media-urn="" data-li-src="https://media.licdn.com/dms/image/D5612AQHJEq-h3zXIeg/article-inline_image-shrink_1500_2232/0/1685380063397?e=1701302400&amp;v=beta&amp;t=3736OiEKEigZ68hx3ULRp5K1h3ZvEf5lU-nBFnHHvqo" src="//:0"></figure><p>Let's verify our istio addons dashboards.</p><p>* <strong><u>Grafana</u></strong></p><figure class="slate-resizable-image-embed slate-image-embed__resize-full-width"><img alt="No alt text provided for this image" data-media-urn="" data-li-src="https://media.licdn.com/dms/image/D5612AQHfOQYPf9GPyQ/article-inline_image-shrink_1500_2232/0/1685380332137?e=1701302400&amp;v=beta&amp;t=IqDK5uG1g_jh0Yhx_4wMrAiTarGi9-vBUt7yWwa9Q5Q" src="//:0"></figure><p>* <strong><u>Kiali</u></strong></p><figure class="slate-resizable-image-embed slate-image-embed__resize-full-width"><img alt="No alt text provided for this image" data-media-urn="" data-li-src="https://media.licdn.com/dms/image/D5612AQEpolULFR_Umg/article-inline_image-shrink_1500_2232/0/1685380396087?e=1701302400&amp;v=beta&amp;t=watdqsEa4CylZ55ENjPeqrI1NIpoikcq0NUsq72H9wc" src="//:0"></figure><p>* <strong><u>Jaeger UI</u></strong></p><figure class="slate-resizable-image-embed slate-image-embed__resize-full-width"><img alt="No alt text provided for this image" data-media-urn="" data-li-src="https://media.licdn.com/dms/image/D5612AQGPusTlHEnOUg/article-inline_image-shrink_1500_2232/0/1685864959313?e=1701302400&amp;v=beta&amp;t=-M28GX4mBxbC3MQjcXY4GtFO0dl8ueT4ztjSkdLARwA" src="//:0"></figure><figure class="slate-resizable-image-embed slate-image-embed__resize-full-width"><img alt="No alt text provided for this image" data-media-urn="" data-li-src="https://media.licdn.com/dms/image/D5612AQEA1DgBnV-vxg/article-inline_image-shrink_1500_2232/0/1685865389124?e=1701302400&amp;v=beta&amp;t=W3148KJG-Hp38YIt1qNSUR8uwOMEl8ZMPKhpDsWHGzg" src="//:0"></figure><p>* <strong><u>Testing And Debugging </u></strong></p><p>we are going to do the same for demo2 app like adding sleep command in app1 deployment and redeploy.</p><figure class="slate-resizable-image-embed slate-image-embed__resize-full-width"><img alt="No alt text provided for this image" data-media-urn="" data-li-src="https://media.licdn.com/dms/image/D5612AQHdE84ml8nMPw/article-inline_image-shrink_1500_2232/0/1685866878717?e=1701302400&amp;v=beta&amp;t=SktUE2_VWUdTFHcR6PyDuSawBGU-bjE6Tm8z-uUyh10" src="//:0"></figure><p>After added sleep command in app1 deployment as we excepted app1 backend service is not available. At the same time we hit the same endpoint again I can able to see app2 is healthy. </p><figure class="slate-resizable-image-embed slate-image-embed__resize-full-width"><img alt="No alt text provided for this image" data-media-urn="" data-li-src="https://media.licdn.com/dms/image/D5612AQE8CLxNBcp2EA/article-inline_image-shrink_1500_2232/0/1685867165652?e=1701302400&amp;v=beta&amp;t=FNu2k-a9ioKaziNcZkNtV8APnmMu-bUpTYekrMgVFjA" src="//:0"></figure><figure class="slate-resizable-image-embed slate-image-embed__resize-full-width"><img alt="No alt text provided for this image" data-media-urn="" data-li-src="https://media.licdn.com/dms/image/D5612AQGiVtMQeGTEUQ/article-inline_image-shrink_1500_2232/0/1685867846856?e=1701302400&amp;v=beta&amp;t=mzAT9M11uFMhxmndXmUgSXOiCnmCgG9cPPP_5EL9uro" src="//:0"></figure><p>Let's verify our app1 and app2 in istio addons dashboard. </p><p><strong><u>Grafana</u></strong></p><p><strong><u>Istio Mesh Dashboard</u></strong></p><p>Here we can see app1 app is success rate is 0.00% and app2 is 100%. Also we can see some 5xx errors 0.262 ops/s for blue app.</p><figure class="slate-resizable-image-embed slate-image-embed__resize-full-width"><img alt="No alt text provided for this image" data-media-urn="" data-li-src="https://media.licdn.com/dms/image/D5612AQE1g6fYQL0X_w/article-inline_image-shrink_1500_2232/0/1685868384922?e=1701302400&amp;v=beta&amp;t=eWXnx4YDBAkmGXCgfejDGqjVKb0zrIVhAm8WG-I7fMY" src="//:0"></figure><p><strong><u>Kiali Console</u></strong></p><p>Kiali graph dashboard we can see our app1 app is having failure with red colour highlighted. Also all incoming request having 5xx errors on app1. And we can see our app2 is healthy.</p><figure class="slate-resizable-image-embed slate-image-embed__resize-full-width"><img alt="No alt text provided for this image" data-media-urn="" data-li-src="https://media.licdn.com/dms/image/D5612AQFhPZVxXsveHg/article-inline_image-shrink_1500_2232/0/1685868779934?e=1701302400&amp;v=beta&amp;t=aIubD4TKpkY30auNFpaDT1aCRrj3W3YLHQQN3nhg14g" src="//:0"></figure><p><strong><u>Jaeger UI</u></strong></p><p>When I search our app1 service with http.status_code=503 we can see some traces and the second image we can see request reached backend app1 pod and it return back with error and response code 503 service unavailable.</p><figure class="slate-resizable-image-embed slate-image-embed__resize-full-width"><img alt="No alt text provided for this image" data-media-urn="" data-li-src="https://media.licdn.com/dms/image/D5612AQGwXdHKEkv8Wg/article-inline_image-shrink_1500_2232/0/1685869434551?e=1701302400&amp;v=beta&amp;t=cSDYbxdTex7howk_0OxzKu1pGSgW-E4rXqH6akQ238g" src="//:0"></figure><figure class="slate-resizable-image-embed slate-image-embed__resize-full-width"><img alt="No alt text provided for this image" data-media-urn="" data-li-src="https://media.licdn.com/dms/image/D5612AQHGkwRs_z1qeQ/article-inline_image-shrink_1500_2232/0/1685869468652?e=1701302400&amp;v=beta&amp;t=7pJe196ochOyrLfl9DOlQ_GOAM_nxUipFfw1Vy5PCMc" src="//:0"></figure><p><br></p><p><strong><u>Conclusion</u></strong> </p><p>In this article, we covered the basics of what a service mesh is, including the features it provides. At a high level, there are two components that comprise a service mesh’s architecture. These include a Data Plane made up of sidecar proxies that are responsible for intercepting requests and providing the mesh features, and a Control Plane that allows the configuration of the sidecars from a central point.</p><p><br></p><p>######################## Happy Learning ##########################</p></div>
+          <!----><!----><!----><!---->        
+  
+<!---->    </article>
+  
+<!---->            
+    
+    
+
+      <code id="ugcPostUrl" style="display: none"><!--"https://www.linkedin.com/feed/update/urn:li:ugcPost:7071911355435401216"--></code>
+      <code id="ugcPost" style="display: none"><!--"urn:li:ugcPost:7071911355435401216"--></code>
+      
+    
+      <code id="disableLinkedinShareRedirectLink" style="display: none"><!--true--></code>
+      <code id="ugcPostUrn" style="display: none"><!--"urn:li:ugcPost:7071911355435401216"--></code>
+      <code id="signInUrl" style="display: none"><!--"https://www.linkedin.com/signup/cold-join?session_redirect=%2Fpulse%2Fistio-service-mesh-kubernetes-avinash-kumar-chandran"--></code>
+
+<!---->  
+    <div class="article-social-activity z-[201]
+        x-social-activity-wrapper sticky bottom-0 flex justify-center border-t-1 border-solid border-color-border-faint bg-color-background-container
+        " data-impression-id="article-ssr-frontend-pulse_x-social-details">
+<!---->      <div class="x-social-activity social-details x-social-activity-left flex w-full max-w-x-article-width-small justify-between lg:max-w-x-article-width">
+        <div class="flex x-social-activity-left">
+          
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+
+    <div class="reactions-menu flex flex-row relative items-center justify-center select-none [-webkit-user-select:none] pointer-events-auto basis-full" data-feed-control="article-ssr-frontend-x-article_x-social-details_like-toggle_reactions-cta">
+        <a class="reactions-menu__link text-color-text social-action-bar__button relative h-6 cursor-pointer w-full basis-full" href="https://www.linkedin.com/signup/cold-join?session_redirect=%2Fpulse%2Fistio-service-mesh-kubernetes-avinash-kumar-chandran&amp;trk=article-ssr-frontend-pulse_x-social-details_like-toggle_like-cta" target="_blank" data-tracking-control-name="article-ssr-frontend-pulse_x-social-details_like-toggle_reactions-cta" data-parent-urn="urn:li:ugcPost:7071911355435401216" data-tracking-will-navigate data-feed-control="article-ssr-frontend-x-article_x-social-details_like-toggle_reactions-cta">
+          
+
+<!---->    <div class="like-button-default flex flex-row items-center ">
+      <icon class="social-action-bar__icon" data-svg-class-name="social-action-bar__icon--svg" data-delayed-url="https://static.licdn.com/aero-v1/sc/h/e2cf8dn8tvjcu9gl3qcxhw31q">
+      </icon>
+      <span class="social-action-bar__button-text">Like</span>
+    </div>
+
+        </a>
+    </div>
+      <template id="selected-reaction">
+        <div>
+            
+  <div class="selected-reaction--LIKE flex flex-row items-center">
+    <img class="inline-block align-middle relative w-3 h-3 mr-1 babybear:mr-0" alt="Like" aria-hidden="true" data-delayed-url="https://static.licdn.com/aero-v1/sc/h/7ze70iqo2l1rn7hwfoykiwjod">
+    <span class="social-action-bar__button-text">Like</span>
+  </div>
+
+            
+  <div class="selected-reaction--PRAISE flex flex-row items-center">
+    <img class="inline-block align-middle relative w-3 h-3 mr-1 babybear:mr-0" alt="Celebrate" aria-hidden="true" data-delayed-url="https://static.licdn.com/aero-v1/sc/h/czva5w81r4b0pjr7sh5r4nbw9">
+    <span class="social-action-bar__button-text">Celebrate</span>
+  </div>
+
+            
+  <div class="selected-reaction--APPRECIATION flex flex-row items-center">
+    <img class="inline-block align-middle relative w-3 h-3 mr-1 babybear:mr-0" alt="Support" aria-hidden="true" data-delayed-url="https://static.licdn.com/aero-v1/sc/h/8kvqqk9m1eu5ffqkdlum1ka1m">
+    <span class="social-action-bar__button-text">Support</span>
+  </div>
+
+            
+  <div class="selected-reaction--EMPATHY flex flex-row items-center">
+    <img class="inline-block align-middle relative w-3 h-3 mr-1 babybear:mr-0" alt="Love" aria-hidden="true" data-delayed-url="https://static.licdn.com/aero-v1/sc/h/5yukss5d7kh4xrbd5642z6tk0">
+    <span class="social-action-bar__button-text">Love</span>
+  </div>
+
+            
+  <div class="selected-reaction--INTEREST flex flex-row items-center">
+    <img class="inline-block align-middle relative w-3 h-3 mr-1 babybear:mr-0" alt="Insightful" aria-hidden="true" data-delayed-url="https://static.licdn.com/aero-v1/sc/h/es4dlamdpym2zbuhglwx2cuz0">
+    <span class="social-action-bar__button-text">Insightful</span>
+  </div>
+
+            
+  <div class="selected-reaction--ENTERTAINMENT flex flex-row items-center">
+    <img class="inline-block align-middle relative w-3 h-3 mr-1 babybear:mr-0" alt="Funny" aria-hidden="true" data-delayed-url="https://static.licdn.com/aero-v1/sc/h/e0rqrq0h755yqqu59fy047ayt">
+    <span class="social-action-bar__button-text">Funny</span>
+  </div>
+
+        </div>
+      </template>
+  
+  
+            <div class="relative flex select-none flex-row items-center justify-center">
+              <a class="social-action-bar__button basis-full !rounded-none" href="https://www.linkedin.com/signup/cold-join?session_redirect=%2Fpulse%2Fistio-service-mesh-kubernetes-avinash-kumar-chandran&amp;trk=article-ssr-frontend-pulse_comment-cta" data-tracking-control-name="article-ssr-frontend-pulse_x-social-details_comment-cta" data-tracking-will-navigate>
+                <icon class="social-action-bar__icon" data-svg-class-name="social-action-bar__icon--svg" data-delayed-url="https://static.licdn.com/aero-v1/sc/h/ady0n422w6b1vpkbkwpfpxt8t">
+                </icon>
+                <span class="social-action-bar__button-text">
+                  Comment
+                </span>
+              </a>
+            </div>
+          
+      
+
+    
+    
+    
+    
+
+    <code id="i18n_copy_cta_message_success" style="display: none"><!--"Link copied to clipboard."--></code>
+    <code id="i18n_copy_cta_message_error" style="display: none"><!--"Something went wrong while copying to clipboard."--></code>
+
+    
+
+    
+
+    <div class="collapsible-dropdown flex items-center relative hyphens-auto social-share inline-block relative select-none x-social-share basis-full" data-share-message="Share" data-share-url="https://www.linkedin.com/pulse/istio-service-mesh-kubernetes-avinash-kumar-chandran?utm_source=share&amp;utm_medium=guest_desktop" data-feed-control="article-ssr-frontend-x-article_x-social-details_social-share-intent_social-share_main_button" data-feed-action-category="EXPAND" data-feed-action-type="openShareMenu">
+<!---->
+        <ul class="collapsible-dropdown__list hidden container-raised absolute w-auto overflow-y-auto flex-col items-stretch z-1 bottom-[100%] top-auto" role="menu" tabindex="-1">
+          
+        
+  <li>
+    <button data-tracking-control-name="article-ssr-frontend-pulse_x-social-details_social-share-intent_social-share_copy" class="social-share__item social-share-item" data-share-service="copy">
+      <icon class="social-share__item-icon" data-delayed-url="https://static.licdn.com/aero-v1/sc/h/aup4g97pdky3ff73gv9lyhjvx"></icon>
+      <span class="social-share__item-text pl-1">Copy</span>
+    </button>
+  </li>
+
+
+        
+  <li>
+    <button data-tracking-control-name="article-ssr-frontend-pulse_x-social-details_social-share-intent_social-share_linkedin" class="social-share__item social-share-item" data-share-service="linkedin">
+      <icon class="social-share__item-icon" data-delayed-url="https://static.licdn.com/aero-v1/sc/h/2uoxvguhsfspfnmr6tvfuyw4y" data-svg-class-name="text-color-text"></icon>
+      <span class="social-share__item-text pl-1">LinkedIn</span>
+    </button>
+  </li>
+
+          
+  <li>
+    <button data-tracking-control-name="article-ssr-frontend-pulse_x-social-details_social-share-intent_social-share_facebook" class="social-share__item social-share-item" data-share-service="facebook">
+      <icon class="social-share__item-icon" data-delayed-url="https://static.licdn.com/aero-v1/sc/h/5xkjpykqkamtr6skk0vodqwd2"></icon>
+      <span class="social-share__item-text pl-1">Facebook</span>
+    </button>
+  </li>
+
+          
+  <li>
+    <button data-tracking-control-name="article-ssr-frontend-pulse_x-social-details_social-share-intent_social-share_twitter" class="social-share__item social-share-item" data-share-service="twitter">
+      <icon class="social-share__item-icon" data-delayed-url="https://static.licdn.com/aero-v1/sc/h/4bmfmbwr1b97362o29qmjo1zj"></icon>
+      <span class="social-share__item-text pl-1">Twitter</span>
+    </button>
+  </li>
+
+<!---->      
+        </ul>
+
+          
+        <button aria-expanded="false" class="social-share__button social-share__button-square
+            social-share-button social-action-bar__button
+            basis-full
+            
+            social-share-button--square" aria-label data-tracking-control-name="article-ssr-frontend-pulse_x-social-details_social-share-intent_social-share_main_button">
+          <icon class="social-share__button-icon" data-delayed-url="https://static.licdn.com/aero-v1/sc/h/852gyy4s01pfis5qf9k99s6d2" data-svg-class-name="social-share-button-icon social-action-bar__icon--svg"></icon>
+            <span class="social-share__button-text-square social-action-bar__button-text">
+              Share
+            </span>
+        </button>
+      
+    </div>
+  
+  
+  
+        </div>
+          
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+      <div class="flex items-center font-sans text-sm babybear:text-xs">
+            
+      <a href="https://www.linkedin.com/signup/cold-join?session_redirect=%2Fpulse%2Fistio-service-mesh-kubernetes-avinash-kumar-chandran&amp;trk=article-ssr-frontend-pulse_x-social-details_likes-count_social-actions-reactions" target="_blank" data-tracking-control-name="article-ssr-frontend-pulse_x-social-details_likes-count_social-actions-reactions" data-tracking-will-navigate class="flex items-center font-normal text-color-text-low-emphasis no-underline visited:text-color-text-low-emphasis  my-1" aria-label="9 Reactions" data-test-id="social-actions__reactions" data-id="social-actions__reactions" data-num-reactions="9" data-singular="%numReactions%" data-plural="%numReactions%" data-entity-urn="urn:li:ugcPost:7071911355435401216">
+        
+                    <img alt data-reaction-type="LIKE" data-delayed-url="https://static.licdn.com/aero-v1/sc/h/9sun4diznbhgyelaeryxy75ur" height="16px" width="16px">
+
+              <span class="font-normal ml-0.5" data-test-id="social-actions__reaction-count">
+                    9
+              </span>
+            
+      </a>
+  
+                  <code id="social-actions__reaction-image-APPRECIATION" style="display: none"><!--"https://static.licdn.com/aero-v1/sc/h/cib97epu77mrzque5gqlzjgaw"--></code>
+<!----><!---->                  <code id="social-actions__reaction-image-EMPATHY" style="display: none"><!--"https://static.licdn.com/aero-v1/sc/h/37hg81qnm85dsy5mbqfifg9qs"--></code>
+                  <code id="social-actions__reaction-image-ENTERTAINMENT" style="display: none"><!--"https://static.licdn.com/aero-v1/sc/h/e7ppwfmo0if15fgie4q5r4us4"--></code>
+<!---->                  <code id="social-actions__reaction-image-INTEREST" style="display: none"><!--"https://static.licdn.com/aero-v1/sc/h/4v7dh2d6cuqm24mzps1pqzeqt"--></code>
+                  <code id="social-actions__reaction-image-LIKE" style="display: none"><!--"https://static.licdn.com/aero-v1/sc/h/9sun4diznbhgyelaeryxy75ur"--></code>
+                  <code id="social-actions__reaction-image-MAYBE" style="display: none"><!--"https://static.licdn.com/aero-v1/sc/h/4iy169rwfs5rdhspekg2r5wc6"--></code>
+                  <code id="social-actions__reaction-image-PRAISE" style="display: none"><!--"https://static.licdn.com/aero-v1/sc/h/cjrxeu0ese8oxe32kiom8kzoh"--></code>
+<!----><!---->
+<!---->      </div>
+  
+      </div>
+    </div>
+      <div class="comments__container">
+        
+    
+    
+    
+
+    <div class="comments">
+<!---->
+      
+<!---->        
+<!---->    </div>
+  
+      </div>
+      
+
+    
+    
+
+    <p class="feed-cta-banner__text border-t-1 border-color-surface-border border-solid p-3 text-center text-md text-color-text-low-emphasis">
+      To view or add a comment, <a href="https://www.linkedin.com/signup/cold-join?session_redirect=%2Fpulse%2Fistio-service-mesh-kubernetes-avinash-kumar-chandran&trk=article-ssr-frontend-pulse_x-social-details_feed-cta-banner-cta" target="" aria-label="To view or add a comment, sign in" data-tracking-control-name="article-ssr-frontend-pulse_x-social-details_feed-cta-banner-cta" data-tracking-will-navigate="true" class="feed-cta-banner__link link">sign in</a>
+    </p>
+  
+  
+              
+    
+    
+    
+
+    
+
+    
+    <section class="core-section-container my-3 more-articles">
+<!---->
+<!---->
+<!---->
+      <div class="core-section-container__content break-words">
+        
+      
+
+    
+    
+    
+    
+    
+    
+
+    <section class="slide-list relative  more-articles__slide-list">
+      <header class="slide-list__header mb-1.5">
+              <h2 class="slide-list__heading font-bold mb-0.5 text-color-text text-lg">More articles by this author</h2>
+<!---->      </header>
+
+
+          <div class="slide-list__nav">
+            <div class="slide-list__nav-wrap absolute flex h-full items-center top-0 z-1 slide-list__nav-wrap--prev left-[-20px]">
+              <div class="previous-slide-list__a11y-notification sr-only hidden" role="alert">
+                No more previous content
+              </div>
+              <button data-tracking-control-name="article-ssr-frontend-pulse_more-articles_slide_list_prev_button" class="slide-list__nav-button btn-sm btn-overlay cursor-pointer disabled:hidden" aria-label="Previous Slide" data-direction="prev" disabled>
+                <icon class="slide-list__nav-icon flex items-center justify-center pointer-events-none h-3 rtl:-scale-x-100 rtl:translate-x-[7px]" data-delayed-url="https://static.licdn.com/aero-v1/sc/h/e5ka7p8s9n5r0z9p6kpmm3hig"></icon>
+              </button>
+            </div>
+          </div>
+
+        <div class="relative overflow-hidden ">
+              <ul class="slide-list__list items-stretch flex list-none transition-all duration-slow ease-standard ">
+                
+            <li class="slide-list__item mr-2 rtl:ml-2">
+              
+    
+    
+    
+      <a href="https://www.linkedin.com/pulse/eks-workloads-backup-restore-using-velero-s3-avinash-kumar-chandran?trk=article-ssr-frontend-pulse_more-articles_related-content-card" target="_self" data-tracking-control-name="article-ssr-frontend-pulse_more-articles_related-content-card" data-tracking-will-navigate class="base-card relative w-full hover:no-underline focus:no-underline base-card--link related-content-card w-[228px] block relative
+        
+        related-content-card--link absolute z-[1] top-0 bottom-0 left-0 right-0 hover:no-underline focus:no-underline">
+        
+
+<!---->
+      
+        
+    <div class="related-entity-media relative block
+        w-[228px] h-[134px] rounded-[2px]">
+      <img class="related-entity-media__img w-full h-full object-cover rounded-[2px]" alt="EKS Workloads Backup and Restore Using Velero and S3" data-delayed-url="https://media.licdn.com/dms/image/D5612AQEmqK5RizlCSA/article-cover_image-shrink_720_1280/0/1681309742731?e=2147483647&amp;v=beta&amp;t=H_RRhdJ0lE3DvflyozgbvrQ1TbpxnGiy6v1yGBz9IP4">
+<!----><!---->    </div>
+  
+
+      <div class="related-content-card__info flex flex-col mt-1">
+        <h3 class="related-content-card__title font-sans text-[18px] font-bold text-color-text line-clamp-2">
+          EKS Workloads Backup and Restore Using Velero and S3
+        </h3>
+
+          <h4 class="related-content-card__subtitle font-sans text-md text-color-text mt-0.5">
+            
+        Apr 13, 2023
+      
+          </h4>
+
+<!---->
+<!---->      </div>
+    
+    
+      </a>
+  
+  
+  
+  
+            </li>
+            <li class="slide-list__item mr-2 rtl:ml-2">
+              
+    
+    
+    
+      <a href="https://www.linkedin.com/pulse/canary-deployment-using-argo-rollouts-kubernetes-chandran?trk=article-ssr-frontend-pulse_more-articles_related-content-card" target="_self" data-tracking-control-name="article-ssr-frontend-pulse_more-articles_related-content-card" data-tracking-will-navigate class="base-card relative w-full hover:no-underline focus:no-underline base-card--link related-content-card w-[228px] block relative
+        
+        related-content-card--link absolute z-[1] top-0 bottom-0 left-0 right-0 hover:no-underline focus:no-underline">
+        
+
+<!---->
+      
+        
+    <div class="related-entity-media relative block
+        w-[228px] h-[134px] rounded-[2px]">
+      <img class="related-entity-media__img w-full h-full object-cover rounded-[2px]" alt="Canary Deployment Using Argo Rollouts In Kubernetes" data-delayed-url="https://media.licdn.com/dms/image/D5612AQHHhSQmj2E2IQ/article-cover_image-shrink_600_2000/0/1670055888770?e=2147483647&amp;v=beta&amp;t=5bu58g5WM870FlwyGHECMa27fDb7meJCzqKDkLyRC_4">
+<!----><!---->    </div>
+  
+
+      <div class="related-content-card__info flex flex-col mt-1">
+        <h3 class="related-content-card__title font-sans text-[18px] font-bold text-color-text line-clamp-2">
+          Canary Deployment Using Argo Rollouts In Kubernetes
+        </h3>
+
+          <h4 class="related-content-card__subtitle font-sans text-md text-color-text mt-0.5">
+            
+        Dec 6, 2022
+      
+          </h4>
+
+<!---->
+<!---->      </div>
+    
+    
+      </a>
+  
+  
+  
+  
+            </li>
+            <li class="slide-list__item mr-2 rtl:ml-2">
+              
+    
+    
+    
+      <a href="https://www.linkedin.com/pulse/logging-kubernetes-using-grafana-loki-avinash-kumar-chandran?trk=article-ssr-frontend-pulse_more-articles_related-content-card" target="_self" data-tracking-control-name="article-ssr-frontend-pulse_more-articles_related-content-card" data-tracking-will-navigate class="base-card relative w-full hover:no-underline focus:no-underline base-card--link related-content-card w-[228px] block relative
+        
+        related-content-card--link absolute z-[1] top-0 bottom-0 left-0 right-0 hover:no-underline focus:no-underline">
+        
+
+<!---->
+      
+        
+    <div class="related-entity-media relative block
+        w-[228px] h-[134px] rounded-[2px]">
+      <img class="related-entity-media__img w-full h-full object-cover rounded-[2px]" alt="Logging For Kubernetes Using Grafana Loki" data-delayed-url="https://media.licdn.com/dms/image/D5612AQHPMQ6gRmwV-Q/article-cover_image-shrink_720_1280/0/1668920288269?e=2147483647&amp;v=beta&amp;t=zYaADaJyYalq5MHKMnTH3LP4CHD80oFn8XMpVzNF05o">
+<!----><!---->    </div>
+  
+
+      <div class="related-content-card__info flex flex-col mt-1">
+        <h3 class="related-content-card__title font-sans text-[18px] font-bold text-color-text line-clamp-2">
+          Logging For Kubernetes Using Grafana Loki
+        </h3>
+
+          <h4 class="related-content-card__subtitle font-sans text-md text-color-text mt-0.5">
+            
+        Nov 21, 2022
+      
+          </h4>
+
+<!---->
+<!---->      </div>
+    
+    
+      </a>
+  
+  
+  
+  
+            </li>
+            <li class="slide-list__item mr-2 rtl:ml-2">
+              
+    
+    
+    
+      <a href="https://www.linkedin.com/pulse/kaka-cluster-setup-kubernetes-avinash-kumar-chandran?trk=article-ssr-frontend-pulse_more-articles_related-content-card" target="_self" data-tracking-control-name="article-ssr-frontend-pulse_more-articles_related-content-card" data-tracking-will-navigate class="base-card relative w-full hover:no-underline focus:no-underline base-card--link related-content-card w-[228px] block relative
+        
+        related-content-card--link absolute z-[1] top-0 bottom-0 left-0 right-0 hover:no-underline focus:no-underline">
+        
+
+<!---->
+      
+        
+    <div class="related-entity-media relative block
+        w-[228px] h-[134px] rounded-[2px]">
+      <img class="related-entity-media__img w-full h-full object-cover rounded-[2px]" alt="Kafka Cluster Setup on Kubernetes" data-delayed-url="https://media.licdn.com/dms/image/D5612AQFCfYXkuhthIQ/article-cover_image-shrink_600_2000/0/1668345075317?e=2147483647&amp;v=beta&amp;t=sv3JKWZPNbsMlQOPtBJLT1r65go3wcgX1FnYQYwKECE">
+<!----><!---->    </div>
+  
+
+      <div class="related-content-card__info flex flex-col mt-1">
+        <h3 class="related-content-card__title font-sans text-[18px] font-bold text-color-text line-clamp-2">
+          Kafka Cluster Setup on Kubernetes
+        </h3>
+
+          <h4 class="related-content-card__subtitle font-sans text-md text-color-text mt-0.5">
+            
+        Nov 18, 2022
+      
+          </h4>
+
+<!---->
+<!---->      </div>
+    
+    
+      </a>
+  
+  
+  
+  
+            </li>
+            <li class="slide-list__item mr-2 rtl:ml-2">
+              
+    
+    
+    
+      <a href="https://www.linkedin.com/pulse/horizontal-pod-autoscaler-kubernetes-avinash-kumar-chandran?trk=article-ssr-frontend-pulse_more-articles_related-content-card" target="_self" data-tracking-control-name="article-ssr-frontend-pulse_more-articles_related-content-card" data-tracking-will-navigate class="base-card relative w-full hover:no-underline focus:no-underline base-card--link related-content-card w-[228px] block relative
+        
+        related-content-card--link absolute z-[1] top-0 bottom-0 left-0 right-0 hover:no-underline focus:no-underline">
+        
+
+<!---->
+      
+        
+    <div class="related-entity-media relative block
+        w-[228px] h-[134px] rounded-[2px]">
+      <img class="related-entity-media__img w-full h-full object-cover rounded-[2px]" alt="Horizontal Pod Autoscaler in Kubernetes" data-delayed-url="https://media.licdn.com/dms/image/D5612AQF2RyrA3Kcw5w/article-cover_image-shrink_600_2000/0/1668318424505?e=2147483647&amp;v=beta&amp;t=2IrZ1BIBBDk6niZoMKex6LOAJ0mQ4iXsNMZI91LPO6I">
+<!----><!---->    </div>
+  
+
+      <div class="related-content-card__info flex flex-col mt-1">
+        <h3 class="related-content-card__title font-sans text-[18px] font-bold text-color-text line-clamp-2">
+          Horizontal Pod Autoscaler in Kubernetes
+        </h3>
+
+          <h4 class="related-content-card__subtitle font-sans text-md text-color-text mt-0.5">
+            
+        Nov 13, 2022
+      
+          </h4>
+
+<!---->
+<!---->      </div>
+    
+    
+      </a>
+  
+  
+  
+  
+            </li>
+            <li class="slide-list__item mr-2 rtl:ml-2">
+              
+    
+    
+    
+      <a href="https://www.linkedin.com/pulse/backup-restore-kubernetes-workloads-using-velero-minio-chandran?trk=article-ssr-frontend-pulse_more-articles_related-content-card" target="_self" data-tracking-control-name="article-ssr-frontend-pulse_more-articles_related-content-card" data-tracking-will-navigate class="base-card relative w-full hover:no-underline focus:no-underline base-card--link related-content-card w-[228px] block relative
+        
+        related-content-card--link absolute z-[1] top-0 bottom-0 left-0 right-0 hover:no-underline focus:no-underline">
+        
+
+<!---->
+      
+        
+    <div class="related-entity-media relative block
+        w-[228px] h-[134px] rounded-[2px]">
+      <img class="related-entity-media__img w-full h-full object-cover rounded-[2px]" alt="Backup And Restore Kubernetes Workloads Using Velero And Minio 
+API Object Storage" data-delayed-url="https://media.licdn.com/dms/image/D5612AQEMYtRAs1vMDA/article-cover_image-shrink_600_2000/0/1667713864759?e=2147483647&amp;v=beta&amp;t=RZpB-GEWbpGoKDEXBfrZsbIVhbHaz2k_bXErfPvYCVI">
+<!----><!---->    </div>
+  
+
+      <div class="related-content-card__info flex flex-col mt-1">
+        <h3 class="related-content-card__title font-sans text-[18px] font-bold text-color-text line-clamp-2">
+          Backup And Restore Kubernetes Workloads Using Velero And Minio 
+API Object Storage
+        </h3>
+
+          <h4 class="related-content-card__subtitle font-sans text-md text-color-text mt-0.5">
+            
+        Nov 6, 2022
+      
+          </h4>
+
+<!---->
+<!---->      </div>
+    
+    
+      </a>
+  
+  
+  
+  
+            </li>
+            <li class="slide-list__item mr-2 rtl:ml-2">
+              
+    
+    
+    
+      <a href="https://www.linkedin.com/pulse/metallb-loadbalancer-bare-metal-kubernetes-cluster-chandran?trk=article-ssr-frontend-pulse_more-articles_related-content-card" target="_self" data-tracking-control-name="article-ssr-frontend-pulse_more-articles_related-content-card" data-tracking-will-navigate class="base-card relative w-full hover:no-underline focus:no-underline base-card--link related-content-card w-[228px] block relative
+        
+        related-content-card--link absolute z-[1] top-0 bottom-0 left-0 right-0 hover:no-underline focus:no-underline">
+        
+
+<!---->
+      
+        
+    <div class="related-entity-media relative block
+        w-[228px] h-[134px] rounded-[2px]">
+      <img class="related-entity-media__img w-full h-full object-cover rounded-[2px]" alt="MetalLB LoadBalancer For Bare Metal Kubernetes Cluster" data-delayed-url="https://media.licdn.com/dms/image/D5612AQH_TamyvKaifQ/article-cover_image-shrink_600_2000/0/1667103013974?e=2147483647&amp;v=beta&amp;t=yjg8y2TLvEIT5GepqeMXL4mcBIyucJ7njJf7i_qnJ3o">
+<!----><!---->    </div>
+  
+
+      <div class="related-content-card__info flex flex-col mt-1">
+        <h3 class="related-content-card__title font-sans text-[18px] font-bold text-color-text line-clamp-2">
+          MetalLB LoadBalancer For Bare Metal Kubernetes Cluster
+        </h3>
+
+          <h4 class="related-content-card__subtitle font-sans text-md text-color-text mt-0.5">
+            
+        Oct 30, 2022
+      
+          </h4>
+
+<!---->
+<!---->      </div>
+    
+    
+      </a>
+  
+  
+  
+  
+            </li>
+            <li class="slide-list__item mr-2 rtl:ml-2">
+              
+    
+    
+    
+      <a href="https://www.linkedin.com/pulse/blue-green-deployment-using-argo-rollouts-kubernetes-chandran?trk=article-ssr-frontend-pulse_more-articles_related-content-card" target="_self" data-tracking-control-name="article-ssr-frontend-pulse_more-articles_related-content-card" data-tracking-will-navigate class="base-card relative w-full hover:no-underline focus:no-underline base-card--link related-content-card w-[228px] block relative
+        
+        related-content-card--link absolute z-[1] top-0 bottom-0 left-0 right-0 hover:no-underline focus:no-underline">
+        
+
+<!---->
+      
+        
+    <div class="related-entity-media relative block
+        w-[228px] h-[134px] rounded-[2px]">
+      <img class="related-entity-media__img w-full h-full object-cover rounded-[2px]" alt="Blue Green Deployment Using Argo Rollouts in Kubernetes" data-delayed-url="https://media.licdn.com/dms/image/D5612AQHMT9CQvtI4Iw/article-cover_image-shrink_720_1280/0/1666595964894?e=2147483647&amp;v=beta&amp;t=HEeM5tN-n0OteU3w9lw-LsipxhWQgv_MRmtxStLNAkc">
+<!----><!---->    </div>
+  
+
+      <div class="related-content-card__info flex flex-col mt-1">
+        <h3 class="related-content-card__title font-sans text-[18px] font-bold text-color-text line-clamp-2">
+          Blue Green Deployment Using Argo Rollouts in Kubernetes
+        </h3>
+
+          <h4 class="related-content-card__subtitle font-sans text-md text-color-text mt-0.5">
+            
+        Oct 25, 2022
+      
+          </h4>
+
+<!---->
+<!---->      </div>
+    
+    
+      </a>
+  
+  
+  
+  
+            </li>
+            <li class="slide-list__item mr-2 rtl:ml-2">
+              
+    
+    
+    
+      <a href="https://www.linkedin.com/pulse/keycloak-cluster-high-availability-kubernetes-avinash-kumar-chandran?trk=article-ssr-frontend-pulse_more-articles_related-content-card" target="_self" data-tracking-control-name="article-ssr-frontend-pulse_more-articles_related-content-card" data-tracking-will-navigate class="base-card relative w-full hover:no-underline focus:no-underline base-card--link related-content-card w-[228px] block relative
+        
+        related-content-card--link absolute z-[1] top-0 bottom-0 left-0 right-0 hover:no-underline focus:no-underline">
+        
+
+<!---->
+      
+        
+    <div class="related-entity-media relative block
+        w-[228px] h-[134px] rounded-[2px]">
+      <img class="related-entity-media__img w-full h-full object-cover rounded-[2px]" alt="Keycloak Cluster High Availability in Kubernetes " data-delayed-url="https://media.licdn.com/dms/image/D5612AQHkgv9di6zn5w/article-cover_image-shrink_720_1280/0/1666367378619?e=2147483647&amp;v=beta&amp;t=jQtdscPFJ7FiJdEKYRzaQOv0dSoC5gwU0_S_lqCldQo">
+<!----><!---->    </div>
+  
+
+      <div class="related-content-card__info flex flex-col mt-1">
+        <h3 class="related-content-card__title font-sans text-[18px] font-bold text-color-text line-clamp-2">
+          Keycloak Cluster High Availability in Kubernetes 
+        </h3>
+
+          <h4 class="related-content-card__subtitle font-sans text-md text-color-text mt-0.5">
+            
+        Oct 23, 2022
+      
+          </h4>
+
+<!---->
+<!---->      </div>
+    
+    
+      </a>
+  
+  
+  
+  
+            </li>
+            <li class="slide-list__item mr-2 rtl:ml-2">
+              
+    
+    
+    
+      <a href="https://www.linkedin.com/pulse/kubernetesrbac-ansible-automation-avinash-kumar-chandran?trk=article-ssr-frontend-pulse_more-articles_related-content-card" target="_self" data-tracking-control-name="article-ssr-frontend-pulse_more-articles_related-content-card" data-tracking-will-navigate class="base-card relative w-full hover:no-underline focus:no-underline base-card--link related-content-card w-[228px] block relative
+        
+        related-content-card--link absolute z-[1] top-0 bottom-0 left-0 right-0 hover:no-underline focus:no-underline">
+        
+
+<!---->
+      
+        
+    <div class="related-entity-media relative block
+        w-[228px] h-[134px] rounded-[2px]">
+      <img class="related-entity-media__img w-full h-full object-cover rounded-[2px]" alt="Kubernetes RBAC With Ansible Automation" data-delayed-url="https://media.licdn.com/dms/image/D5612AQHIK7qdayaVvw/article-cover_image-shrink_600_2000/0/1665906949578?e=2147483647&amp;v=beta&amp;t=Kny_GaHkUw9dMjFReMS7Fqtpr9fRbCsyhcSL8GQ3WmY">
+<!----><!---->    </div>
+  
+
+      <div class="related-content-card__info flex flex-col mt-1">
+        <h3 class="related-content-card__title font-sans text-[18px] font-bold text-color-text line-clamp-2">
+          Kubernetes RBAC With Ansible Automation
+        </h3>
+
+          <h4 class="related-content-card__subtitle font-sans text-md text-color-text mt-0.5">
+            
+        Oct 16, 2022
+      
+          </h4>
+
+<!---->
+<!---->      </div>
+    
+    
+      </a>
+  
+  
+  
+  
+            </li>
+        
+              </ul>
+        </div>
+
+          <div class="slide-list__nav">
+            <div class="slide-list__nav-wrap absolute flex h-full items-center top-0 z-1 slide-list__nav-wrap--next right-[-20px]">
+              <div class="next-slide-list__a11y-notification sr-only hidden" role="alert">
+                No more next content
+              </div>
+              <button data-tracking-control-name="article-ssr-frontend-pulse_more-articles_slide_list_next_button" class="slide-list__nav-button btn-sm btn-overlay cursor-pointer disabled:hidden" aria-label="Next Slide" data-direction="next">
+                <icon class="slide-list__nav-icon flex items-center justify-center pointer-events-none h-3 rtl:-scale-x-100 rtl:translate-x-[7px]" data-delayed-url="https://static.licdn.com/aero-v1/sc/h/c9dcz2pyrbwi3sr6xwxigmvlz"></icon>
+              </button>
+            </div>
+          </div>
+
+
+        <div class="flex items-center mt-2">
+<!---->
+            
+
+            <a aria-label="See all articles by Avinash Kumar Chandran" class="absolute flex gap-1 items-center link-styled right-0 text-sm slide_list__see-all" data-tracking-control-name="article-ssr-frontend-pulse_more-articles_see_all" data-tracking-will-navigate href="https://www.linkedin.com/today/author/avinash-kumar-chandran-b8500017a?trk=article-ssr-frontend-pulse_more-articles">
+              <span>See all</span>
+              <icon class="h-2 w-2" data-delayed-url="https://static.licdn.com/aero-v1/sc/h/588y48bk4e72ybpxav0sjkozs"></icon>
+            </a>
+        </div>
+    </section>
+  
+    
+      </div>
+    </section>
+  
+  
+<!---->          
+      
+        </div>
+      </section>
+      <section class="right-rail papabear:w-right-rail-width papabear:ml-column-gutter mamabear:max-w-[790px] mamabear:px-mobile-container-padding babybear:max-w-[790px] babybear:px-mobile-container-padding">
+        
+        
+<!---->              
+    
+      <section class="aside-section-container mb-4 articles-content-card">
+
+            <h2 class="aside-section-container__title section-title">
+              Others also viewed
+            </h2>
+
+<!---->
+        <div class="aside-section-container__content break-words">
+          
+          
+    
+    
+
+      <div class="show-more-less">
+<!---->
+        <ul data-max-num-to-show="6" class="show-more-less__list show-more-less__list--hide-after-6" data-impression-id="article-ssr-frontend-pulse_show-more-less">
+          
+                <li class="articles-content-card__list-item mt-3">
+    
+    
+    
+    
+      <a href="https://www.linkedin.com/pulse/kubernetes-cluster-setup-using-ansible-playbooks-chandran" target="_self" data-tracking-control-name="full-link" data-tracking-will-navigate class="base-card relative w-full hover:no-underline focus:no-underline base-card--link base-aside-card flex my-1.5
+        
+        base-aside-card--link aside-article-card">
+        
+
+<!---->
+      
+            <div class="base-aside-card__media flex-shrink-0 h-[54px] mr-0.5 overflow-hidden relative w-[95px]">
+              
+        <img data-delayed-url="https://media.licdn.com/dms/image/D5612AQFe0jYOpLCpkQ/article-cover_image-shrink_600_2000/0/1665666133762?e=2147483647&amp;v=beta&amp;t=Vip_hJVA7dM6uRJhMlIxozvbg2POXqP6XJ2BMgvz0Ck" data-ghost-url="https://static.licdn.com/aero-v1/sc/h/9l8dv1r8a09nem281grvopn9l" alt>
+      
+<!---->            </div>
+
+        <div class="base-aside-card__info self-center pl-0.5 flex flex-col flex-1">
+          <h3 class="base-aside-card__title font-sans text-md font-bold text-color-text relative">
+            
+        Kubernetes Cluster Setup Using Ansible Playbooks
+      
+<!---->          </h3>
+
+<!---->
+<!---->
+<!---->
+            <div class="base-aside-card__metadata font-sans text-sm leading-open font-regular text-color-text-low-emphasis mt-0.5">
+              
+          <span class="base-aside-card__metadata-item">
+            Avinash Kumar Chandran
+          </span>
+          <span class="base-aside-card__metadata-item">
+            
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+      11mo
+  
+          </span>
+      
+            </div>
+
+<!---->        </div>
+      
+    
+      </a>
+  
+  
+  
+  
+  </li>
+  <li class="articles-content-card__list-item mt-3">
+    
+    
+    
+    
+      <a href="https://www.linkedin.com/pulse/istio-what-mesh-mukesh-verma" target="_self" data-tracking-control-name="full-link" data-tracking-will-navigate class="base-card relative w-full hover:no-underline focus:no-underline base-card--link base-aside-card flex my-1.5
+        
+        base-aside-card--link aside-article-card">
+        
+
+<!---->
+      
+            <div class="base-aside-card__media flex-shrink-0 h-[54px] mr-0.5 overflow-hidden relative w-[95px]">
+              
+        <img data-delayed-url="https://media.licdn.com/dms/image/C4D12AQGEKlLveMl9PA/article-cover_image-shrink_600_2000/0/1598041303621?e=2147483647&amp;v=beta&amp;t=k0oF7oyvJ0TDAlbnqsR9TUnK23StOAQD5lxnuxOb8C8" data-ghost-url="https://static.licdn.com/aero-v1/sc/h/9l8dv1r8a09nem281grvopn9l" alt>
+      
+<!---->            </div>
+
+        <div class="base-aside-card__info self-center pl-0.5 flex flex-col flex-1">
+          <h3 class="base-aside-card__title font-sans text-md font-bold text-color-text relative">
+            
+        Istio ,what a mesh...
+      
+<!---->          </h3>
+
+<!---->
+<!---->
+<!---->
+            <div class="base-aside-card__metadata font-sans text-sm leading-open font-regular text-color-text-low-emphasis mt-0.5">
+              
+          <span class="base-aside-card__metadata-item">
+            Mukesh Verma
+          </span>
+          <span class="base-aside-card__metadata-item">
+            
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+      3y
+  
+          </span>
+      
+            </div>
+
+<!---->        </div>
+      
+    
+      </a>
+  
+  
+  
+  
+  </li>
+  <li class="articles-content-card__list-item mt-3">
+    
+    
+    
+    
+      <a href="https://www.linkedin.com/pulse/harnessing-power-service-mesh-kubernetes-istio-rishikesh-chandra" target="_self" data-tracking-control-name="full-link" data-tracking-will-navigate class="base-card relative w-full hover:no-underline focus:no-underline base-card--link base-aside-card flex my-1.5
+        
+        base-aside-card--link aside-article-card">
+        
+
+<!---->
+      
+            <div class="base-aside-card__media flex-shrink-0 h-[54px] mr-0.5 overflow-hidden relative w-[95px]">
+              
+        <img data-delayed-url="https://media.licdn.com/dms/image/D4D12AQGKLdpS27jFTQ/article-cover_image-shrink_720_1280/0/1684234095220?e=2147483647&amp;v=beta&amp;t=4GVd3shwa9RCYn6fP_SCUzEiWSQ6BDwEih99NGffAsQ" data-ghost-url="https://static.licdn.com/aero-v1/sc/h/9l8dv1r8a09nem281grvopn9l" alt>
+      
+<!---->            </div>
+
+        <div class="base-aside-card__info self-center pl-0.5 flex flex-col flex-1">
+          <h3 class="base-aside-card__title font-sans text-md font-bold text-color-text relative">
+            
+        Harnessing the Power of Service Mesh: Kubernetes &amp; Istio
+      
+<!---->          </h3>
+
+<!---->
+<!---->
+<!---->
+            <div class="base-aside-card__metadata font-sans text-sm leading-open font-regular text-color-text-low-emphasis mt-0.5">
+              
+          <span class="base-aside-card__metadata-item">
+            Rishikesh Chandra
+          </span>
+          <span class="base-aside-card__metadata-item">
+            
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+      4mo
+  
+          </span>
+      
+            </div>
+
+<!---->        </div>
+      
+    
+      </a>
+  
+  
+  
+  
+  </li>
+  <li class="articles-content-card__list-item mt-3">
+    
+    
+    
+    
+      <a href="https://www.linkedin.com/pulse/service-mesh-istio-ranjan-rakesh" target="_self" data-tracking-control-name="full-link" data-tracking-will-navigate class="base-card relative w-full hover:no-underline focus:no-underline base-card--link base-aside-card flex my-1.5
+        
+        base-aside-card--link aside-article-card">
+        
+
+<!---->
+      
+            <div class="base-aside-card__media flex-shrink-0 h-[54px] mr-0.5 overflow-hidden relative w-[95px]">
+              
+        <img data-delayed-url="https://media.licdn.com/dms/image/C5612AQHVVcmBPPXW8Q/article-cover_image-shrink_600_2000/0/1599668998217?e=2147483647&amp;v=beta&amp;t=eEBzN8cbAgXhoWBKO1fCrztxWFX9_fB5oqUxuQLGmZA" data-ghost-url="https://static.licdn.com/aero-v1/sc/h/9l8dv1r8a09nem281grvopn9l" alt>
+      
+<!---->            </div>
+
+        <div class="base-aside-card__info self-center pl-0.5 flex flex-col flex-1">
+          <h3 class="base-aside-card__title font-sans text-md font-bold text-color-text relative">
+            
+        Service Mesh :Istio 
+      
+<!---->          </h3>
+
+<!---->
+<!---->
+<!---->
+            <div class="base-aside-card__metadata font-sans text-sm leading-open font-regular text-color-text-low-emphasis mt-0.5">
+              
+          <span class="base-aside-card__metadata-item">
+            Rakesh Ranjan
+          </span>
+          <span class="base-aside-card__metadata-item">
+            
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+      3y
+  
+          </span>
+      
+            </div>
+
+<!---->        </div>
+      
+    
+      </a>
+  
+  
+  
+  
+  </li>
+  <li class="articles-content-card__list-item mt-3">
+    
+    
+    
+    
+      <a href="https://www.linkedin.com/pulse/ingress-istio-sriram-iyengar" target="_self" data-tracking-control-name="full-link" data-tracking-will-navigate class="base-card relative w-full hover:no-underline focus:no-underline base-card--link base-aside-card flex my-1.5
+        
+        base-aside-card--link aside-article-card">
+        
+
+<!---->
+      
+            <div class="base-aside-card__media flex-shrink-0 h-[54px] mr-0.5 overflow-hidden relative w-[95px]">
+              
+        <img data-delayed-url="https://media-exp1.licdn.com/media/AAYQAgQLAAkAAQAAAAAAAA196XghfnplQFCx7y__C0e55w.png" data-ghost-url="https://static.licdn.com/aero-v1/sc/h/9l8dv1r8a09nem281grvopn9l" alt>
+      
+<!---->            </div>
+
+        <div class="base-aside-card__info self-center pl-0.5 flex flex-col flex-1">
+          <h3 class="base-aside-card__title font-sans text-md font-bold text-color-text relative">
+            
+        Ingress and Istio
+      
+<!---->          </h3>
+
+<!---->
+<!---->
+<!---->
+            <div class="base-aside-card__metadata font-sans text-sm leading-open font-regular text-color-text-low-emphasis mt-0.5">
+              
+          <span class="base-aside-card__metadata-item">
+            sriram Iyengar
+          </span>
+          <span class="base-aside-card__metadata-item">
+            
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+      7mo
+  
+          </span>
+      
+            </div>
+
+<!---->        </div>
+      
+    
+      </a>
+  
+  
+  
+  
+  </li>
+  <li class="articles-content-card__list-item mt-3">
+    
+    
+    
+    
+      <a href="https://www.linkedin.com/pulse/end-in-transit-encryption-microservices-aws-eks-istio-rahul-natarajan" target="_self" data-tracking-control-name="full-link" data-tracking-will-navigate class="base-card relative w-full hover:no-underline focus:no-underline base-card--link base-aside-card flex my-1.5
+        
+        base-aside-card--link aside-article-card">
+        
+
+<!---->
+      
+            <div class="base-aside-card__media flex-shrink-0 h-[54px] mr-0.5 overflow-hidden relative w-[95px]">
+              
+        <img data-delayed-url="https://media.licdn.com/dms/image/C5612AQG3CebUg9GA5g/article-cover_image-shrink_720_1280/0/1588996521636?e=2147483647&amp;v=beta&amp;t=r_yEwDqxwH2sOiTH2AVfl_TXQmjOdaCHAgnMEbii4YQ" data-ghost-url="https://static.licdn.com/aero-v1/sc/h/9l8dv1r8a09nem281grvopn9l" alt>
+      
+<!---->            </div>
+
+        <div class="base-aside-card__info self-center pl-0.5 flex flex-col flex-1">
+          <h3 class="base-aside-card__title font-sans text-md font-bold text-color-text relative">
+            
+        End to End In-Transit Encryption for Microservices on AWS EKS with Istio &amp; AWS ACM
+      
+<!---->          </h3>
+
+<!---->
+<!---->
+<!---->
+            <div class="base-aside-card__metadata font-sans text-sm leading-open font-regular text-color-text-low-emphasis mt-0.5">
+              
+          <span class="base-aside-card__metadata-item">
+            Rahul Natarajan
+          </span>
+          <span class="base-aside-card__metadata-item">
+            
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+      3y
+  
+          </span>
+      
+            </div>
+
+<!---->        </div>
+      
+    
+      </a>
+  
+  
+  
+  
+  </li>
+  <li class="articles-content-card__list-item mt-3">
+    
+    
+    
+    
+      <a href="https://www.linkedin.com/pulse/service-mesh-kubernetes-istio-introduction-sushant-sikare" target="_self" data-tracking-control-name="full-link" data-tracking-will-navigate class="base-card relative w-full hover:no-underline focus:no-underline base-card--link base-aside-card flex my-1.5
+        
+        base-aside-card--link aside-article-card">
+        
+
+<!---->
+      
+            <div class="base-aside-card__media flex-shrink-0 h-[54px] mr-0.5 overflow-hidden relative w-[95px]">
+              
+        <img data-delayed-url="https://media.licdn.com/dms/image/D4D12AQGE4MZ05N0d8w/article-cover_image-shrink_600_2000/0/1669262411662?e=2147483647&amp;v=beta&amp;t=PJQnt2lrI8uLtIP4YmnNPGzNdnfwuLdvQ_IRDSvXJH4" data-ghost-url="https://static.licdn.com/aero-v1/sc/h/9l8dv1r8a09nem281grvopn9l" alt>
+      
+<!---->            </div>
+
+        <div class="base-aside-card__info self-center pl-0.5 flex flex-col flex-1">
+          <h3 class="base-aside-card__title font-sans text-md font-bold text-color-text relative">
+            
+        🎯Service Mesh on Kubernetes — Istio Introduction.
+      
+<!---->          </h3>
+
+<!---->
+<!---->
+<!---->
+            <div class="base-aside-card__metadata font-sans text-sm leading-open font-regular text-color-text-low-emphasis mt-0.5">
+              
+          <span class="base-aside-card__metadata-item">
+            Sushant S.
+          </span>
+          <span class="base-aside-card__metadata-item">
+            
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+      10mo
+  
+          </span>
+      
+            </div>
+
+<!---->        </div>
+      
+    
+      </a>
+  
+  
+  
+  
+  </li>
+  <li class="articles-content-card__list-item mt-3">
+    
+    
+    
+    
+      <a href="https://www.linkedin.com/pulse/introduction-istio-service-mesh-its-architecture-shiva-g" target="_self" data-tracking-control-name="full-link" data-tracking-will-navigate class="base-card relative w-full hover:no-underline focus:no-underline base-card--link base-aside-card flex my-1.5
+        
+        base-aside-card--link aside-article-card">
+        
+
+<!---->
+      
+            <div class="base-aside-card__media flex-shrink-0 h-[54px] mr-0.5 overflow-hidden relative w-[95px]">
+              
+        <img data-delayed-url="https://media.licdn.com/dms/image/D5612AQHYCkPFV6rMMA/article-cover_image-shrink_720_1280/0/1681636898116?e=2147483647&amp;v=beta&amp;t=pTO7ZGbStsegGue2AqGcYEIlAYn56VvldgtnvfVyWLY" data-ghost-url="https://static.licdn.com/aero-v1/sc/h/9l8dv1r8a09nem281grvopn9l" alt>
+      
+<!---->            </div>
+
+        <div class="base-aside-card__info self-center pl-0.5 flex flex-col flex-1">
+          <h3 class="base-aside-card__title font-sans text-md font-bold text-color-text relative">
+            
+        An Introduction to ISTIO Service Mesh &amp; its Architecture!
+      
+<!---->          </h3>
+
+<!---->
+<!---->
+<!---->
+            <div class="base-aside-card__metadata font-sans text-sm leading-open font-regular text-color-text-low-emphasis mt-0.5">
+              
+          <span class="base-aside-card__metadata-item">
+            Shiva G
+          </span>
+          <span class="base-aside-card__metadata-item">
+            
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+      5mo
+  
+          </span>
+      
+            </div>
+
+<!---->        </div>
+      
+    
+      </a>
+  
+  
+  
+  
+  </li>
+  <li class="articles-content-card__list-item mt-3">
+    
+    
+    
+    
+      <a href="https://www.linkedin.com/pulse/building-highly-available-ha-resilient-microservices-using-istio" target="_self" data-tracking-control-name="full-link" data-tracking-will-navigate class="base-card relative w-full hover:no-underline focus:no-underline base-card--link base-aside-card flex my-1.5
+        
+        base-aside-card--link aside-article-card">
+        
+
+<!---->
+      
+            <div class="base-aside-card__media flex-shrink-0 h-[54px] mr-0.5 overflow-hidden relative w-[95px]">
+              
+        <img data-delayed-url="https://media.licdn.com/dms/image/D5612AQHHzrtARgmexg/article-cover_image-shrink_720_1280/0/1690264236396?e=2147483647&amp;v=beta&amp;t=a5RxNbuD9gMqk_tPn5WQrbjiYU1znpNARtpKg5FZ9HY" data-ghost-url="https://static.licdn.com/aero-v1/sc/h/9l8dv1r8a09nem281grvopn9l" alt>
+      
+<!---->            </div>
+
+        <div class="base-aside-card__info self-center pl-0.5 flex flex-col flex-1">
+          <h3 class="base-aside-card__title font-sans text-md font-bold text-color-text relative">
+            
+        Building highly available (HA) and resilient microservices using Istio Service Mesh
+      
+<!---->          </h3>
+
+<!---->
+<!---->
+<!---->
+            <div class="base-aside-card__metadata font-sans text-sm leading-open font-regular text-color-text-low-emphasis mt-0.5">
+              
+          <span class="base-aside-card__metadata-item">
+            Tetrate
+          </span>
+          <span class="base-aside-card__metadata-item">
+            
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+      2mo
+  
+          </span>
+      
+            </div>
+
+<!---->        </div>
+      
+    
+      </a>
+  
+  
+  
+  
+  </li>
+  <li class="articles-content-card__list-item mt-3">
+    
+    
+    
+    
+      <a href="https://www.linkedin.com/pulse/kafka-zookeeper-cluster-setup-kubernetes-running-suthram-cissp-ccsp" target="_self" data-tracking-control-name="full-link" data-tracking-will-navigate class="base-card relative w-full hover:no-underline focus:no-underline base-card--link base-aside-card flex my-1.5
+        
+        base-aside-card--link aside-article-card">
+        
+
+<!---->
+      
+            <div class="base-aside-card__media flex-shrink-0 h-[54px] mr-0.5 overflow-hidden relative w-[95px]">
+              
+        <img data-delayed-url="https://media.licdn.com/dms/image/C5612AQGq6NEhU57CqA/article-cover_image-shrink_720_1280/0/1650511687104?e=2147483647&amp;v=beta&amp;t=iDJLlHEErhnVIQaU5Hy5O0bw0NQxoP3wdoAzF9L3Uo0" data-ghost-url="https://static.licdn.com/aero-v1/sc/h/9l8dv1r8a09nem281grvopn9l" alt>
+      
+<!---->            </div>
+
+        <div class="base-aside-card__info self-center pl-0.5 flex flex-col flex-1">
+          <h3 class="base-aside-card__title font-sans text-md font-bold text-color-text relative">
+            
+        Kafka and Zookeeper cluster setup in kubernetes running on native Linux
+      
+<!---->          </h3>
+
+<!---->
+<!---->
+<!---->
+            <div class="base-aside-card__metadata font-sans text-sm leading-open font-regular text-color-text-low-emphasis mt-0.5">
+              
+          <span class="base-aside-card__metadata-item">
+            Sivakumar Suthram
+          </span>
+          <span class="base-aside-card__metadata-item">
+            
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+      1y
+  
+          </span>
+      
+            </div>
+
+<!---->        </div>
+      
+    
+      </a>
+  
+  
+  
+  
+  </li>
+
+            
+        </ul>
+
+            <button class="show-more-less__button show-more-less__more-button show-more-less-button
+                " aria-expanded="false" data-tracking-control-name="article-ssr-frontend-pulse_show_more">
+                Show more
+              <icon class="show-more-less__button--chevron show-more-less-button-icon" data-delayed-url="https://static.licdn.com/aero-v1/sc/h/cyolgscd0imw2ldqppkrb84vo"></icon>
+            </button>
+
+            <button class="show-more-less__button show-more-less__less-button show-more-less-button
+                show-more-less__button--hide" aria-expanded="false" aria-label="Others also viewed" data-tracking-control-name="article-ssr-frontend-pulse_show_more">
+                Show less
+              <icon class="show-more-less__button--chevron show-more-less-button-icon" data-delayed-url="https://static.licdn.com/aero-v1/sc/h/4chtt12k98xwnba1nimld2oyg"></icon>
+            </button>
+      </div>
+  
+      
+        </div>
+      </section>
+  
+  
+              
+    
+
+    
+      <section class="aside-section-container mb-4 pulse-to-x">
+
+            <h2 class="aside-section-container__title section-title">
+              Insights from the community
+            </h2>
+
+<!---->
+        <div class="aside-section-container__content break-words">
+          
+        
+    
+    
+
+      <div class="show-more-less">
+<!---->
+        <ul data-max-num-to-show="6" class="show-more-less__list show-more-less__list--hide-after-6" data-impression-id="article-ssr-frontend-pulse_show-more-less">
+          
+              <li class="articles-side-panel__list-item -ml-3">
+                
+    
+    
+    
+      <a class="x-article-card__link hover:no-underline focus:no-underline active:no-underline" href="https://www.linkedin.com/advice/3/how-do-you-use-service-meshes-facilitate-communication" aria-label="Recommended article link" data-tracking-will-navigate="true" data-tracking-control-name="recommended_article" data-feed-action-category="view" data-feed-action-type="viewArticle" target="_self">
+        <div class="x-article-card container-lined m-3 min-h-max p-1.5 hover:shadow-md active:shadow-md
+            w-100%">
+            <div class="x-article-card__tag tag-sm tag-enabled inline break-words font-normal">
+              Microservices
+            </div>
+            <div class="x-article-card__title text-base break-words pt-1 text-md font-normal text-color-text">
+              How do you use service meshes to facilitate communication and coordination among your microservices?
+            </div>
+<!---->        </div>
+      </a>
+  
+              </li>
+              <li class="articles-side-panel__list-item -ml-3">
+                
+    
+    
+    
+      <a class="x-article-card__link hover:no-underline focus:no-underline active:no-underline" href="https://www.linkedin.com/advice/0/how-do-you-use-containers-orchestration-tools-scale" aria-label="Recommended article link" data-tracking-will-navigate="true" data-tracking-control-name="recommended_article" data-feed-action-category="view" data-feed-action-type="viewArticle" target="_self">
+        <div class="x-article-card container-lined m-3 min-h-max p-1.5 hover:shadow-md active:shadow-md
+            w-100%">
+            <div class="x-article-card__tag tag-sm tag-enabled inline break-words font-normal">
+              Scalability
+            </div>
+            <div class="x-article-card__title text-base break-words pt-1 text-md font-normal text-color-text">
+              How do you use containers and orchestration tools to scale microservices efficiently?
+            </div>
+<!---->        </div>
+      </a>
+  
+              </li>
+              <li class="articles-side-panel__list-item -ml-3">
+                
+    
+    
+    
+      <a class="x-article-card__link hover:no-underline focus:no-underline active:no-underline" href="https://www.linkedin.com/advice/3/how-do-you-choose-between-service-mesh-api" aria-label="Recommended article link" data-tracking-will-navigate="true" data-tracking-control-name="recommended_article" data-feed-action-category="view" data-feed-action-type="viewArticle" target="_self">
+        <div class="x-article-card container-lined m-3 min-h-max p-1.5 hover:shadow-md active:shadow-md
+            w-100%">
+            <div class="x-article-card__tag tag-sm tag-enabled inline break-words font-normal">
+              Enterprise Software
+            </div>
+            <div class="x-article-card__title text-base break-words pt-1 text-md font-normal text-color-text">
+              How do you choose between service mesh and API gateway for microservices?
+            </div>
+<!---->        </div>
+      </a>
+  
+              </li>
+              <li class="articles-side-panel__list-item -ml-3">
+                
+    
+    
+    
+      <a class="x-article-card__link hover:no-underline focus:no-underline active:no-underline" href="https://www.linkedin.com/advice/3/how-do-you-integrate-service-mesh-your-existing-cicd" aria-label="Recommended article link" data-tracking-will-navigate="true" data-tracking-control-name="recommended_article" data-feed-action-category="view" data-feed-action-type="viewArticle" target="_self">
+        <div class="x-article-card container-lined m-3 min-h-max p-1.5 hover:shadow-md active:shadow-md
+            w-100%">
+            <div class="x-article-card__tag tag-sm tag-enabled inline break-words font-normal">
+              Microservices
+            </div>
+            <div class="x-article-card__title text-base break-words pt-1 text-md font-normal text-color-text">
+              How do you integrate service mesh with your existing CI/CD pipeline and tools?
+            </div>
+<!---->        </div>
+      </a>
+  
+              </li>
+              <li class="articles-side-panel__list-item -ml-3">
+                
+    
+    
+    
+      <a class="x-article-card__link hover:no-underline focus:no-underline active:no-underline" href="https://www.linkedin.com/advice/0/how-do-you-design-your-microservices-discoverable" aria-label="Recommended article link" data-tracking-will-navigate="true" data-tracking-control-name="recommended_article" data-feed-action-category="view" data-feed-action-type="viewArticle" target="_self">
+        <div class="x-article-card container-lined m-3 min-h-max p-1.5 hover:shadow-md active:shadow-md
+            w-100%">
+            <div class="x-article-card__tag tag-sm tag-enabled inline break-words font-normal">
+              Microservices
+            </div>
+            <div class="x-article-card__title text-base break-words pt-1 text-md font-normal text-color-text">
+              How do you design your microservices to be discoverable and self-describing?
+            </div>
+<!---->        </div>
+      </a>
+  
+              </li>
+              <li class="articles-side-panel__list-item -ml-3">
+                
+    
+    
+    
+      <a class="x-article-card__link hover:no-underline focus:no-underline active:no-underline" href="https://www.linkedin.com/advice/0/how-do-you-design-test-observability-your-microservices" aria-label="Recommended article link" data-tracking-will-navigate="true" data-tracking-control-name="recommended_article" data-feed-action-category="view" data-feed-action-type="viewArticle" target="_self">
+        <div class="x-article-card container-lined m-3 min-h-max p-1.5 hover:shadow-md active:shadow-md
+            w-100%">
+            <div class="x-article-card__tag tag-sm tag-enabled inline break-words font-normal">
+              Microservices
+            </div>
+            <div class="x-article-card__title text-base break-words pt-1 text-md font-normal text-color-text">
+              How do you design and test observability into your microservices from the start?
+            </div>
+<!---->        </div>
+      </a>
+  
+              </li>
+              <li class="articles-side-panel__list-item -ml-3">
+                
+    
+    
+    
+      <a class="x-article-card__link hover:no-underline focus:no-underline active:no-underline" href="https://www.linkedin.com/advice/0/how-can-you-ensure-microservices-performance-reliability" aria-label="Recommended article link" data-tracking-will-navigate="true" data-tracking-control-name="recommended_article" data-feed-action-category="view" data-feed-action-type="viewArticle" target="_self">
+        <div class="x-article-card container-lined m-3 min-h-max p-1.5 hover:shadow-md active:shadow-md
+            w-100%">
+            <div class="x-article-card__tag tag-sm tag-enabled inline break-words font-normal">
+              Software Design
+            </div>
+            <div class="x-article-card__title text-base break-words pt-1 text-md font-normal text-color-text">
+              How can you ensure microservices performance and reliability across platforms?
+            </div>
+<!---->        </div>
+      </a>
+  
+              </li>
+              <li class="articles-side-panel__list-item -ml-3">
+                
+    
+    
+    
+      <a class="x-article-card__link hover:no-underline focus:no-underline active:no-underline" href="https://www.linkedin.com/advice/3/how-do-you-design-implement-effective-service-interfaces" aria-label="Recommended article link" data-tracking-will-navigate="true" data-tracking-control-name="recommended_article" data-feed-action-category="view" data-feed-action-type="viewArticle" target="_self">
+        <div class="x-article-card container-lined m-3 min-h-max p-1.5 hover:shadow-md active:shadow-md
+            w-100%">
+            <div class="x-article-card__tag tag-sm tag-enabled inline break-words font-normal">
+              Microservices
+            </div>
+            <div class="x-article-card__title text-base break-words pt-1 text-md font-normal text-color-text">
+              How do you design and implement effective service interfaces and contracts?
+            </div>
+<!---->        </div>
+      </a>
+  
+              </li>
+              <li class="articles-side-panel__list-item -ml-3">
+                
+    
+    
+    
+      <a class="x-article-card__link hover:no-underline focus:no-underline active:no-underline" href="https://www.linkedin.com/advice/0/what-some-ways-address-network-latency-bandwidth" aria-label="Recommended article link" data-tracking-will-navigate="true" data-tracking-control-name="recommended_article" data-feed-action-category="view" data-feed-action-type="viewArticle" target="_self">
+        <div class="x-article-card container-lined m-3 min-h-max p-1.5 hover:shadow-md active:shadow-md
+            w-100%">
+            <div class="x-article-card__tag tag-sm tag-enabled inline break-words font-normal">
+              Software Design
+            </div>
+            <div class="x-article-card__title text-base break-words pt-1 text-md font-normal text-color-text">
+              What are some ways to address network latency and bandwidth issues in microservices architecture?
+            </div>
+<!---->        </div>
+      </a>
+  
+              </li>
+              <li class="articles-side-panel__list-item -ml-3">
+                
+    
+    
+    
+      <a class="x-article-card__link hover:no-underline focus:no-underline active:no-underline" href="https://www.linkedin.com/advice/1/what-some-best-practices-monitoring-logging-microservices" aria-label="Recommended article link" data-tracking-will-navigate="true" data-tracking-control-name="recommended_article" data-feed-action-category="view" data-feed-action-type="viewArticle" target="_self">
+        <div class="x-article-card container-lined m-3 min-h-max p-1.5 hover:shadow-md active:shadow-md
+            w-100%">
+            <div class="x-article-card__tag tag-sm tag-enabled inline break-words font-normal">
+              System Automation
+            </div>
+            <div class="x-article-card__title text-base break-words pt-1 text-md font-normal text-color-text">
+              What are some best practices for monitoring and logging microservices?
+            </div>
+<!---->        </div>
+      </a>
+  
+              </li>
+          
+        </ul>
+
+            <button class="show-more-less__button show-more-less__more-button show-more-less-button
+                " aria-expanded="false" data-tracking-control-name="article-ssr-frontend-pulse_show_more">
+                Show more
+              <icon class="show-more-less__button--chevron show-more-less-button-icon" data-delayed-url="https://static.licdn.com/aero-v1/sc/h/cyolgscd0imw2ldqppkrb84vo"></icon>
+            </button>
+
+            <button class="show-more-less__button show-more-less__less-button show-more-less-button
+                show-more-less__button--hide" aria-expanded="false" aria-label="Insights from the community" data-tracking-control-name="article-ssr-frontend-pulse_show_more">
+                Show less
+              <icon class="show-more-less__button--chevron show-more-less-button-icon" data-delayed-url="https://static.licdn.com/aero-v1/sc/h/4chtt12k98xwnba1nimld2oyg"></icon>
+            </button>
+      </div>
+  
+      
+        </div>
+      </section>
+  
+  
+              
+    
+    
+
+    
+      <section class="aside-section-container mb-4 content-hub-topics">
+
+            <h2 class="aside-section-container__title section-title">
+              Explore topics
+            </h2>
+
+<!---->
+        <div class="aside-section-container__content break-words">
+          
+        <ul class="career-advice-hub-topics__list">
+            <li class="career-advice-hub-topics__list-item mb-1">
+              <a href="https://www.linkedin.com/pulse/topics/sales-s5/" data-tracking-control-name="article-ssr-frontend-pulse_content-hub-topic" data-tracking-will-navigate class="btn-sm btn-secondary flex w-fit mr-1 mb-1 hover:no-underline">
+                Sales
+              </a>
+            </li>
+            <li class="career-advice-hub-topics__list-item mb-1">
+              <a href="https://www.linkedin.com/pulse/topics/marketing-s2461/" data-tracking-control-name="article-ssr-frontend-pulse_content-hub-topic" data-tracking-will-navigate class="btn-sm btn-secondary flex w-fit mr-1 mb-1 hover:no-underline">
+                Marketing
+              </a>
+            </li>
+            <li class="career-advice-hub-topics__list-item mb-1">
+              <a href="https://www.linkedin.com/pulse/topics/public-administration-s3697/" data-tracking-control-name="article-ssr-frontend-pulse_content-hub-topic" data-tracking-will-navigate class="btn-sm btn-secondary flex w-fit mr-1 mb-1 hover:no-underline">
+                Public Administration
+              </a>
+            </li>
+            <li class="career-advice-hub-topics__list-item mb-1">
+              <a href="https://www.linkedin.com/pulse/topics/business-administration-s50111/" data-tracking-control-name="article-ssr-frontend-pulse_content-hub-topic" data-tracking-will-navigate class="btn-sm btn-secondary flex w-fit mr-1 mb-1 hover:no-underline">
+                Business Administration
+              </a>
+            </li>
+            <li class="career-advice-hub-topics__list-item mb-1">
+              <a href="https://www.linkedin.com/pulse/topics/hr-management-s50359/" data-tracking-control-name="article-ssr-frontend-pulse_content-hub-topic" data-tracking-will-navigate class="btn-sm btn-secondary flex w-fit mr-1 mb-1 hover:no-underline">
+                HR Management
+              </a>
+            </li>
+            <li class="career-advice-hub-topics__list-item mb-1">
+              <a href="https://www.linkedin.com/pulse/topics/engineering-s166/" data-tracking-control-name="article-ssr-frontend-pulse_content-hub-topic" data-tracking-will-navigate class="btn-sm btn-secondary flex w-fit mr-1 mb-1 hover:no-underline">
+                Engineering
+              </a>
+            </li>
+            <li class="career-advice-hub-topics__list-item mb-1">
+              <a href="https://www.linkedin.com/pulse/topics/soft-skills-s2976/" data-tracking-control-name="article-ssr-frontend-pulse_content-hub-topic" data-tracking-will-navigate class="btn-sm btn-secondary flex w-fit mr-1 mb-1 hover:no-underline">
+                Soft Skills
+              </a>
+            </li>
+          <li class="career-advice-hub-topics__list-item mb-1">
+            <a href="https://www.linkedin.com/pulse/topics/home/" data-tracking-control-name="article-ssr-frontend-pulse_content-hub-topic" data-tracking-will-navigate class="btn-sm btn-secondary-emphasis flex w-fit mr-[6px] mb-1 hover:no-underline">
+              See All
+            </a>
+          </li>
+        </ul>
+      
+        </div>
+      </section>
+  
+  
+          
+      
+      </section>
+    </main>
+
+      <div class="pre-footer ">
+        
+        
+<!---->          
+      
+      </div>
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+
+    <footer class="li-footer bg-transparent w-full ">
+      <ul class="li-footer__list flex flex-wrap flex-row items-start justify-start w-full h-auto min-h-[50px] my-[0px] mx-auto py-3 px-2 papabear:w-[1128px] papabear:p-0">
+        
+  <li class="li-footer__item font-sans text-xs text-color-text-low-emphasis flex flex-shrink-0 justify-start p-1 relative w-50% papabear:justify-center papabear:w-auto">
+        
+          <span class="sr-only">LinkedIn</span>
+          <icon class="li-footer__copy-logo text-color-logo-brand-alt inline-block self-center h-[14px] w-[56px] mr-1" data-delayed-url="https://static.licdn.com/aero-v1/sc/h/e12h2cd8ac580qen9qdd0qks8"></icon>
+          <span class="li-footer__copy-text flex items-center">&copy; 2023</span>
+        
+  </li>
+
+        
+  <li class="li-footer__item font-sans text-xs text-color-text-low-emphasis flex flex-shrink-0 justify-start p-1 relative w-50% papabear:justify-center papabear:w-auto">
+        <a class="li-footer__item-link flex items-center font-sans text-xs font-bold text-color-text-low-emphasis hover:text-color-link-hover focus:text-color-link-focus" href="https://about.linkedin.com?trk=d_flagship2_pulse_read_footer-about" data-tracking-control-name="d_flagship2_pulse_read_footer-about" data-tracking-will-navigate>
+          
+          About
+        
+        </a>
+  </li>
+
+        
+  <li class="li-footer__item font-sans text-xs text-color-text-low-emphasis flex flex-shrink-0 justify-start p-1 relative w-50% papabear:justify-center papabear:w-auto">
+        <a class="li-footer__item-link flex items-center font-sans text-xs font-bold text-color-text-low-emphasis hover:text-color-link-hover focus:text-color-link-focus" href="https://www.linkedin.com/accessibility?trk=d_flagship2_pulse_read_footer-accessibility" data-tracking-control-name="d_flagship2_pulse_read_footer-accessibility" data-tracking-will-navigate>
+          
+          Accessibility
+        
+        </a>
+  </li>
+
+        
+  <li class="li-footer__item font-sans text-xs text-color-text-low-emphasis flex flex-shrink-0 justify-start p-1 relative w-50% papabear:justify-center papabear:w-auto">
+        <a class="li-footer__item-link flex items-center font-sans text-xs font-bold text-color-text-low-emphasis hover:text-color-link-hover focus:text-color-link-focus" href="https://www.linkedin.com/legal/user-agreement?trk=d_flagship2_pulse_read_footer-user-agreement" data-tracking-control-name="d_flagship2_pulse_read_footer-user-agreement" data-tracking-will-navigate>
+          
+          User Agreement
+        
+        </a>
+  </li>
+
+        
+  <li class="li-footer__item font-sans text-xs text-color-text-low-emphasis flex flex-shrink-0 justify-start p-1 relative w-50% papabear:justify-center papabear:w-auto">
+        <a class="li-footer__item-link flex items-center font-sans text-xs font-bold text-color-text-low-emphasis hover:text-color-link-hover focus:text-color-link-focus" href="https://www.linkedin.com/legal/privacy-policy?trk=d_flagship2_pulse_read_footer-privacy-policy" data-tracking-control-name="d_flagship2_pulse_read_footer-privacy-policy" data-tracking-will-navigate>
+          
+          Privacy Policy
+        
+        </a>
+  </li>
+
+<!---->        
+  <li class="li-footer__item font-sans text-xs text-color-text-low-emphasis flex flex-shrink-0 justify-start p-1 relative w-50% papabear:justify-center papabear:w-auto">
+        <a class="li-footer__item-link flex items-center font-sans text-xs font-bold text-color-text-low-emphasis hover:text-color-link-hover focus:text-color-link-focus" href="https://www.linkedin.com/legal/cookie-policy?trk=d_flagship2_pulse_read_footer-cookie-policy" data-tracking-control-name="d_flagship2_pulse_read_footer-cookie-policy" data-tracking-will-navigate>
+          
+          Cookie Policy
+        
+        </a>
+  </li>
+
+        
+  <li class="li-footer__item font-sans text-xs text-color-text-low-emphasis flex flex-shrink-0 justify-start p-1 relative w-50% papabear:justify-center papabear:w-auto">
+        <a class="li-footer__item-link flex items-center font-sans text-xs font-bold text-color-text-low-emphasis hover:text-color-link-hover focus:text-color-link-focus" href="https://www.linkedin.com/legal/copyright-policy?trk=d_flagship2_pulse_read_footer-copyright-policy" data-tracking-control-name="d_flagship2_pulse_read_footer-copyright-policy" data-tracking-will-navigate>
+          
+          Copyright Policy
+        
+        </a>
+  </li>
+
+        
+  <li class="li-footer__item font-sans text-xs text-color-text-low-emphasis flex flex-shrink-0 justify-start p-1 relative w-50% papabear:justify-center papabear:w-auto">
+        <a class="li-footer__item-link flex items-center font-sans text-xs font-bold text-color-text-low-emphasis hover:text-color-link-hover focus:text-color-link-focus" href="https://brand.linkedin.com/policies?trk=d_flagship2_pulse_read_footer-brand-policy" data-tracking-control-name="d_flagship2_pulse_read_footer-brand-policy" data-tracking-will-navigate>
+          
+          Brand Policy
+        
+        </a>
+  </li>
+
+          
+  <li class="li-footer__item font-sans text-xs text-color-text-low-emphasis flex flex-shrink-0 justify-start p-1 relative w-50% papabear:justify-center papabear:w-auto">
+        <a class="li-footer__item-link flex items-center font-sans text-xs font-bold text-color-text-low-emphasis hover:text-color-link-hover focus:text-color-link-focus" href="https://www.linkedin.com/psettings/guest-controls?trk=d_flagship2_pulse_read_footer-guest-controls" data-tracking-control-name="d_flagship2_pulse_read_footer-guest-controls" data-tracking-will-navigate>
+          
+            Guest Controls
+          
+        </a>
+  </li>
+
+        
+  <li class="li-footer__item font-sans text-xs text-color-text-low-emphasis flex flex-shrink-0 justify-start p-1 relative w-50% papabear:justify-center papabear:w-auto">
+        <a class="li-footer__item-link flex items-center font-sans text-xs font-bold text-color-text-low-emphasis hover:text-color-link-hover focus:text-color-link-focus" href="https://www.linkedin.com/legal/professional-community-policies?trk=d_flagship2_pulse_read_footer-community-guide" data-tracking-control-name="d_flagship2_pulse_read_footer-community-guide" data-tracking-will-navigate>
+          
+          Community Guidelines
+        
+        </a>
+  </li>
+
+        
+<!---->
+          
+          
+  <li class="li-footer__item font-sans text-xs text-color-text-low-emphasis flex flex-shrink-0 justify-start p-1 relative w-50% papabear:justify-center papabear:w-auto">
+        
+              
+
+    
+    
+
+    
+
+    
+
+    <div class="collapsible-dropdown collapsible-dropdown--footer collapsible-dropdown--up flex items-center relative hyphens-auto language-selector z-2">
+<!---->
+        <ul class="collapsible-dropdown__list hidden container-raised absolute w-auto overflow-y-auto flex-col items-stretch z-1 bottom-[100%] top-auto" role="menu" tabindex="-1">
+          
+          <li class="language-selector__item" role="presentation">
+            <!-- Adding aria-label to both the li and the button because screen reader focus goes to button on desktop and li on mobile-->
+            <button aria-label="العربية (Arabic)" class="font-sans text-xs link block py-[5px] px-2 w-full hover:cursor-pointer hover:bg-color-action hover:text-color-text-on-dark focus:bg-color-action focus:text-color-text-on-dark
+                language-selector__link !font-regular" data-tracking-control-name="language-selector-ar_AE" data-locale="ar_AE" role="menuitem" lang="ar_AE">
+                العربية (Arabic)
+            </button>
+          </li>
+          <li class="language-selector__item" role="presentation">
+            <!-- Adding aria-label to both the li and the button because screen reader focus goes to button on desktop and li on mobile-->
+            <button aria-label="Čeština (Czech)" class="font-sans text-xs link block py-[5px] px-2 w-full hover:cursor-pointer hover:bg-color-action hover:text-color-text-on-dark focus:bg-color-action focus:text-color-text-on-dark
+                language-selector__link !font-regular" data-tracking-control-name="language-selector-cs_CZ" data-locale="cs_CZ" role="menuitem" lang="cs_CZ">
+                Čeština (Czech)
+            </button>
+          </li>
+          <li class="language-selector__item" role="presentation">
+            <!-- Adding aria-label to both the li and the button because screen reader focus goes to button on desktop and li on mobile-->
+            <button aria-label="Dansk (Danish)" class="font-sans text-xs link block py-[5px] px-2 w-full hover:cursor-pointer hover:bg-color-action hover:text-color-text-on-dark focus:bg-color-action focus:text-color-text-on-dark
+                language-selector__link !font-regular" data-tracking-control-name="language-selector-da_DK" data-locale="da_DK" role="menuitem" lang="da_DK">
+                Dansk (Danish)
+            </button>
+          </li>
+          <li class="language-selector__item" role="presentation">
+            <!-- Adding aria-label to both the li and the button because screen reader focus goes to button on desktop and li on mobile-->
+            <button aria-label="Deutsch (German)" class="font-sans text-xs link block py-[5px] px-2 w-full hover:cursor-pointer hover:bg-color-action hover:text-color-text-on-dark focus:bg-color-action focus:text-color-text-on-dark
+                language-selector__link !font-regular" data-tracking-control-name="language-selector-de_DE" data-locale="de_DE" role="menuitem" lang="de_DE">
+                Deutsch (German)
+            </button>
+          </li>
+          <li class="language-selector__item" role="presentation">
+            <!-- Adding aria-label to both the li and the button because screen reader focus goes to button on desktop and li on mobile-->
+            <button aria-label="English (English) selected" class="font-sans text-xs link block py-[5px] px-2 w-full hover:cursor-pointer hover:bg-color-action hover:text-color-text-on-dark focus:bg-color-action focus:text-color-text-on-dark
+                language-selector__link--selected" data-tracking-control-name="language-selector-en_US" data-locale="en_US" role="menuitem" lang="en_US">
+                <strong>English (English)</strong>
+            </button>
+          </li>
+          <li class="language-selector__item" role="presentation">
+            <!-- Adding aria-label to both the li and the button because screen reader focus goes to button on desktop and li on mobile-->
+            <button aria-label="Español (Spanish)" class="font-sans text-xs link block py-[5px] px-2 w-full hover:cursor-pointer hover:bg-color-action hover:text-color-text-on-dark focus:bg-color-action focus:text-color-text-on-dark
+                language-selector__link !font-regular" data-tracking-control-name="language-selector-es_ES" data-locale="es_ES" role="menuitem" lang="es_ES">
+                Español (Spanish)
+            </button>
+          </li>
+          <li class="language-selector__item" role="presentation">
+            <!-- Adding aria-label to both the li and the button because screen reader focus goes to button on desktop and li on mobile-->
+            <button aria-label="Français (French)" class="font-sans text-xs link block py-[5px] px-2 w-full hover:cursor-pointer hover:bg-color-action hover:text-color-text-on-dark focus:bg-color-action focus:text-color-text-on-dark
+                language-selector__link !font-regular" data-tracking-control-name="language-selector-fr_FR" data-locale="fr_FR" role="menuitem" lang="fr_FR">
+                Français (French)
+            </button>
+          </li>
+          <li class="language-selector__item" role="presentation">
+            <!-- Adding aria-label to both the li and the button because screen reader focus goes to button on desktop and li on mobile-->
+            <button aria-label="हिंदी (Hindi)" class="font-sans text-xs link block py-[5px] px-2 w-full hover:cursor-pointer hover:bg-color-action hover:text-color-text-on-dark focus:bg-color-action focus:text-color-text-on-dark
+                language-selector__link !font-regular" data-tracking-control-name="language-selector-hi_IN" data-locale="hi_IN" role="menuitem" lang="hi_IN">
+                हिंदी (Hindi)
+            </button>
+          </li>
+          <li class="language-selector__item" role="presentation">
+            <!-- Adding aria-label to both the li and the button because screen reader focus goes to button on desktop and li on mobile-->
+            <button aria-label="Bahasa Indonesia (Indonesian)" class="font-sans text-xs link block py-[5px] px-2 w-full hover:cursor-pointer hover:bg-color-action hover:text-color-text-on-dark focus:bg-color-action focus:text-color-text-on-dark
+                language-selector__link !font-regular" data-tracking-control-name="language-selector-in_ID" data-locale="in_ID" role="menuitem" lang="in_ID">
+                Bahasa Indonesia (Indonesian)
+            </button>
+          </li>
+          <li class="language-selector__item" role="presentation">
+            <!-- Adding aria-label to both the li and the button because screen reader focus goes to button on desktop and li on mobile-->
+            <button aria-label="Italiano (Italian)" class="font-sans text-xs link block py-[5px] px-2 w-full hover:cursor-pointer hover:bg-color-action hover:text-color-text-on-dark focus:bg-color-action focus:text-color-text-on-dark
+                language-selector__link !font-regular" data-tracking-control-name="language-selector-it_IT" data-locale="it_IT" role="menuitem" lang="it_IT">
+                Italiano (Italian)
+            </button>
+          </li>
+          <li class="language-selector__item" role="presentation">
+            <!-- Adding aria-label to both the li and the button because screen reader focus goes to button on desktop and li on mobile-->
+            <button aria-label="日本語 (Japanese)" class="font-sans text-xs link block py-[5px] px-2 w-full hover:cursor-pointer hover:bg-color-action hover:text-color-text-on-dark focus:bg-color-action focus:text-color-text-on-dark
+                language-selector__link !font-regular" data-tracking-control-name="language-selector-ja_JP" data-locale="ja_JP" role="menuitem" lang="ja_JP">
+                日本語 (Japanese)
+            </button>
+          </li>
+          <li class="language-selector__item" role="presentation">
+            <!-- Adding aria-label to both the li and the button because screen reader focus goes to button on desktop and li on mobile-->
+            <button aria-label="한국어 (Korean)" class="font-sans text-xs link block py-[5px] px-2 w-full hover:cursor-pointer hover:bg-color-action hover:text-color-text-on-dark focus:bg-color-action focus:text-color-text-on-dark
+                language-selector__link !font-regular" data-tracking-control-name="language-selector-ko_KR" data-locale="ko_KR" role="menuitem" lang="ko_KR">
+                한국어 (Korean)
+            </button>
+          </li>
+          <li class="language-selector__item" role="presentation">
+            <!-- Adding aria-label to both the li and the button because screen reader focus goes to button on desktop and li on mobile-->
+            <button aria-label="Bahasa Malaysia (Malay)" class="font-sans text-xs link block py-[5px] px-2 w-full hover:cursor-pointer hover:bg-color-action hover:text-color-text-on-dark focus:bg-color-action focus:text-color-text-on-dark
+                language-selector__link !font-regular" data-tracking-control-name="language-selector-ms_MY" data-locale="ms_MY" role="menuitem" lang="ms_MY">
+                Bahasa Malaysia (Malay)
+            </button>
+          </li>
+          <li class="language-selector__item" role="presentation">
+            <!-- Adding aria-label to both the li and the button because screen reader focus goes to button on desktop and li on mobile-->
+            <button aria-label="Nederlands (Dutch)" class="font-sans text-xs link block py-[5px] px-2 w-full hover:cursor-pointer hover:bg-color-action hover:text-color-text-on-dark focus:bg-color-action focus:text-color-text-on-dark
+                language-selector__link !font-regular" data-tracking-control-name="language-selector-nl_NL" data-locale="nl_NL" role="menuitem" lang="nl_NL">
+                Nederlands (Dutch)
+            </button>
+          </li>
+          <li class="language-selector__item" role="presentation">
+            <!-- Adding aria-label to both the li and the button because screen reader focus goes to button on desktop and li on mobile-->
+            <button aria-label="Norsk (Norwegian)" class="font-sans text-xs link block py-[5px] px-2 w-full hover:cursor-pointer hover:bg-color-action hover:text-color-text-on-dark focus:bg-color-action focus:text-color-text-on-dark
+                language-selector__link !font-regular" data-tracking-control-name="language-selector-no_NO" data-locale="no_NO" role="menuitem" lang="no_NO">
+                Norsk (Norwegian)
+            </button>
+          </li>
+          <li class="language-selector__item" role="presentation">
+            <!-- Adding aria-label to both the li and the button because screen reader focus goes to button on desktop and li on mobile-->
+            <button aria-label="Polski (Polish)" class="font-sans text-xs link block py-[5px] px-2 w-full hover:cursor-pointer hover:bg-color-action hover:text-color-text-on-dark focus:bg-color-action focus:text-color-text-on-dark
+                language-selector__link !font-regular" data-tracking-control-name="language-selector-pl_PL" data-locale="pl_PL" role="menuitem" lang="pl_PL">
+                Polski (Polish)
+            </button>
+          </li>
+          <li class="language-selector__item" role="presentation">
+            <!-- Adding aria-label to both the li and the button because screen reader focus goes to button on desktop and li on mobile-->
+            <button aria-label="Português (Portuguese)" class="font-sans text-xs link block py-[5px] px-2 w-full hover:cursor-pointer hover:bg-color-action hover:text-color-text-on-dark focus:bg-color-action focus:text-color-text-on-dark
+                language-selector__link !font-regular" data-tracking-control-name="language-selector-pt_BR" data-locale="pt_BR" role="menuitem" lang="pt_BR">
+                Português (Portuguese)
+            </button>
+          </li>
+          <li class="language-selector__item" role="presentation">
+            <!-- Adding aria-label to both the li and the button because screen reader focus goes to button on desktop and li on mobile-->
+            <button aria-label="Română (Romanian)" class="font-sans text-xs link block py-[5px] px-2 w-full hover:cursor-pointer hover:bg-color-action hover:text-color-text-on-dark focus:bg-color-action focus:text-color-text-on-dark
+                language-selector__link !font-regular" data-tracking-control-name="language-selector-ro_RO" data-locale="ro_RO" role="menuitem" lang="ro_RO">
+                Română (Romanian)
+            </button>
+          </li>
+          <li class="language-selector__item" role="presentation">
+            <!-- Adding aria-label to both the li and the button because screen reader focus goes to button on desktop and li on mobile-->
+            <button aria-label="Русский (Russian)" class="font-sans text-xs link block py-[5px] px-2 w-full hover:cursor-pointer hover:bg-color-action hover:text-color-text-on-dark focus:bg-color-action focus:text-color-text-on-dark
+                language-selector__link !font-regular" data-tracking-control-name="language-selector-ru_RU" data-locale="ru_RU" role="menuitem" lang="ru_RU">
+                Русский (Russian)
+            </button>
+          </li>
+          <li class="language-selector__item" role="presentation">
+            <!-- Adding aria-label to both the li and the button because screen reader focus goes to button on desktop and li on mobile-->
+            <button aria-label="Svenska (Swedish)" class="font-sans text-xs link block py-[5px] px-2 w-full hover:cursor-pointer hover:bg-color-action hover:text-color-text-on-dark focus:bg-color-action focus:text-color-text-on-dark
+                language-selector__link !font-regular" data-tracking-control-name="language-selector-sv_SE" data-locale="sv_SE" role="menuitem" lang="sv_SE">
+                Svenska (Swedish)
+            </button>
+          </li>
+          <li class="language-selector__item" role="presentation">
+            <!-- Adding aria-label to both the li and the button because screen reader focus goes to button on desktop and li on mobile-->
+            <button aria-label="ภาษาไทย (Thai)" class="font-sans text-xs link block py-[5px] px-2 w-full hover:cursor-pointer hover:bg-color-action hover:text-color-text-on-dark focus:bg-color-action focus:text-color-text-on-dark
+                language-selector__link !font-regular" data-tracking-control-name="language-selector-th_TH" data-locale="th_TH" role="menuitem" lang="th_TH">
+                ภาษาไทย (Thai)
+            </button>
+          </li>
+          <li class="language-selector__item" role="presentation">
+            <!-- Adding aria-label to both the li and the button because screen reader focus goes to button on desktop and li on mobile-->
+            <button aria-label="Tagalog (Tagalog)" class="font-sans text-xs link block py-[5px] px-2 w-full hover:cursor-pointer hover:bg-color-action hover:text-color-text-on-dark focus:bg-color-action focus:text-color-text-on-dark
+                language-selector__link !font-regular" data-tracking-control-name="language-selector-tl_PH" data-locale="tl_PH" role="menuitem" lang="tl_PH">
+                Tagalog (Tagalog)
+            </button>
+          </li>
+          <li class="language-selector__item" role="presentation">
+            <!-- Adding aria-label to both the li and the button because screen reader focus goes to button on desktop and li on mobile-->
+            <button aria-label="Türkçe (Turkish)" class="font-sans text-xs link block py-[5px] px-2 w-full hover:cursor-pointer hover:bg-color-action hover:text-color-text-on-dark focus:bg-color-action focus:text-color-text-on-dark
+                language-selector__link !font-regular" data-tracking-control-name="language-selector-tr_TR" data-locale="tr_TR" role="menuitem" lang="tr_TR">
+                Türkçe (Turkish)
+            </button>
+          </li>
+          <li class="language-selector__item" role="presentation">
+            <!-- Adding aria-label to both the li and the button because screen reader focus goes to button on desktop and li on mobile-->
+            <button aria-label="Українська (Ukrainian)" class="font-sans text-xs link block py-[5px] px-2 w-full hover:cursor-pointer hover:bg-color-action hover:text-color-text-on-dark focus:bg-color-action focus:text-color-text-on-dark
+                language-selector__link !font-regular" data-tracking-control-name="language-selector-uk_UA" data-locale="uk_UA" role="menuitem" lang="uk_UA">
+                Українська (Ukrainian)
+            </button>
+          </li>
+          <li class="language-selector__item" role="presentation">
+            <!-- Adding aria-label to both the li and the button because screen reader focus goes to button on desktop and li on mobile-->
+            <button aria-label="简体中文 (Chinese (Simplified))" class="font-sans text-xs link block py-[5px] px-2 w-full hover:cursor-pointer hover:bg-color-action hover:text-color-text-on-dark focus:bg-color-action focus:text-color-text-on-dark
+                language-selector__link !font-regular" data-tracking-control-name="language-selector-zh_CN" data-locale="zh_CN" role="menuitem" lang="zh_CN">
+                简体中文 (Chinese (Simplified))
+            </button>
+          </li>
+          <li class="language-selector__item" role="presentation">
+            <!-- Adding aria-label to both the li and the button because screen reader focus goes to button on desktop and li on mobile-->
+            <button aria-label="正體中文 (Chinese (Traditional))" class="font-sans text-xs link block py-[5px] px-2 w-full hover:cursor-pointer hover:bg-color-action hover:text-color-text-on-dark focus:bg-color-action focus:text-color-text-on-dark
+                language-selector__link !font-regular" data-tracking-control-name="language-selector-zh_TW" data-locale="zh_TW" role="menuitem" lang="zh_TW">
+                正體中文 (Chinese (Traditional))
+            </button>
+          </li>
+<!---->      
+        </ul>
+
+          
+        <button class="language-selector__button select-none relative pr-2 font-sans text-xs font-bold text-color-text-low-emphasis hover:text-color-link-hover hover:cursor-pointer focus:text-color-link-focus focus:outline-dotted focus:outline-1" aria-expanded="false" data-tracking-control-name="footer-lang-dropdown_trigger">
+          <span class="language-selector__label-text mr-0.5 break-words">
+            Language
+          </span>
+          <icon class="language-selector__label-chevron w-2 h-2 absolute top-0 right-0" data-delayed-url="https://static.licdn.com/aero-v1/sc/h/cyolgscd0imw2ldqppkrb84vo"></icon>
+        </button>
+      
+    </div>
+  
+  
+          
+  </li>
+
+      </ul>
+
+<!---->    </footer>
+  
+  
+  
+      
+            
+  
+    
+
+    <div id="toasts" class="toasts fixed z-8 babybear:right-4 mamabear:right-4 papabear:min-h-[96px] invisible
+        top:auto bottom-4 left-4 papabear:w-[400px]
+        toasts--bottom" type="bottom">
+    
+
+    <template id="toast-template">
+      <div class="toast container-raised flex
+          toast--bottom
+          transition ease-accelerate duration-xxslow
+          " data-id="toast">
+        <div class="toast__message flex flex-1 babybear:items-center mamabear:items-center papabear:items-start py-2 px-1.5" data-id="toast__message" role="alert" tabindex="-1">
+          <div class="toast__message-content-container" data-id="toast__message-content-container">
+            <p class="toast__message-content font-sans text-sm opacity-90 inline babybear:self-center mamabear:self-center papabear:self-start" data-id="toast__message-content"></p>
+          </div>
+        </div>
+        <button class="toast__dismiss-btn cursor-pointer babybear:self-center mamabear:self-center papabear:self-start pt-3 pb-2 papabear:py-2 pl-0.5 pr-0" data-id="toast__dismiss-btn" aria-label="Close">
+          <svg width="24" height="24" class="fill-color-icon"><path d="M13 4.32 9.31 8 13 11.69 11.69 13 8 9.31 4.31 13 3 11.69 6.69 8 3 4.31 4.31 3 8 6.69 11.68 3Z"></path></svg>
+        </button>
+      </div>
+    </template>
+      <template id="toast-icon-caution">
+        <icon class="text-color-icon-caution toast__icon w-3 h-3 shrink-0 mr-2" data-delayed-url="https://static.licdn.com/aero-v1/sc/h/u6kgm8vi5s4rhtbgmjlphlp6"></icon>
+      </template>
+      <template id="toast-icon-error">
+        <icon class="text-color-icon-negative toast__icon w-3 h-3 shrink-0 mr-2" data-delayed-url="https://static.licdn.com/aero-v1/sc/h/2ffvlzyh9wb65459t9va8w2ph"></icon>
+      </template>
+      <template id="toast-icon-gdpr">
+        <icon class="text-color-icon-neutral toast__icon w-3 h-3 shrink-0 mr-2" data-delayed-url="https://static.licdn.com/aero-v1/sc/h/a0d85elrpgg38lskvq1kvzb3"></icon>
+      </template>
+      <template id="toast-icon-notify">
+        <icon class="text-color-icon-neutral toast__icon w-3 h-3 shrink-0 mr-2" data-delayed-url="https://static.licdn.com/aero-v1/sc/h/de23f5me7dfm17unsj9up4vga"></icon>
+      </template>
+      <template id="toast-icon-success">
+        <icon class="text-color-icon-positive toast__icon w-3 h-3 shrink-0 mr-2" data-delayed-url="https://static.licdn.com/aero-v1/sc/h/c44ryoszao52cyd0y87z7s0uf"></icon>
+      </template>
+    <template id="toast-cta">
+      <a class="toast__cta cta-link font-medium ml-0.5 text-sm text-inherit inline" target="_blank"></a>
+    </template>
+  </div>
+  
+<!---->
+      
+
+            <script src="https://static.licdn.com/aero-v1/sc/h/an3u8gpta43rgjny4tzujbn6p" async></script>
+<!---->          
+        
+        <script src="https://static.licdn.com/aero-v1/sc/h/dnujfszajjxceg4oth26xx6pt" async defer></script>
+<!---->      
+<!---->      
+      </body>
+    </html>
+  
+  
+  

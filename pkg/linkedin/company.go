@@ -135,7 +135,7 @@ func getCompanyFromRequest(req *http.Request, debug bool) (*Company, error) {
 	size := strings.TrimSpace(doc.Find("div[data-test-id='about-us__size'] dd").Text())
 	specialties := strings.TrimSpace(doc.Find("div[data-test-id='about-us__specialties'] dd").Text())
 	companyType := strings.TrimSpace(doc.Find("div[data-test-id='about-us__organizationType'] dd").Text())
-	website := strings.TrimSpace(doc.Find("div[data-test-id='about-us__website'] dd").Text())
+	website := strings.Split(strings.TrimSpace(doc.Find("div[data-test-id='about-us__website'] dd").Text()), "\n")[0]
 
 	company = Company{
 		FollowerCount: followerCount,

@@ -1,0 +1,2260 @@
+<!DOCTYPE html>
+
+    
+    
+    
+    
+
+    
+
+    
+    <html lang="en" class="cls-fix-enabled">
+      <head>
+        <meta name="pageKey" content="d_flagship2_pulse_read">
+<!---->        <meta name="locale" content="en_US">
+        <meta id="config" data-app-version="0.0.2495" data-call-tree-id="AAYGxKHZaePZSRw+WJzMFg==" data-multiproduct-name="article-ssr-frontend" data-service-name="article-ssr-frontend" data-browser-id="615f55fb-a872-4ec0-8e2e-ad1695edc174" data-enable-page-view-heartbeat-tracking data-page-instance="urn:li:page:d_flagship2_pulse_read;uj5+l5fjRRSphHHjflKRSQ==" data-theme="light" data-disable-jsbeacon-pagekey-suffix="false" data-member-id="0" data-logout-url="https://www.linkedin.com/uas/logout?session_full_logout=true&amp;csrfToken=ajax%3A2694320563746513925">
+
+        <link rel="canonical" href="https://www.linkedin.com/pulse/introduction-istio-service-mesh-its-architecture-shiva-g">
+<!----><!---->
+<!---->
+<!---->
+<!---->
+<!---->
+          <link rel="icon" href="https://static.licdn.com/aero-v1/sc/h/al2o9zrvru7aqj8e1x2rzsrca">
+
+        <script>
+          function getDfd() {let yFn,nFn;const p=new Promise(function(y, n){yFn=y;nFn=n;});p.resolve=yFn;p.reject=nFn;return p;}
+          window.lazyloader = getDfd();
+          window.tracking = getDfd();
+          window.impressionTracking = getDfd();
+          window.ingraphTracking = getDfd();
+          window.appDetection = getDfd();
+          window.pemTracking = getDfd();
+        </script>
+
+<!---->
+        
+        <title>An Introduction to ISTIO Service Mesh &amp; its Architecture!</title>
+        <link rel="stylesheet" href="https://static.licdn.com/aero-v1/sc/h/4h8mvmsteh4b3o2m2qklqs5on">
+        
+    
+    
+    
+
+    <meta name="description" content="#kubernetes #servicemesh #awsdevops What is istio…? Istio is an open-source service mesh platform that provides a unified management plane for distributed microservice architectures. It was developed by Google, IBM, and Lyft, and is now a part of the Cloud Native Computing Foundation (CNCF).">
+    <meta property="og:title" content="An Introduction to ISTIO Service Mesh &amp; its Architecture!">
+    <meta property="og:description" content="#kubernetes #servicemesh #awsdevops What is istio…? Istio is an open-source service mesh platform that provides a unified management plane for distributed microservice architectures. It was developed by Google, IBM, and Lyft, and is now a part of the Cloud Native Computing Foundation (CNCF).">
+    <meta property="og:image" content="https://media.licdn.com/dms/image/D5612AQHYCkPFV6rMMA/article-cover_image-shrink_720_1280/0/1681636898116?e=2147483647&amp;v=beta&amp;t=pTO7ZGbStsegGue2AqGcYEIlAYn56VvldgtnvfVyWLY">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://www.linkedin.com/pulse/introduction-istio-service-mesh-its-architecture-shiva-g">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@LinkedInEditors">
+    <meta name="twitter:title" content="An Introduction to ISTIO Service Mesh &amp; its Architecture!">
+    <meta name="twitter:description" content="#kubernetes #servicemesh #awsdevops What is istio…? Istio is an open-source service mesh platform that provides a unified management plane for distributed microservice architectures. It was developed by Google, IBM, and Lyft, and is now a part of the Cloud Native Computing Foundation (CNCF).">
+    <meta name="twitter:image" content="https://media.licdn.com/dms/image/D5612AQHYCkPFV6rMMA/article-cover_image-shrink_720_1280/0/1681636898116?e=2147483647&amp;v=beta&amp;t=pTO7ZGbStsegGue2AqGcYEIlAYn56VvldgtnvfVyWLY">
+    <meta name="robots" content="noarchive, max-image-preview:large">
+    <meta name="appId">
+      <meta name="twitter:label1" content="Written by">
+      <meta name="twitter:data1" content="Shiva G">
+      <meta name="twitter:label2" content="Reading time">
+      <meta name="twitter:data2" content="3 min read">
+
+    <meta name="clientSideIngraphs" content="1" data-gauge-metric-endpoint="/pulse/api/ingraphs/gauge" data-counter-metric-endpoint="/pulse/api/ingraphs/counter">
+  
+          
+    
+      <script type="application/ld+json">
+        {"@context":"http://schema.org","@type":"Article","headline":"#kubernetes #servicemesh #awsdevops What is istio…? Istio is an open-source service mesh platform that provides a unified management plane for distributed microservice architectures. It was developed by Google, IBM, and Lyft, and is now a part of the Cloud Native Computing Foundation (CNCF).","url":"https://www.linkedin.com/pulse/introduction-istio-service-mesh-its-architecture-shiva-g","publisher":null,"name":"An Introduction to ISTIO Service Mesh & its Architecture!","commentCount":0,"interactionStatistic":[{"interactionType":"http://schema.org/LikeAction","userInteractionCount":2,"@type":"InteractionCounter"},{"interactionType":"http://schema.org/CommentAction","userInteractionCount":0,"@type":"InteractionCounter"}],"author":{"name":"Shiva G","url":"https://in.linkedin.com/in/shiva-g-51b562222","image":"https://media.licdn.com/dms/image/C4E03AQHu77FGppJOJw/profile-displayphoto-shrink_400_400/0/1663658088356?e=1701907200&v=beta&t=lGm0WXn4ESTD34NSZ_eFHm4vn5FZsoHYYGHANEzIBzc","@type":"Person"},"datePublished":1681637068000,"mainEntityOfPage":"https://www.linkedin.com/pulse/introduction-istio-service-mesh-its-architecture-shiva-g","isAccessibleForFree":true,"image":{"url":"https://media.licdn.com/dms/image/D5612AQHYCkPFV6rMMA/article-cover_image-shrink_720_1280/0/1681636898116?e=2147483647&v=beta&t=pTO7ZGbStsegGue2AqGcYEIlAYn56VvldgtnvfVyWLY","@type":"ImageObject"}}
+      </script>
+  
+  
+      
+<!---->      </head>
+      <body dir="ltr">
+<!----><!---->          
+      
+    <div id="artdeco-global-alert-container" aria-live="assertive" role="alert" class="global-alert-banner">
+<!---->    </div>
+      <div id="artdeco-global-alerts-cls-offset">
+<!---->      </div>
+  
+  
+
+        
+          
+    
+    
+    
+    <code id="google-one-tap-enabled" style="display: none"><!--true--></code>
+    <form class="google-auth" action="https://www.linkedin.com/uas/login-submit" method="post">
+      <input name="loginCsrfParam" value="615f55fb-a872-4ec0-8e2e-ad1695edc174" type="hidden">
+
+        <input name="session_redirect" value="https://www.linkedin.com/pulse/introduction-istio-service-mesh-its-architecture-shiva-g" type="hidden">
+
+      <input name="trk" value="pulse-article_google-one-tap-submit" type="hidden">
+<!---->      
+    <div class="loader loader--full-screen">
+      <div class="loader__container mb-2 overflow-hidden">
+        <icon class="loader__icon inline-block loader__icon--default text-color-progress-loading" data-delayed-url="https://static.licdn.com/aero-v1/sc/h/ddi43qwelxeqjxdd45pe3fvs1" data-svg-class-name="loader__icon-svg--large fill-currentColor h-[60px] min-h-[60px] w-[60px] min-w-[60px]"></icon>
+      </div>
+    </div>
+  
+    </form>
+
+    <script data-delayed-url="https://static.licdn.com/aero-v1/sc/h/8m736dfzskmdn6bwwqz67iiki" data-module-id="google-gsi-lib"></script>
+    <code id="enableGoogleAutoSelect" style="display: none"><!--true--></code>
+    <code id="googleAuthLibraryPath" style="display: none"><!--"https://static.licdn.com/aero-v1/sc/h/8m736dfzskmdn6bwwqz67iiki"--></code>
+    <code id="isLinkedInAppWebView" style="display: none"><!--false--></code>
+    <code id="isTermsAndConditionsSkipEnabledOneTap" style="display: none"><!--false--></code>
+  
+          
+  <code id="isGuest" style="display: none"><!--true--></code>
+  <code id="isLite" style="display: none"><!--false--></code>
+  <code id="articleViewEventData" style="display: none"><!--"{\"articleId\":7053293199506747000,\"authorId\":938971751,\"linkedInArticleUrn\":\"urn:li:linkedInArticle:7053293199506747392\",\"articleUrn\":\"urn:li:article:7429358095237608957\"}"--></code>
+  <code id="articleUrn" style="display: none"><!--"urn:li:linkedInArticle:7053293199506747392"--></code>
+    <code id="legacyArticleUrn" style="display: none"><!--"urn:li:article:7429358095237608957"--></code>
+  
+              
+        
+    
+      <code id="isClsFixActive" style="display: none"><!--true--></code>
+      
+    
+
+    <a href="#main-content" class="skip-link btn-md btn-primary absolute z-11 -top-[100vh] focus:top-0">
+      Skip to main content
+    </a>
+  
+    <header class="header base-detail-page__header px-mobile-container-padding bg-color-background-container global-alert-offset sticky-header">
+      
+        
+
+    
+    
+    
+    
+
+    <nav class="nav pt-1.5 pb-2 flex items-center justify-between relative flex-nowrap mamabear:flex-wrap mamabear:gap-y-1 babybear:flex-wrap babybear:py-1.5
+         nav--minified-mobile babybear:flex-wrap" aria-label="Primary">
+
+      <a href="/?trk=article-ssr-frontend-pulse_nav-header-logo" class="nav__logo-link link-no-visited-state z-1 mr-auto babybear:z-0 babybear:mr-0 babybear:flex-1 hover:no-underline focus:no-underline active:no-underline" data-tracking-control-name="article-ssr-frontend-pulse_nav-header-logo" data-tracking-will-navigate>
+          
+              
+    
+    <span class="sr-only">LinkedIn</span>
+      <icon class="nav-logo--inbug flex text-color-brand
+          papabear:hidden mamabear:hidden" data-svg-class-name="h-[34px] w-[34px] babybear:h-[27px] babybear:w-[27px]" data-delayed-url="https://static.licdn.com/aero-v1/sc/h/4zqr0f9jf98vi2nkijyc3bex2"></icon>
+      <icon class="block text-color-brand w-[84px] h-[21px] papabear:w-[135px] papabear:h-[34px]
+          babybear:hidden" data-test-id="nav-logo" data-delayed-url="https://static.licdn.com/aero-v1/sc/h/8fkga714vy9b2wk5auqo5reeb"></icon>
+  
+          
+      </a>
+
+<!---->
+        
+    
+    
+    
+    
+    
+    
+    <ul class="top-nav-menu flex items-center mr-0.5 babybear:hidden mamabear:hidden
+        after:up-down-divider after:!h-[37px]
+         nav__menu order-3">
+        <li class>
+          
+    <a href="https://www.linkedin.com/pulse/topics/home/?trk=article-ssr-frontend-pulse_guest_nav_menu_articles" data-tracking-control-name="article-ssr-frontend-pulse_guest_nav_menu_articles" data-tracking-will-navigate class="top-nav-link flex justify-center items-center h-[52px] hover:text-color-text visited:hover:text-color-text hover:no-underline
+        w-[64px]
+        flex-col mx-1
+        text-color-text-secondary visited:text-color-text-secondary">
+      <icon class="top-nav-link__icon flex h-3 w-3 flex-shrink-0 " data-delayed-url="https://static.licdn.com/aero-v1/sc/h/6ulnj3n2ijcmhej768y6oj1hr">
+      </icon>
+      <span class="top-nav-link__label-text font-sans text-xs leading-regular text-center
+          font-regular">
+        Articles
+      </span>
+    </a>
+  
+        </li>
+        <li class>
+          
+    <a href="https://www.linkedin.com/pub/dir/+/+?trk=article-ssr-frontend-pulse_guest_nav_menu_people" data-tracking-control-name="article-ssr-frontend-pulse_guest_nav_menu_people" data-tracking-will-navigate class="top-nav-link flex justify-center items-center h-[52px] hover:text-color-text visited:hover:text-color-text hover:no-underline
+        w-[64px]
+        flex-col mx-1
+        text-color-text-secondary visited:text-color-text-secondary">
+      <icon class="top-nav-link__icon flex h-3 w-3 flex-shrink-0 " data-delayed-url="https://static.licdn.com/aero-v1/sc/h/7kb6sn3tm4cx918cx9a5jlb0">
+      </icon>
+      <span class="top-nav-link__label-text font-sans text-xs leading-regular text-center
+          font-regular">
+        People
+      </span>
+    </a>
+  
+        </li>
+        <li class>
+          
+    <a href="https://www.linkedin.com/learning/search?trk=article-ssr-frontend-pulse_guest_nav_menu_learning" data-tracking-control-name="article-ssr-frontend-pulse_guest_nav_menu_learning" data-tracking-will-navigate class="top-nav-link flex justify-center items-center h-[52px] hover:text-color-text visited:hover:text-color-text hover:no-underline
+        w-[64px]
+        flex-col mx-1
+        text-color-text-secondary visited:text-color-text-secondary">
+      <icon class="top-nav-link__icon flex h-3 w-3 flex-shrink-0 " data-delayed-url="https://static.licdn.com/aero-v1/sc/h/8wykgzgbqy0t3fnkgborvz54u">
+      </icon>
+      <span class="top-nav-link__label-text font-sans text-xs leading-regular text-center
+          font-regular">
+        Learning
+      </span>
+    </a>
+  
+        </li>
+        <li class>
+          
+    <a href="https://www.linkedin.com/jobs/search?trk=article-ssr-frontend-pulse_guest_nav_menu_jobs" data-tracking-control-name="article-ssr-frontend-pulse_guest_nav_menu_jobs" data-tracking-will-navigate class="top-nav-link flex justify-center items-center h-[52px] hover:text-color-text visited:hover:text-color-text hover:no-underline
+        w-[64px]
+        flex-col mx-1
+        text-color-text-secondary visited:text-color-text-secondary">
+      <icon class="top-nav-link__icon flex h-3 w-3 flex-shrink-0 " data-delayed-url="https://static.licdn.com/aero-v1/sc/h/92eb1xekc34eklevj0io6x4ki">
+      </icon>
+      <span class="top-nav-link__label-text font-sans text-xs leading-regular text-center
+          font-regular">
+        Jobs
+      </span>
+    </a>
+  
+        </li>
+    </ul>
+  
+
+      <div class="nav__cta-container order-3 flex gap-x-1 justify-end min-w-[100px] flex-nowrap flex-shrink-0 babybear:flex-wrap flex-2">
+        
+    
+    <a class="nav__button-tertiary btn-md btn-tertiary" href="https://www.linkedin.com/signup/cold-join?session_redirect=%2Fpulse%2Fintroduction-istio-service-mesh-its-architecture-shiva-g&amp;trk=article-ssr-frontend-pulse_nav-header-join" data-tracking-control-name="article-ssr-frontend-pulse_nav-header-join" data-test-live-nav-primary-cta data-tracking-will-navigate>
+      Join now
+    </a>
+
+
+        
+  
+  
+
+      
+      <a class="nav__button-secondary btn-md btn-secondary-emphasis" href="https://www.linkedin.com/uas/login?session_redirect=%2Fpulse%2Fintroduction-istio-service-mesh-its-architecture-shiva-g&amp;fromSignIn=true&amp;trk=article-ssr-frontend-pulse_nav-header-signin" data-tracking-control-name="article-ssr-frontend-pulse_nav-header-signin" data-tracking-will-navigate>
+          Sign in
+      </a>
+
+
+          <a aria-label="Sign in" class="nav__link-person papabear:hidden mamabear:hidden" data-tracking-control-name="article-ssr-frontend-pulse_nav-header-signin" data-tracking-will-navigate href="https://www.linkedin.com/uas/login?session_redirect=%2Fpulse%2Fintroduction-istio-service-mesh-its-architecture-shiva-g&amp;fromSignIn=true&amp;trk=article-ssr-frontend-pulse_nav-header-signin">
+            
+      <img class="inline-block relative
+          rounded-[50%]
+          w-4 h-4
+          bg-color-entity-ghost-background" data-delayed-url="https://static.licdn.com/aero-v1/sc/h/9c8pery4andzj6ohjkjp54ma2" data-ghost-classes="bg-color-entity-ghost-background" data-ghost-url="https://static.licdn.com/aero-v1/sc/h/9c8pery4andzj6ohjkjp54ma2" alt>
+  
+          </a>
+      </div>
+
+<!---->
+<!---->    </nav>
+  
+      
+    </header>
+
+    
+<!---->      
+
+<!---->
+    <main class="main papabear:flex papabear:w-content-max-w papabear:mx-auto papabear:pt-desktop-content-top-margin mamabear:pt-desktop-content-top-margin
+        " id="main-content" role="main">
+      <section class="core-rail mx-auto papabear:w-core-rail-width mamabear:max-w-[790px] babybear:max-w-[790px]">
+        
+        
+      
+
+        <div class="details mx-details-container-padding">
+          
+        
+            
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+<!---->    <code id="isGuest" style="display: none"><!--true--></code>
+    <article class="article-main relative flex-grow pulse">
+<!----><!---->          
+    <figure class="cover-img">
+<!---->      <div class="cover-img__image-frame relative w-full overflow-hidden pb-[calc((134/782)*100%)]">
+        <div class="cover-img__image-position absolute top-0 right-0 bottom-0 left-0
+            ">
+            <img class="cover-img__image relative w-full h-full object-cover" src="https://media.licdn.com/dms/image/D5612AQHYCkPFV6rMMA/article-cover_image-shrink_720_1280/0/1681636898116?e=2147483647&amp;v=beta&amp;t=pTO7ZGbStsegGue2AqGcYEIlAYn56VvldgtnvfVyWLY" fetchpriority="high" data-embed-id="cover-image" alt="An Introduction to ISTIO Service Mesh &amp; its Architecture!">
+        </div>
+      </div>
+<!---->    </figure>
+  
+      
+      <header>
+        <section class="core-section-container relative my-3">
+            
+            
+  <h1 class="pulse-title text-display-md text-color-text lg:text-display-lg font-bold w-11/12">An Introduction to ISTIO Service Mesh &amp; its Architecture!</h1>
+
+              
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+      <div class="ellipsis-menu absolute right-0 top-0">
+        
+
+    
+
+    <div class="collapsible-dropdown flex items-center relative hyphens-auto">
+          
+            <button class="ellipsis-menu__trigger
+                collapsible-dropdown__button btn-md btn-tertiary cursor-pointer
+                !py-[6px] !px-1 flex items-center rounded-[50%]
+                
+                " aria-expanded="false" aria-label="Open menu" data-tracking-control-name="article-ssr-frontend-pulse_ellipsis-menu-trigger">
+              <icon class="ellipsis-menu__trigger-icon m-0 p-0 centered-icon" data-delayed-url="https://static.licdn.com/aero-v1/sc/h/671xosfpvk4c0kqtyl87hashi"></icon>
+            </button>
+          
+
+        <ul class="collapsible-dropdown__list hidden container-raised absolute w-auto overflow-y-auto flex-col items-stretch z-1 bottom-auto top-[100%]" role="menu" tabindex="-1">
+          
+              
+
+                <li class="ellipsis-menu__item border-t-1 border-solid border-color-border-low-emphasis first-of-type:border-none flex">
+                  
+
+    
+    
+
+    
+
+    
+
+    <a href="/uas/login?session_redirect=https%3A%2F%2Fwww.linkedin.com%2Fpulse%2Fintroduction-istio-service-mesh-its-architecture-shiva-g&amp;trk=article-ssr-frontend-pulse_ellipsis-menu-semaphore-sign-in-redirect&amp;guestReportContentType=PONCHO_ARTICLE&amp;_f=guest-reporting" data-tracking-control-name="article-ssr-frontend-pulse_ellipsis-menu-semaphore-sign-in-redirect" data-tracking-will-navigate data-item-type="semaphore" data-semaphore-content-type="PONCHO_ARTICLE" data-semaphore-content-urn="urn:li:linkedInArticle:7053293199506747392" data-semaphore-tracking-prefix="article-ssr-frontend-pulse_ellipsis-menu-semaphore" data-is-logged-in="false" data-modal="semaphore__toggle" class="semaphore__toggle visited:text-color-text-secondary ellipsis-menu__semaphore ellipsis-menu__item-button flex items-center w-full p-1 cursor-pointer font-sans text-sm font-bold link-styled focus:link-styled link:no-underline active:bg-color-background-container-tint focus:bg-color-background-container-tint hover:bg-color-background-container-tint outline-offset-[-2px]">
+<!---->        
+                      <icon class="ellipsis-menu__item-icon text-color-text h-[24px] w-[24px] mr-1" data-delayed-url="https://static.licdn.com/aero-v1/sc/h/iq0x9q37wj214o129ai1yjut">
+                      </icon>
+                      Report this article
+                    
+    </a>
+
+<!---->  
+                </li>
+<!---->          
+        </ul>
+
+<!---->    </div>
+  
+
+      </div>
+  
+        
+
+          <div class="core-section-container__content break-words">
+            
+<!----><!---->            
+    
+    
+
+    
+    
+    
+      <div class="base-card relative w-full hover:no-underline focus:no-underline base-card--link base-main-card flex flex-wrap py-2 pr-2 babybear:pr-0
+        
+        base-main-card--link publisher-author-card">
+        
+
+        <a class="base-card__full-link absolute top-0 right-0 bottom-0 left-0 p-0 z-[2]" href="https://in.linkedin.com/in/shiva-g-51b562222?trk=article-ssr-frontend-pulse_publisher-author-card" data-tracking-control-name="article-ssr-frontend-pulse_publisher-author-card" data-tracking-will-navigate>
+          
+          <span class="sr-only">
+              
+          
+        Shiva G
+      
+      
+          </span>
+        </a>
+
+      
+          
+      <img class="inline-block relative
+          rounded-[50%]
+          w-6 h-6
+          " data-delayed-url="https://media.licdn.com/dms/image/C4E03AQHu77FGppJOJw/profile-displayphoto-shrink_400_400/0/1663658088356?e=1701907200&amp;v=beta&amp;t=lGm0WXn4ESTD34NSZ_eFHm4vn5FZsoHYYGHANEzIBzc" data-ghost-classes="bg-color-entity-ghost-background" data-ghost-url="https://static.licdn.com/aero-v1/sc/h/9c8pery4andzj6ohjkjp54ma2" alt="Shiva G">
+  
+
+        <div class="base-main-card__info self-center ml-1 flex-1 relative break-words papabear:min-w-0 mamabear:min-w-0 babybear:w-full">
+          <h3 class="base-main-card__title font-sans text-[18px] font-bold text-color-text overflow-hidden
+              ">
+            
+        Shiva G
+      
+          </h3>
+          
+
+            <h4 class="base-main-card__subtitle body-text text-color-text overflow-hidden">
+              
+          👨💻 DevOps Engineer in CodeCrux Web Technologies Hyderabad , Passionate about #🥇Jenkins #☸️kubernetes #🐱github #🔧Razorops #🐹Argocd
+      
+            </h4>
+
+<!---->
+              <div class="body-text text-color-text-low-emphasis base-main-card__metadata">
+                
+          Published Apr 16, 2023
+      
+              </div>
+        </div>
+
+          <div class="base-main-card__ctas z-[3] self-center ml-3 babybear:ml-1 babybear:self-start">
+            
+          <a class="base-main-card__cta btn-sm btn-secondary" href="https://www.linkedin.com/signup/cold-join?session_redirect=%2Fpulse%2Fintroduction-istio-service-mesh-its-architecture-shiva-g&amp;trk=article-ssr-frontend-pulse_publisher-author-card" data-tracking-control-name="article-ssr-frontend-pulse_publisher-author-card" data-tracking-will-navigate>
+            + Follow
+          </a>
+      
+          </div>
+      
+    
+      </div>
+  
+  
+  
+  
+        
+          </div>
+        </section>
+      </header>
+      
+            <div class="article-main__content max-w-[744px]"><h2><strong>#kubernetes</strong> <strong>#servicemesh</strong> <strong>#awsdevops</strong> </h2><p><strong>What is istio…?</strong></p><p>	Istio is an open-source service mesh platform that provides a unified management plane for distributed microservice architectures. It was developed by Google, IBM, and Lyft, and is now a part of the Cloud Native Computing Foundation (CNCF).</p><p>Istio allows developers to decouple service management and traffic control from the application code, making it easier to implement and manage complex microservice architectures. It provides a range of features such as load balancing, traffic routing, service discovery, and security.</p><p>With Istio, developers can easily configure and manage a network of microservices, as well as monitor and analyze traffic between services to gain insights into performance and behavior. Istio can also be integrated with other popular tools and platforms, such as Kubernetes, to provide a complete solution for building and managing cloud-native applications.</p><p><br></p><p>Istio is an open-source service mesh platform that provides a configurable infrastructure layer for managing, securing, and observing microservices. By adding a service mesh layer, Istio helps to address the challenges of microservices architectures, such as network complexity, service discovery, traffic management, and security.</p><p>Istio service mesh enables developers to configure traffic routing, load balancing, fault tolerance, and other features without changing the application code. It provides a centralized control plane that enables operators to enforce policies and monitor service performance. Istio also provides features such as mutual TLS authentication, authorization, and encryption to ensure the security of microservices communications.</p><p>In summary, Istio service mesh provides a powerful way to control how microservices share data with each other, making it easier to develop and manage complex microservices architectures.</p><p><strong>Istio on kubernetes&nbsp;</strong></p><p>	When Istio is deployed in a Kubernetes cluster, it intercepts all network traffic between microservices and provides additional features such as load balancing, traffic routing, and fault tolerance. Istio also provides security features such as authentication, authorization, and encryption to protect microservices from attacks.</p><p>	In addition, Istio provides powerful monitoring and tracing capabilities that enable developers to gain insights into the behavior of their microservices and identify performance issues. Istio also integrates with other Kubernetes components such as Kubernetes Ingress, enabling developers to manage external traffic to their services.</p><p>	Overall, Istio Kubernetes provides a comprehensive solution for building and managing cloud-native applications on Kubernetes, simplifying the development and operation of distributed microservice architectures.</p><p><br></p><h2><strong>ISTIO Architecture!</strong></h2><p><strong>Data plane :</strong> The "Data Plane" is an important part of the Istio service mesh. It includes special helpers called "Envoy" that work like traffic cops for communication between microservices. These helpers are installed as extra programs called "sidecars". They help manage and control all communication between the microservices.</p><p><strong>Control plane :</strong> The "Control Plane" is responsible for setting up and managing the helpers in the "Data Plane".</p><p><br></p><figure class="slate-resizable-image-embed slate-image-embed__resize-full-width"><div></div><div></div><img alt="No alt text provided for this image" data-media-urn="" data-li-src="https://media.licdn.com/dms/image/D5612AQFh1KX8rIEDlA/article-inline_image-shrink_1000_1488/0/1681639057806?e=1701302400&amp;v=beta&amp;t=UscwtpxXBRJGcyQfIzid_vk1zkxAi3Ix7q45QkZWct4" src="//:0"></figure><p><br></p><p>The Istio architecture consists of several components that work together to provide a service mesh platform for microservices. The main components of the Istio architecture are:</p><ol><li>Envoy: Envoy is a high-performance proxy that is deployed as a sidecar container alongside each microservice. It intercepts all traffic to and from the microservice, and handles traffic routing, load balancing, and other functions.</li><li>Pilot: Pilot is the traffic management component of Istio. It manages the configuration and deployment of Envoy proxies, and provides service discovery, traffic routing, and load balancing.</li><li>Mixer: Mixer is the policy enforcement component of Istio. It enforces policies for authentication, authorization, rate limiting, and quota management, and collects telemetry data for monitoring and tracing.</li><li>Citadel: Citadel is the security component of Istio. It provides strong service-to-service authentication using mutual TLS, and enables encryption of traffic between microservices.</li><li>Galley: Galley is the configuration validation and ingestion component of Istio. It validates and ingests configuration changes, and ensures that the configuration is consistent across the service mesh.</li><li>Telemetry: Telemetry provides observability and monitoring capabilities for Istio. It collects data on traffic, latency, errors, and other metrics, and enables tracing of requests across multiple microservices.</li></ol><p>Overall, these components work together to provide a comprehensive service mesh platform for managing, securing, and observing microservices.</p></div>
+          <!----><!----><!----><!---->        
+  
+<!---->    </article>
+  
+<!---->            
+    
+    
+
+      <code id="ugcPostUrl" style="display: none"><!--"https://www.linkedin.com/feed/update/urn:li:ugcPost:7053297081800671232"--></code>
+      <code id="ugcPost" style="display: none"><!--"urn:li:ugcPost:7053297081800671232"--></code>
+      
+    
+      <code id="disableLinkedinShareRedirectLink" style="display: none"><!--true--></code>
+      <code id="ugcPostUrn" style="display: none"><!--"urn:li:ugcPost:7053297081800671232"--></code>
+      <code id="signInUrl" style="display: none"><!--"https://www.linkedin.com/signup/cold-join?session_redirect=%2Fpulse%2Fintroduction-istio-service-mesh-its-architecture-shiva-g"--></code>
+
+<!---->  
+    <div class="article-social-activity z-[201]
+        x-social-activity-wrapper sticky bottom-0 flex justify-center border-t-1 border-solid border-color-border-faint bg-color-background-container
+        " data-impression-id="article-ssr-frontend-pulse_x-social-details">
+<!---->      <div class="x-social-activity social-details x-social-activity-left flex w-full max-w-x-article-width-small justify-between lg:max-w-x-article-width">
+        <div class="flex x-social-activity-left">
+          
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+
+    <div class="reactions-menu flex flex-row relative items-center justify-center select-none [-webkit-user-select:none] pointer-events-auto basis-full" data-feed-control="article-ssr-frontend-x-article_x-social-details_like-toggle_reactions-cta">
+        <a class="reactions-menu__link text-color-text social-action-bar__button relative h-6 cursor-pointer w-full basis-full" href="https://www.linkedin.com/signup/cold-join?session_redirect=%2Fpulse%2Fintroduction-istio-service-mesh-its-architecture-shiva-g&amp;trk=article-ssr-frontend-pulse_x-social-details_like-toggle_like-cta" target="_blank" data-tracking-control-name="article-ssr-frontend-pulse_x-social-details_like-toggle_reactions-cta" data-parent-urn="urn:li:ugcPost:7053297081800671232" data-tracking-will-navigate data-feed-control="article-ssr-frontend-x-article_x-social-details_like-toggle_reactions-cta">
+          
+
+<!---->    <div class="like-button-default flex flex-row items-center ">
+      <icon class="social-action-bar__icon" data-svg-class-name="social-action-bar__icon--svg" data-delayed-url="https://static.licdn.com/aero-v1/sc/h/e2cf8dn8tvjcu9gl3qcxhw31q">
+      </icon>
+      <span class="social-action-bar__button-text">Like</span>
+    </div>
+
+        </a>
+    </div>
+      <template id="selected-reaction">
+        <div>
+            
+  <div class="selected-reaction--LIKE flex flex-row items-center">
+    <img class="inline-block align-middle relative w-3 h-3 mr-1 babybear:mr-0" alt="Like" aria-hidden="true" data-delayed-url="https://static.licdn.com/aero-v1/sc/h/7ze70iqo2l1rn7hwfoykiwjod">
+    <span class="social-action-bar__button-text">Like</span>
+  </div>
+
+            
+  <div class="selected-reaction--PRAISE flex flex-row items-center">
+    <img class="inline-block align-middle relative w-3 h-3 mr-1 babybear:mr-0" alt="Celebrate" aria-hidden="true" data-delayed-url="https://static.licdn.com/aero-v1/sc/h/czva5w81r4b0pjr7sh5r4nbw9">
+    <span class="social-action-bar__button-text">Celebrate</span>
+  </div>
+
+            
+  <div class="selected-reaction--APPRECIATION flex flex-row items-center">
+    <img class="inline-block align-middle relative w-3 h-3 mr-1 babybear:mr-0" alt="Support" aria-hidden="true" data-delayed-url="https://static.licdn.com/aero-v1/sc/h/8kvqqk9m1eu5ffqkdlum1ka1m">
+    <span class="social-action-bar__button-text">Support</span>
+  </div>
+
+            
+  <div class="selected-reaction--EMPATHY flex flex-row items-center">
+    <img class="inline-block align-middle relative w-3 h-3 mr-1 babybear:mr-0" alt="Love" aria-hidden="true" data-delayed-url="https://static.licdn.com/aero-v1/sc/h/5yukss5d7kh4xrbd5642z6tk0">
+    <span class="social-action-bar__button-text">Love</span>
+  </div>
+
+            
+  <div class="selected-reaction--INTEREST flex flex-row items-center">
+    <img class="inline-block align-middle relative w-3 h-3 mr-1 babybear:mr-0" alt="Insightful" aria-hidden="true" data-delayed-url="https://static.licdn.com/aero-v1/sc/h/es4dlamdpym2zbuhglwx2cuz0">
+    <span class="social-action-bar__button-text">Insightful</span>
+  </div>
+
+            
+  <div class="selected-reaction--ENTERTAINMENT flex flex-row items-center">
+    <img class="inline-block align-middle relative w-3 h-3 mr-1 babybear:mr-0" alt="Funny" aria-hidden="true" data-delayed-url="https://static.licdn.com/aero-v1/sc/h/e0rqrq0h755yqqu59fy047ayt">
+    <span class="social-action-bar__button-text">Funny</span>
+  </div>
+
+        </div>
+      </template>
+  
+  
+            <div class="relative flex select-none flex-row items-center justify-center">
+              <a class="social-action-bar__button basis-full !rounded-none" href="https://www.linkedin.com/signup/cold-join?session_redirect=%2Fpulse%2Fintroduction-istio-service-mesh-its-architecture-shiva-g&amp;trk=article-ssr-frontend-pulse_comment-cta" data-tracking-control-name="article-ssr-frontend-pulse_x-social-details_comment-cta" data-tracking-will-navigate>
+                <icon class="social-action-bar__icon" data-svg-class-name="social-action-bar__icon--svg" data-delayed-url="https://static.licdn.com/aero-v1/sc/h/ady0n422w6b1vpkbkwpfpxt8t">
+                </icon>
+                <span class="social-action-bar__button-text">
+                  Comment
+                </span>
+              </a>
+            </div>
+          
+      
+
+    
+    
+    
+    
+
+    <code id="i18n_copy_cta_message_success" style="display: none"><!--"Link copied to clipboard."--></code>
+    <code id="i18n_copy_cta_message_error" style="display: none"><!--"Something went wrong while copying to clipboard."--></code>
+
+    
+
+    
+
+    <div class="collapsible-dropdown flex items-center relative hyphens-auto social-share inline-block relative select-none x-social-share basis-full" data-share-message="Share" data-share-url="https://www.linkedin.com/pulse/introduction-istio-service-mesh-its-architecture-shiva-g?utm_source=share&amp;utm_medium=guest_desktop" data-feed-control="article-ssr-frontend-x-article_x-social-details_social-share-intent_social-share_main_button" data-feed-action-category="EXPAND" data-feed-action-type="openShareMenu">
+<!---->
+        <ul class="collapsible-dropdown__list hidden container-raised absolute w-auto overflow-y-auto flex-col items-stretch z-1 bottom-[100%] top-auto" role="menu" tabindex="-1">
+          
+        
+  <li>
+    <button data-tracking-control-name="article-ssr-frontend-pulse_x-social-details_social-share-intent_social-share_copy" class="social-share__item social-share-item" data-share-service="copy">
+      <icon class="social-share__item-icon" data-delayed-url="https://static.licdn.com/aero-v1/sc/h/aup4g97pdky3ff73gv9lyhjvx"></icon>
+      <span class="social-share__item-text pl-1">Copy</span>
+    </button>
+  </li>
+
+
+        
+  <li>
+    <button data-tracking-control-name="article-ssr-frontend-pulse_x-social-details_social-share-intent_social-share_linkedin" class="social-share__item social-share-item" data-share-service="linkedin">
+      <icon class="social-share__item-icon" data-delayed-url="https://static.licdn.com/aero-v1/sc/h/2uoxvguhsfspfnmr6tvfuyw4y" data-svg-class-name="text-color-text"></icon>
+      <span class="social-share__item-text pl-1">LinkedIn</span>
+    </button>
+  </li>
+
+          
+  <li>
+    <button data-tracking-control-name="article-ssr-frontend-pulse_x-social-details_social-share-intent_social-share_facebook" class="social-share__item social-share-item" data-share-service="facebook">
+      <icon class="social-share__item-icon" data-delayed-url="https://static.licdn.com/aero-v1/sc/h/5xkjpykqkamtr6skk0vodqwd2"></icon>
+      <span class="social-share__item-text pl-1">Facebook</span>
+    </button>
+  </li>
+
+          
+  <li>
+    <button data-tracking-control-name="article-ssr-frontend-pulse_x-social-details_social-share-intent_social-share_twitter" class="social-share__item social-share-item" data-share-service="twitter">
+      <icon class="social-share__item-icon" data-delayed-url="https://static.licdn.com/aero-v1/sc/h/4bmfmbwr1b97362o29qmjo1zj"></icon>
+      <span class="social-share__item-text pl-1">Twitter</span>
+    </button>
+  </li>
+
+<!---->      
+        </ul>
+
+          
+        <button aria-expanded="false" class="social-share__button social-share__button-square
+            social-share-button social-action-bar__button
+            basis-full
+            
+            social-share-button--square" aria-label data-tracking-control-name="article-ssr-frontend-pulse_x-social-details_social-share-intent_social-share_main_button">
+          <icon class="social-share__button-icon" data-delayed-url="https://static.licdn.com/aero-v1/sc/h/852gyy4s01pfis5qf9k99s6d2" data-svg-class-name="social-share-button-icon social-action-bar__icon--svg"></icon>
+            <span class="social-share__button-text-square social-action-bar__button-text">
+              Share
+            </span>
+        </button>
+      
+    </div>
+  
+  
+  
+        </div>
+          
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+      <div class="flex items-center font-sans text-sm babybear:text-xs">
+            
+      <a href="https://www.linkedin.com/signup/cold-join?session_redirect=%2Fpulse%2Fintroduction-istio-service-mesh-its-architecture-shiva-g&amp;trk=article-ssr-frontend-pulse_x-social-details_likes-count_social-actions-reactions" target="_blank" data-tracking-control-name="article-ssr-frontend-pulse_x-social-details_likes-count_social-actions-reactions" data-tracking-will-navigate class="flex items-center font-normal text-color-text-low-emphasis no-underline visited:text-color-text-low-emphasis  my-1" aria-label="2 Reactions" data-test-id="social-actions__reactions" data-id="social-actions__reactions" data-num-reactions="2" data-singular="%numReactions%" data-plural="%numReactions%" data-entity-urn="urn:li:ugcPost:7053297081800671232">
+        
+                    <img alt data-reaction-type="LIKE" data-delayed-url="https://static.licdn.com/aero-v1/sc/h/9sun4diznbhgyelaeryxy75ur" height="16px" width="16px">
+
+              <span class="font-normal ml-0.5" data-test-id="social-actions__reaction-count">
+                    2
+              </span>
+            
+      </a>
+  
+                  <code id="social-actions__reaction-image-APPRECIATION" style="display: none"><!--"https://static.licdn.com/aero-v1/sc/h/cib97epu77mrzque5gqlzjgaw"--></code>
+<!----><!---->                  <code id="social-actions__reaction-image-EMPATHY" style="display: none"><!--"https://static.licdn.com/aero-v1/sc/h/37hg81qnm85dsy5mbqfifg9qs"--></code>
+                  <code id="social-actions__reaction-image-ENTERTAINMENT" style="display: none"><!--"https://static.licdn.com/aero-v1/sc/h/e7ppwfmo0if15fgie4q5r4us4"--></code>
+<!---->                  <code id="social-actions__reaction-image-INTEREST" style="display: none"><!--"https://static.licdn.com/aero-v1/sc/h/4v7dh2d6cuqm24mzps1pqzeqt"--></code>
+                  <code id="social-actions__reaction-image-LIKE" style="display: none"><!--"https://static.licdn.com/aero-v1/sc/h/9sun4diznbhgyelaeryxy75ur"--></code>
+                  <code id="social-actions__reaction-image-MAYBE" style="display: none"><!--"https://static.licdn.com/aero-v1/sc/h/4iy169rwfs5rdhspekg2r5wc6"--></code>
+                  <code id="social-actions__reaction-image-PRAISE" style="display: none"><!--"https://static.licdn.com/aero-v1/sc/h/cjrxeu0ese8oxe32kiom8kzoh"--></code>
+<!----><!---->
+<!---->      </div>
+  
+      </div>
+    </div>
+      <div class="comments__container">
+        
+    
+    
+    
+
+    <div class="comments">
+<!---->
+      
+<!---->        
+<!---->    </div>
+  
+      </div>
+      
+
+    
+    
+
+    <p class="feed-cta-banner__text border-t-1 border-color-surface-border border-solid p-3 text-center text-md text-color-text-low-emphasis">
+      To view or add a comment, <a href="https://www.linkedin.com/signup/cold-join?session_redirect=%2Fpulse%2Fintroduction-istio-service-mesh-its-architecture-shiva-g&trk=article-ssr-frontend-pulse_x-social-details_feed-cta-banner-cta" target="" aria-label="To view or add a comment, sign in" data-tracking-control-name="article-ssr-frontend-pulse_x-social-details_feed-cta-banner-cta" data-tracking-will-navigate="true" class="feed-cta-banner__link link">sign in</a>
+    </p>
+  
+  
+<!----><!---->          
+      
+        </div>
+      </section>
+      <section class="right-rail papabear:w-right-rail-width papabear:ml-column-gutter mamabear:max-w-[790px] mamabear:px-mobile-container-padding babybear:max-w-[790px] babybear:px-mobile-container-padding">
+        
+        
+<!---->              
+    
+      <section class="aside-section-container mb-4 articles-content-card">
+
+            <h2 class="aside-section-container__title section-title">
+              Others also viewed
+            </h2>
+
+<!---->
+        <div class="aside-section-container__content break-words">
+          
+          
+    
+    
+
+      <div class="show-more-less">
+<!---->
+        <ul data-max-num-to-show="6" class="show-more-less__list show-more-less__list--hide-after-6" data-impression-id="article-ssr-frontend-pulse_show-more-less">
+          
+                <li class="articles-content-card__list-item mt-3">
+    
+    
+    
+    
+      <a href="https://www.linkedin.com/pulse/istio-service-mesh-complete-setup-venkatesh-s" target="_self" data-tracking-control-name="full-link" data-tracking-will-navigate class="base-card relative w-full hover:no-underline focus:no-underline base-card--link base-aside-card flex my-1.5
+        
+        base-aside-card--link aside-article-card">
+        
+
+<!---->
+      
+            <div class="base-aside-card__media flex-shrink-0 h-[54px] mr-0.5 overflow-hidden relative w-[95px]">
+              
+        <img data-delayed-url="https://media.licdn.com/dms/image/D5612AQFcjpe7aTGIBg/article-cover_image-shrink_600_2000/0/1657732995112?e=2147483647&amp;v=beta&amp;t=BR0wV2pvLbelShbEqtv_QA6ZgcBnqqTotblsKFDtl6I" data-ghost-url="https://static.licdn.com/aero-v1/sc/h/9l8dv1r8a09nem281grvopn9l" alt>
+      
+<!---->            </div>
+
+        <div class="base-aside-card__info self-center pl-0.5 flex flex-col flex-1">
+          <h3 class="base-aside-card__title font-sans text-md font-bold text-color-text relative">
+            
+        Istio Service Mesh : Complete Setup
+      
+<!---->          </h3>
+
+<!---->
+<!---->
+<!---->
+            <div class="base-aside-card__metadata font-sans text-sm leading-open font-regular text-color-text-low-emphasis mt-0.5">
+              
+          <span class="base-aside-card__metadata-item">
+            Venkatesh S
+          </span>
+          <span class="base-aside-card__metadata-item">
+            
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+      1y
+  
+          </span>
+      
+            </div>
+
+<!---->        </div>
+      
+    
+      </a>
+  
+  
+  
+  
+  </li>
+  <li class="articles-content-card__list-item mt-3">
+    
+    
+    
+    
+      <a href="https://www.linkedin.com/pulse/how-restart-kubernetes-pods-kubectl-abhishek-rana" target="_self" data-tracking-control-name="full-link" data-tracking-will-navigate class="base-card relative w-full hover:no-underline focus:no-underline base-card--link base-aside-card flex my-1.5
+        
+        base-aside-card--link aside-article-card">
+        
+
+<!---->
+      
+            <div class="base-aside-card__media flex-shrink-0 h-[54px] mr-0.5 overflow-hidden relative w-[95px]">
+              
+        <img data-delayed-url="https://media.licdn.com/dms/image/D5612AQH7XRu6Y83z2g/article-cover_image-shrink_720_1280/0/1695215757311?e=2147483647&amp;v=beta&amp;t=a3oEIN0yJDP2kdMKJOP8XihG5wY77huz1ymJfUNlsak" data-ghost-url="https://static.licdn.com/aero-v1/sc/h/9l8dv1r8a09nem281grvopn9l" alt>
+      
+<!---->            </div>
+
+        <div class="base-aside-card__info self-center pl-0.5 flex flex-col flex-1">
+          <h3 class="base-aside-card__title font-sans text-md font-bold text-color-text relative">
+            
+        How to Restart Kubernetes Pods With Kubectl
+      
+<!---->          </h3>
+
+<!---->
+<!---->
+<!---->
+            <div class="base-aside-card__metadata font-sans text-sm leading-open font-regular text-color-text-low-emphasis mt-0.5">
+              
+          <span class="base-aside-card__metadata-item">
+            Abhishek Rana
+          </span>
+          <span class="base-aside-card__metadata-item">
+            
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+      1w
+  
+          </span>
+      
+            </div>
+
+<!---->        </div>
+      
+    
+      </a>
+  
+  
+  
+  
+  </li>
+  <li class="articles-content-card__list-item mt-3">
+    
+    
+    
+    
+      <a href="https://www.linkedin.com/pulse/devsecops-shift-left-security-abhay-kumar" target="_self" data-tracking-control-name="full-link" data-tracking-will-navigate class="base-card relative w-full hover:no-underline focus:no-underline base-card--link base-aside-card flex my-1.5
+        
+        base-aside-card--link aside-article-card">
+        
+
+<!---->
+      
+            <div class="base-aside-card__media flex-shrink-0 h-[54px] mr-0.5 overflow-hidden relative w-[95px]">
+              
+        <img data-delayed-url="https://media.licdn.com/dms/image/D4D12AQGT5HPiakkqoA/article-cover_image-shrink_600_2000/0/1681064232210?e=2147483647&amp;v=beta&amp;t=Fb2o0KinIXI02baasgMLnUb4a9HZ-DjBw6elbsv7iEs" data-ghost-url="https://static.licdn.com/aero-v1/sc/h/9l8dv1r8a09nem281grvopn9l" alt>
+      
+<!---->            </div>
+
+        <div class="base-aside-card__info self-center pl-0.5 flex flex-col flex-1">
+          <h3 class="base-aside-card__title font-sans text-md font-bold text-color-text relative">
+            
+        DevSecOps: Shift-Left Security
+      
+<!---->          </h3>
+
+<!---->
+<!---->
+<!---->
+            <div class="base-aside-card__metadata font-sans text-sm leading-open font-regular text-color-text-low-emphasis mt-0.5">
+              
+          <span class="base-aside-card__metadata-item">
+            Abhay Kumar
+          </span>
+          <span class="base-aside-card__metadata-item">
+            
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+      5mo
+  
+          </span>
+      
+            </div>
+
+<!---->        </div>
+      
+    
+      </a>
+  
+  
+  
+  
+  </li>
+  <li class="articles-content-card__list-item mt-3">
+    
+    
+    
+    
+      <a href="https://www.linkedin.com/pulse/microservices-service-mesh-abhay-kumar" target="_self" data-tracking-control-name="full-link" data-tracking-will-navigate class="base-card relative w-full hover:no-underline focus:no-underline base-card--link base-aside-card flex my-1.5
+        
+        base-aside-card--link aside-article-card">
+        
+
+<!---->
+      
+            <div class="base-aside-card__media flex-shrink-0 h-[54px] mr-0.5 overflow-hidden relative w-[95px]">
+              
+        <img data-delayed-url="https://media.licdn.com/dms/image/D4D12AQGdZE7YYn5x3Q/article-cover_image-shrink_720_1280/0/1683632532828?e=2147483647&amp;v=beta&amp;t=aPcp3Tft12I5QgbJKOPsHrcdQKu1u3QABEjA9ii-Sk4" data-ghost-url="https://static.licdn.com/aero-v1/sc/h/9l8dv1r8a09nem281grvopn9l" alt>
+      
+<!---->            </div>
+
+        <div class="base-aside-card__info self-center pl-0.5 flex flex-col flex-1">
+          <h3 class="base-aside-card__title font-sans text-md font-bold text-color-text relative">
+            
+        Microservices Architecture - Service Mesh
+      
+<!---->          </h3>
+
+<!---->
+<!---->
+<!---->
+            <div class="base-aside-card__metadata font-sans text-sm leading-open font-regular text-color-text-low-emphasis mt-0.5">
+              
+          <span class="base-aside-card__metadata-item">
+            Abhay Kumar
+          </span>
+          <span class="base-aside-card__metadata-item">
+            
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+      4mo
+  
+          </span>
+      
+            </div>
+
+<!---->        </div>
+      
+    
+      </a>
+  
+  
+  
+  
+  </li>
+  <li class="articles-content-card__list-item mt-3">
+    
+    
+    
+    
+      <a href="https://www.linkedin.com/pulse/istio-what-mesh-mukesh-verma" target="_self" data-tracking-control-name="full-link" data-tracking-will-navigate class="base-card relative w-full hover:no-underline focus:no-underline base-card--link base-aside-card flex my-1.5
+        
+        base-aside-card--link aside-article-card">
+        
+
+<!---->
+      
+            <div class="base-aside-card__media flex-shrink-0 h-[54px] mr-0.5 overflow-hidden relative w-[95px]">
+              
+        <img data-delayed-url="https://media.licdn.com/dms/image/C4D12AQGEKlLveMl9PA/article-cover_image-shrink_600_2000/0/1598041303621?e=2147483647&amp;v=beta&amp;t=k0oF7oyvJ0TDAlbnqsR9TUnK23StOAQD5lxnuxOb8C8" data-ghost-url="https://static.licdn.com/aero-v1/sc/h/9l8dv1r8a09nem281grvopn9l" alt>
+      
+<!---->            </div>
+
+        <div class="base-aside-card__info self-center pl-0.5 flex flex-col flex-1">
+          <h3 class="base-aside-card__title font-sans text-md font-bold text-color-text relative">
+            
+        Istio ,what a mesh...
+      
+<!---->          </h3>
+
+<!---->
+<!---->
+<!---->
+            <div class="base-aside-card__metadata font-sans text-sm leading-open font-regular text-color-text-low-emphasis mt-0.5">
+              
+          <span class="base-aside-card__metadata-item">
+            Mukesh Verma
+          </span>
+          <span class="base-aside-card__metadata-item">
+            
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+      3y
+  
+          </span>
+      
+            </div>
+
+<!---->        </div>
+      
+    
+      </a>
+  
+  
+  
+  
+  </li>
+  <li class="articles-content-card__list-item mt-3">
+    
+    
+    
+    
+      <a href="https://www.linkedin.com/pulse/harnessing-power-service-mesh-kubernetes-istio-rishikesh-chandra" target="_self" data-tracking-control-name="full-link" data-tracking-will-navigate class="base-card relative w-full hover:no-underline focus:no-underline base-card--link base-aside-card flex my-1.5
+        
+        base-aside-card--link aside-article-card">
+        
+
+<!---->
+      
+            <div class="base-aside-card__media flex-shrink-0 h-[54px] mr-0.5 overflow-hidden relative w-[95px]">
+              
+        <img data-delayed-url="https://media.licdn.com/dms/image/D4D12AQGKLdpS27jFTQ/article-cover_image-shrink_720_1280/0/1684234095220?e=2147483647&amp;v=beta&amp;t=4GVd3shwa9RCYn6fP_SCUzEiWSQ6BDwEih99NGffAsQ" data-ghost-url="https://static.licdn.com/aero-v1/sc/h/9l8dv1r8a09nem281grvopn9l" alt>
+      
+<!---->            </div>
+
+        <div class="base-aside-card__info self-center pl-0.5 flex flex-col flex-1">
+          <h3 class="base-aside-card__title font-sans text-md font-bold text-color-text relative">
+            
+        Harnessing the Power of Service Mesh: Kubernetes &amp; Istio
+      
+<!---->          </h3>
+
+<!---->
+<!---->
+<!---->
+            <div class="base-aside-card__metadata font-sans text-sm leading-open font-regular text-color-text-low-emphasis mt-0.5">
+              
+          <span class="base-aside-card__metadata-item">
+            Rishikesh Chandra
+          </span>
+          <span class="base-aside-card__metadata-item">
+            
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+      4mo
+  
+          </span>
+      
+            </div>
+
+<!---->        </div>
+      
+    
+      </a>
+  
+  
+  
+  
+  </li>
+  <li class="articles-content-card__list-item mt-3">
+    
+    
+    
+    
+      <a href="https://www.linkedin.com/pulse/service-mesh-istio-ranjan-rakesh" target="_self" data-tracking-control-name="full-link" data-tracking-will-navigate class="base-card relative w-full hover:no-underline focus:no-underline base-card--link base-aside-card flex my-1.5
+        
+        base-aside-card--link aside-article-card">
+        
+
+<!---->
+      
+            <div class="base-aside-card__media flex-shrink-0 h-[54px] mr-0.5 overflow-hidden relative w-[95px]">
+              
+        <img data-delayed-url="https://media.licdn.com/dms/image/C5612AQHVVcmBPPXW8Q/article-cover_image-shrink_600_2000/0/1599668998217?e=2147483647&amp;v=beta&amp;t=eEBzN8cbAgXhoWBKO1fCrztxWFX9_fB5oqUxuQLGmZA" data-ghost-url="https://static.licdn.com/aero-v1/sc/h/9l8dv1r8a09nem281grvopn9l" alt>
+      
+<!---->            </div>
+
+        <div class="base-aside-card__info self-center pl-0.5 flex flex-col flex-1">
+          <h3 class="base-aside-card__title font-sans text-md font-bold text-color-text relative">
+            
+        Service Mesh :Istio 
+      
+<!---->          </h3>
+
+<!---->
+<!---->
+<!---->
+            <div class="base-aside-card__metadata font-sans text-sm leading-open font-regular text-color-text-low-emphasis mt-0.5">
+              
+          <span class="base-aside-card__metadata-item">
+            Rakesh Ranjan
+          </span>
+          <span class="base-aside-card__metadata-item">
+            
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+      3y
+  
+          </span>
+      
+            </div>
+
+<!---->        </div>
+      
+    
+      </a>
+  
+  
+  
+  
+  </li>
+  <li class="articles-content-card__list-item mt-3">
+    
+    
+    
+    
+      <a href="https://www.linkedin.com/pulse/ingress-istio-sriram-iyengar" target="_self" data-tracking-control-name="full-link" data-tracking-will-navigate class="base-card relative w-full hover:no-underline focus:no-underline base-card--link base-aside-card flex my-1.5
+        
+        base-aside-card--link aside-article-card">
+        
+
+<!---->
+      
+            <div class="base-aside-card__media flex-shrink-0 h-[54px] mr-0.5 overflow-hidden relative w-[95px]">
+              
+        <img data-delayed-url="https://media-exp1.licdn.com/media/AAYQAgQLAAkAAQAAAAAAAA196XghfnplQFCx7y__C0e55w.png" data-ghost-url="https://static.licdn.com/aero-v1/sc/h/9l8dv1r8a09nem281grvopn9l" alt>
+      
+<!---->            </div>
+
+        <div class="base-aside-card__info self-center pl-0.5 flex flex-col flex-1">
+          <h3 class="base-aside-card__title font-sans text-md font-bold text-color-text relative">
+            
+        Ingress and Istio
+      
+<!---->          </h3>
+
+<!---->
+<!---->
+<!---->
+            <div class="base-aside-card__metadata font-sans text-sm leading-open font-regular text-color-text-low-emphasis mt-0.5">
+              
+          <span class="base-aside-card__metadata-item">
+            sriram Iyengar
+          </span>
+          <span class="base-aside-card__metadata-item">
+            
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+      7mo
+  
+          </span>
+      
+            </div>
+
+<!---->        </div>
+      
+    
+      </a>
+  
+  
+  
+  
+  </li>
+  <li class="articles-content-card__list-item mt-3">
+    
+    
+    
+    
+      <a href="https://www.linkedin.com/pulse/end-in-transit-encryption-microservices-aws-eks-istio-rahul-natarajan" target="_self" data-tracking-control-name="full-link" data-tracking-will-navigate class="base-card relative w-full hover:no-underline focus:no-underline base-card--link base-aside-card flex my-1.5
+        
+        base-aside-card--link aside-article-card">
+        
+
+<!---->
+      
+            <div class="base-aside-card__media flex-shrink-0 h-[54px] mr-0.5 overflow-hidden relative w-[95px]">
+              
+        <img data-delayed-url="https://media.licdn.com/dms/image/C5612AQG3CebUg9GA5g/article-cover_image-shrink_720_1280/0/1588996521636?e=2147483647&amp;v=beta&amp;t=r_yEwDqxwH2sOiTH2AVfl_TXQmjOdaCHAgnMEbii4YQ" data-ghost-url="https://static.licdn.com/aero-v1/sc/h/9l8dv1r8a09nem281grvopn9l" alt>
+      
+<!---->            </div>
+
+        <div class="base-aside-card__info self-center pl-0.5 flex flex-col flex-1">
+          <h3 class="base-aside-card__title font-sans text-md font-bold text-color-text relative">
+            
+        End to End In-Transit Encryption for Microservices on AWS EKS with Istio &amp; AWS ACM
+      
+<!---->          </h3>
+
+<!---->
+<!---->
+<!---->
+            <div class="base-aside-card__metadata font-sans text-sm leading-open font-regular text-color-text-low-emphasis mt-0.5">
+              
+          <span class="base-aside-card__metadata-item">
+            Rahul Natarajan
+          </span>
+          <span class="base-aside-card__metadata-item">
+            
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+      3y
+  
+          </span>
+      
+            </div>
+
+<!---->        </div>
+      
+    
+      </a>
+  
+  
+  
+  
+  </li>
+  <li class="articles-content-card__list-item mt-3">
+    
+    
+    
+    
+      <a href="https://www.linkedin.com/pulse/service-mesh-kubernetes-istio-introduction-sushant-sikare" target="_self" data-tracking-control-name="full-link" data-tracking-will-navigate class="base-card relative w-full hover:no-underline focus:no-underline base-card--link base-aside-card flex my-1.5
+        
+        base-aside-card--link aside-article-card">
+        
+
+<!---->
+      
+            <div class="base-aside-card__media flex-shrink-0 h-[54px] mr-0.5 overflow-hidden relative w-[95px]">
+              
+        <img data-delayed-url="https://media.licdn.com/dms/image/D4D12AQGE4MZ05N0d8w/article-cover_image-shrink_600_2000/0/1669262411662?e=2147483647&amp;v=beta&amp;t=PJQnt2lrI8uLtIP4YmnNPGzNdnfwuLdvQ_IRDSvXJH4" data-ghost-url="https://static.licdn.com/aero-v1/sc/h/9l8dv1r8a09nem281grvopn9l" alt>
+      
+<!---->            </div>
+
+        <div class="base-aside-card__info self-center pl-0.5 flex flex-col flex-1">
+          <h3 class="base-aside-card__title font-sans text-md font-bold text-color-text relative">
+            
+        🎯Service Mesh on Kubernetes — Istio Introduction.
+      
+<!---->          </h3>
+
+<!---->
+<!---->
+<!---->
+            <div class="base-aside-card__metadata font-sans text-sm leading-open font-regular text-color-text-low-emphasis mt-0.5">
+              
+          <span class="base-aside-card__metadata-item">
+            Sushant S.
+          </span>
+          <span class="base-aside-card__metadata-item">
+            
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+      10mo
+  
+          </span>
+      
+            </div>
+
+<!---->        </div>
+      
+    
+      </a>
+  
+  
+  
+  
+  </li>
+
+            
+        </ul>
+
+            <button class="show-more-less__button show-more-less__more-button show-more-less-button
+                " aria-expanded="false" data-tracking-control-name="article-ssr-frontend-pulse_show_more">
+                Show more
+              <icon class="show-more-less__button--chevron show-more-less-button-icon" data-delayed-url="https://static.licdn.com/aero-v1/sc/h/cyolgscd0imw2ldqppkrb84vo"></icon>
+            </button>
+
+            <button class="show-more-less__button show-more-less__less-button show-more-less-button
+                show-more-less__button--hide" aria-expanded="false" aria-label="Others also viewed" data-tracking-control-name="article-ssr-frontend-pulse_show_more">
+                Show less
+              <icon class="show-more-less__button--chevron show-more-less-button-icon" data-delayed-url="https://static.licdn.com/aero-v1/sc/h/4chtt12k98xwnba1nimld2oyg"></icon>
+            </button>
+      </div>
+  
+      
+        </div>
+      </section>
+  
+  
+              
+    
+
+    
+      <section class="aside-section-container mb-4 pulse-to-x">
+
+            <h2 class="aside-section-container__title section-title">
+              Insights from the community
+            </h2>
+
+<!---->
+        <div class="aside-section-container__content break-words">
+          
+        
+    
+    
+
+      <div class="show-more-less">
+<!---->
+        <ul data-max-num-to-show="6" class="show-more-less__list show-more-less__list--hide-after-6" data-impression-id="article-ssr-frontend-pulse_show-more-less">
+          
+              <li class="articles-side-panel__list-item -ml-3">
+                
+    
+    
+    
+      <a class="x-article-card__link hover:no-underline focus:no-underline active:no-underline" href="https://www.linkedin.com/advice/0/how-do-you-deal-shared-overlapping-domains" aria-label="Recommended article link" data-tracking-will-navigate="true" data-tracking-control-name="recommended_article" data-feed-action-category="view" data-feed-action-type="viewArticle" target="_self">
+        <div class="x-article-card container-lined m-3 min-h-max p-1.5 hover:shadow-md active:shadow-md
+            w-100%">
+            <div class="x-article-card__tag tag-sm tag-enabled inline break-words font-normal">
+              Domain-Driven Design (DDD)
+            </div>
+            <div class="x-article-card__title text-base break-words pt-1 text-md font-normal text-color-text">
+              How do you deal with shared or overlapping domains in a microservices context?
+            </div>
+<!---->        </div>
+      </a>
+  
+              </li>
+              <li class="articles-side-panel__list-item -ml-3">
+                
+    
+    
+    
+      <a class="x-article-card__link hover:no-underline focus:no-underline active:no-underline" href="https://www.linkedin.com/advice/3/how-do-you-choose-between-service-mesh-api" aria-label="Recommended article link" data-tracking-will-navigate="true" data-tracking-control-name="recommended_article" data-feed-action-category="view" data-feed-action-type="viewArticle" target="_self">
+        <div class="x-article-card container-lined m-3 min-h-max p-1.5 hover:shadow-md active:shadow-md
+            w-100%">
+            <div class="x-article-card__tag tag-sm tag-enabled inline break-words font-normal">
+              Enterprise Software
+            </div>
+            <div class="x-article-card__title text-base break-words pt-1 text-md font-normal text-color-text">
+              How do you choose between service mesh and API gateway for microservices?
+            </div>
+<!---->        </div>
+      </a>
+  
+              </li>
+              <li class="articles-side-panel__list-item -ml-3">
+                
+    
+    
+    
+      <a class="x-article-card__link hover:no-underline focus:no-underline active:no-underline" href="https://www.linkedin.com/advice/1/how-do-you-measure-impact-value-tracing-microservices-skills-devops" aria-label="Recommended article link" data-tracking-will-navigate="true" data-tracking-control-name="recommended_article" data-feed-action-category="view" data-feed-action-type="viewArticle" target="_self">
+        <div class="x-article-card container-lined m-3 min-h-max p-1.5 hover:shadow-md active:shadow-md
+            w-100%">
+            <div class="x-article-card__tag tag-sm tag-enabled inline break-words font-normal">
+              DevOps
+            </div>
+            <div class="x-article-card__title text-base break-words pt-1 text-md font-normal text-color-text">
+              How do you measure the impact and value of tracing in microservices?
+            </div>
+<!---->        </div>
+      </a>
+  
+              </li>
+              <li class="articles-side-panel__list-item -ml-3">
+                
+    
+    
+    
+      <a class="x-article-card__link hover:no-underline focus:no-underline active:no-underline" href="https://www.linkedin.com/advice/0/how-do-you-design-test-observability-your-microservices" aria-label="Recommended article link" data-tracking-will-navigate="true" data-tracking-control-name="recommended_article" data-feed-action-category="view" data-feed-action-type="viewArticle" target="_self">
+        <div class="x-article-card container-lined m-3 min-h-max p-1.5 hover:shadow-md active:shadow-md
+            w-100%">
+            <div class="x-article-card__tag tag-sm tag-enabled inline break-words font-normal">
+              Microservices
+            </div>
+            <div class="x-article-card__title text-base break-words pt-1 text-md font-normal text-color-text">
+              How do you design and test observability into your microservices from the start?
+            </div>
+<!---->        </div>
+      </a>
+  
+              </li>
+              <li class="articles-side-panel__list-item -ml-3">
+                
+    
+    
+    
+      <a class="x-article-card__link hover:no-underline focus:no-underline active:no-underline" href="https://www.linkedin.com/advice/3/how-do-you-optimize-microservice-performance-skills-design-patterns" aria-label="Recommended article link" data-tracking-will-navigate="true" data-tracking-control-name="recommended_article" data-feed-action-category="view" data-feed-action-type="viewArticle" target="_self">
+        <div class="x-article-card container-lined m-3 min-h-max p-1.5 hover:shadow-md active:shadow-md
+            w-100%">
+            <div class="x-article-card__tag tag-sm tag-enabled inline break-words font-normal">
+              Design Patterns
+            </div>
+            <div class="x-article-card__title text-base break-words pt-1 text-md font-normal text-color-text">
+              How do you optimize microservice performance?
+            </div>
+<!---->        </div>
+      </a>
+  
+              </li>
+              <li class="articles-side-panel__list-item -ml-3">
+                
+    
+    
+    
+      <a class="x-article-card__link hover:no-underline focus:no-underline active:no-underline" href="https://www.linkedin.com/advice/1/how-do-you-use-domain-events-enable-cqrs" aria-label="Recommended article link" data-tracking-will-navigate="true" data-tracking-control-name="recommended_article" data-feed-action-category="view" data-feed-action-type="viewArticle" target="_self">
+        <div class="x-article-card container-lined m-3 min-h-max p-1.5 hover:shadow-md active:shadow-md
+            w-100%">
+            <div class="x-article-card__tag tag-sm tag-enabled inline break-words font-normal">
+              Domain-Driven Design (DDD)
+            </div>
+            <div class="x-article-card__title text-base break-words pt-1 text-md font-normal text-color-text">
+              How do you use domain events to enable CQRS and microservices architectures?
+            </div>
+<!---->        </div>
+      </a>
+  
+              </li>
+              <li class="articles-side-panel__list-item -ml-3">
+                
+    
+    
+    
+      <a class="x-article-card__link hover:no-underline focus:no-underline active:no-underline" href="https://www.linkedin.com/advice/3/how-do-you-use-service-meshes-facilitate-communication" aria-label="Recommended article link" data-tracking-will-navigate="true" data-tracking-control-name="recommended_article" data-feed-action-category="view" data-feed-action-type="viewArticle" target="_self">
+        <div class="x-article-card container-lined m-3 min-h-max p-1.5 hover:shadow-md active:shadow-md
+            w-100%">
+            <div class="x-article-card__tag tag-sm tag-enabled inline break-words font-normal">
+              Microservices
+            </div>
+            <div class="x-article-card__title text-base break-words pt-1 text-md font-normal text-color-text">
+              How do you use service meshes to facilitate communication and coordination among your microservices?
+            </div>
+<!---->        </div>
+      </a>
+  
+              </li>
+              <li class="articles-side-panel__list-item -ml-3">
+                
+    
+    
+    
+      <a class="x-article-card__link hover:no-underline focus:no-underline active:no-underline" href="https://www.linkedin.com/advice/0/how-do-you-test-debug-event-driven-microservices" aria-label="Recommended article link" data-tracking-will-navigate="true" data-tracking-control-name="recommended_article" data-feed-action-category="view" data-feed-action-type="viewArticle" target="_self">
+        <div class="x-article-card container-lined m-3 min-h-max p-1.5 hover:shadow-md active:shadow-md
+            w-100%">
+            <div class="x-article-card__tag tag-sm tag-enabled inline break-words font-normal">
+              Microservices
+            </div>
+            <div class="x-article-card__title text-base break-words pt-1 text-md font-normal text-color-text">
+              How do you test and debug event-driven microservices in a distributed environment?
+            </div>
+<!---->        </div>
+      </a>
+  
+              </li>
+              <li class="articles-side-panel__list-item -ml-3">
+                
+    
+    
+    
+      <a class="x-article-card__link hover:no-underline focus:no-underline active:no-underline" href="https://www.linkedin.com/advice/0/what-best-practices-tools-monitoring-troubleshooting" aria-label="Recommended article link" data-tracking-will-navigate="true" data-tracking-control-name="recommended_article" data-feed-action-category="view" data-feed-action-type="viewArticle" target="_self">
+        <div class="x-article-card container-lined m-3 min-h-max p-1.5 hover:shadow-md active:shadow-md
+            w-100%">
+            <div class="x-article-card__tag tag-sm tag-enabled inline break-words font-normal">
+              Enterprise Software
+            </div>
+            <div class="x-article-card__title text-base break-words pt-1 text-md font-normal text-color-text">
+              What are the best practices and tools for monitoring and troubleshooting service mesh and API gateway?
+            </div>
+<!---->        </div>
+      </a>
+  
+              </li>
+              <li class="articles-side-panel__list-item -ml-3">
+                
+    
+    
+    
+      <a class="x-article-card__link hover:no-underline focus:no-underline active:no-underline" href="https://www.linkedin.com/advice/0/how-can-you-use-emerging-container-tech-trends" aria-label="Recommended article link" data-tracking-will-navigate="true" data-tracking-control-name="recommended_article" data-feed-action-category="view" data-feed-action-type="viewArticle" target="_self">
+        <div class="x-article-card container-lined m-3 min-h-max p-1.5 hover:shadow-md active:shadow-md
+            w-100%">
+            <div class="x-article-card__tag tag-sm tag-enabled inline break-words font-normal">
+              Operating Systems
+            </div>
+            <div class="x-article-card__title text-base break-words pt-1 text-md font-normal text-color-text">
+              How can you use emerging container tech trends?
+            </div>
+<!---->        </div>
+      </a>
+  
+              </li>
+          
+        </ul>
+
+            <button class="show-more-less__button show-more-less__more-button show-more-less-button
+                " aria-expanded="false" data-tracking-control-name="article-ssr-frontend-pulse_show_more">
+                Show more
+              <icon class="show-more-less__button--chevron show-more-less-button-icon" data-delayed-url="https://static.licdn.com/aero-v1/sc/h/cyolgscd0imw2ldqppkrb84vo"></icon>
+            </button>
+
+            <button class="show-more-less__button show-more-less__less-button show-more-less-button
+                show-more-less__button--hide" aria-expanded="false" aria-label="Insights from the community" data-tracking-control-name="article-ssr-frontend-pulse_show_more">
+                Show less
+              <icon class="show-more-less__button--chevron show-more-less-button-icon" data-delayed-url="https://static.licdn.com/aero-v1/sc/h/4chtt12k98xwnba1nimld2oyg"></icon>
+            </button>
+      </div>
+  
+      
+        </div>
+      </section>
+  
+  
+              
+    
+    
+
+    
+      <section class="aside-section-container mb-4 content-hub-topics">
+
+            <h2 class="aside-section-container__title section-title">
+              Explore topics
+            </h2>
+
+<!---->
+        <div class="aside-section-container__content break-words">
+          
+        <ul class="career-advice-hub-topics__list">
+            <li class="career-advice-hub-topics__list-item mb-1">
+              <a href="https://www.linkedin.com/pulse/topics/sales-s5/" data-tracking-control-name="article-ssr-frontend-pulse_content-hub-topic" data-tracking-will-navigate class="btn-sm btn-secondary flex w-fit mr-1 mb-1 hover:no-underline">
+                Sales
+              </a>
+            </li>
+            <li class="career-advice-hub-topics__list-item mb-1">
+              <a href="https://www.linkedin.com/pulse/topics/marketing-s2461/" data-tracking-control-name="article-ssr-frontend-pulse_content-hub-topic" data-tracking-will-navigate class="btn-sm btn-secondary flex w-fit mr-1 mb-1 hover:no-underline">
+                Marketing
+              </a>
+            </li>
+            <li class="career-advice-hub-topics__list-item mb-1">
+              <a href="https://www.linkedin.com/pulse/topics/public-administration-s3697/" data-tracking-control-name="article-ssr-frontend-pulse_content-hub-topic" data-tracking-will-navigate class="btn-sm btn-secondary flex w-fit mr-1 mb-1 hover:no-underline">
+                Public Administration
+              </a>
+            </li>
+            <li class="career-advice-hub-topics__list-item mb-1">
+              <a href="https://www.linkedin.com/pulse/topics/business-administration-s50111/" data-tracking-control-name="article-ssr-frontend-pulse_content-hub-topic" data-tracking-will-navigate class="btn-sm btn-secondary flex w-fit mr-1 mb-1 hover:no-underline">
+                Business Administration
+              </a>
+            </li>
+            <li class="career-advice-hub-topics__list-item mb-1">
+              <a href="https://www.linkedin.com/pulse/topics/hr-management-s50359/" data-tracking-control-name="article-ssr-frontend-pulse_content-hub-topic" data-tracking-will-navigate class="btn-sm btn-secondary flex w-fit mr-1 mb-1 hover:no-underline">
+                HR Management
+              </a>
+            </li>
+            <li class="career-advice-hub-topics__list-item mb-1">
+              <a href="https://www.linkedin.com/pulse/topics/engineering-s166/" data-tracking-control-name="article-ssr-frontend-pulse_content-hub-topic" data-tracking-will-navigate class="btn-sm btn-secondary flex w-fit mr-1 mb-1 hover:no-underline">
+                Engineering
+              </a>
+            </li>
+            <li class="career-advice-hub-topics__list-item mb-1">
+              <a href="https://www.linkedin.com/pulse/topics/soft-skills-s2976/" data-tracking-control-name="article-ssr-frontend-pulse_content-hub-topic" data-tracking-will-navigate class="btn-sm btn-secondary flex w-fit mr-1 mb-1 hover:no-underline">
+                Soft Skills
+              </a>
+            </li>
+          <li class="career-advice-hub-topics__list-item mb-1">
+            <a href="https://www.linkedin.com/pulse/topics/home/" data-tracking-control-name="article-ssr-frontend-pulse_content-hub-topic" data-tracking-will-navigate class="btn-sm btn-secondary-emphasis flex w-fit mr-[6px] mb-1 hover:no-underline">
+              See All
+            </a>
+          </li>
+        </ul>
+      
+        </div>
+      </section>
+  
+  
+          
+      
+      </section>
+    </main>
+
+      <div class="pre-footer ">
+        
+        
+<!---->          
+      
+      </div>
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+
+    <footer class="li-footer bg-transparent w-full ">
+      <ul class="li-footer__list flex flex-wrap flex-row items-start justify-start w-full h-auto min-h-[50px] my-[0px] mx-auto py-3 px-2 papabear:w-[1128px] papabear:p-0">
+        
+  <li class="li-footer__item font-sans text-xs text-color-text-low-emphasis flex flex-shrink-0 justify-start p-1 relative w-50% papabear:justify-center papabear:w-auto">
+        
+          <span class="sr-only">LinkedIn</span>
+          <icon class="li-footer__copy-logo text-color-logo-brand-alt inline-block self-center h-[14px] w-[56px] mr-1" data-delayed-url="https://static.licdn.com/aero-v1/sc/h/e12h2cd8ac580qen9qdd0qks8"></icon>
+          <span class="li-footer__copy-text flex items-center">&copy; 2023</span>
+        
+  </li>
+
+        
+  <li class="li-footer__item font-sans text-xs text-color-text-low-emphasis flex flex-shrink-0 justify-start p-1 relative w-50% papabear:justify-center papabear:w-auto">
+        <a class="li-footer__item-link flex items-center font-sans text-xs font-bold text-color-text-low-emphasis hover:text-color-link-hover focus:text-color-link-focus" href="https://about.linkedin.com?trk=d_flagship2_pulse_read_footer-about" data-tracking-control-name="d_flagship2_pulse_read_footer-about" data-tracking-will-navigate>
+          
+          About
+        
+        </a>
+  </li>
+
+        
+  <li class="li-footer__item font-sans text-xs text-color-text-low-emphasis flex flex-shrink-0 justify-start p-1 relative w-50% papabear:justify-center papabear:w-auto">
+        <a class="li-footer__item-link flex items-center font-sans text-xs font-bold text-color-text-low-emphasis hover:text-color-link-hover focus:text-color-link-focus" href="https://www.linkedin.com/accessibility?trk=d_flagship2_pulse_read_footer-accessibility" data-tracking-control-name="d_flagship2_pulse_read_footer-accessibility" data-tracking-will-navigate>
+          
+          Accessibility
+        
+        </a>
+  </li>
+
+        
+  <li class="li-footer__item font-sans text-xs text-color-text-low-emphasis flex flex-shrink-0 justify-start p-1 relative w-50% papabear:justify-center papabear:w-auto">
+        <a class="li-footer__item-link flex items-center font-sans text-xs font-bold text-color-text-low-emphasis hover:text-color-link-hover focus:text-color-link-focus" href="https://www.linkedin.com/legal/user-agreement?trk=d_flagship2_pulse_read_footer-user-agreement" data-tracking-control-name="d_flagship2_pulse_read_footer-user-agreement" data-tracking-will-navigate>
+          
+          User Agreement
+        
+        </a>
+  </li>
+
+        
+  <li class="li-footer__item font-sans text-xs text-color-text-low-emphasis flex flex-shrink-0 justify-start p-1 relative w-50% papabear:justify-center papabear:w-auto">
+        <a class="li-footer__item-link flex items-center font-sans text-xs font-bold text-color-text-low-emphasis hover:text-color-link-hover focus:text-color-link-focus" href="https://www.linkedin.com/legal/privacy-policy?trk=d_flagship2_pulse_read_footer-privacy-policy" data-tracking-control-name="d_flagship2_pulse_read_footer-privacy-policy" data-tracking-will-navigate>
+          
+          Privacy Policy
+        
+        </a>
+  </li>
+
+<!---->        
+  <li class="li-footer__item font-sans text-xs text-color-text-low-emphasis flex flex-shrink-0 justify-start p-1 relative w-50% papabear:justify-center papabear:w-auto">
+        <a class="li-footer__item-link flex items-center font-sans text-xs font-bold text-color-text-low-emphasis hover:text-color-link-hover focus:text-color-link-focus" href="https://www.linkedin.com/legal/cookie-policy?trk=d_flagship2_pulse_read_footer-cookie-policy" data-tracking-control-name="d_flagship2_pulse_read_footer-cookie-policy" data-tracking-will-navigate>
+          
+          Cookie Policy
+        
+        </a>
+  </li>
+
+        
+  <li class="li-footer__item font-sans text-xs text-color-text-low-emphasis flex flex-shrink-0 justify-start p-1 relative w-50% papabear:justify-center papabear:w-auto">
+        <a class="li-footer__item-link flex items-center font-sans text-xs font-bold text-color-text-low-emphasis hover:text-color-link-hover focus:text-color-link-focus" href="https://www.linkedin.com/legal/copyright-policy?trk=d_flagship2_pulse_read_footer-copyright-policy" data-tracking-control-name="d_flagship2_pulse_read_footer-copyright-policy" data-tracking-will-navigate>
+          
+          Copyright Policy
+        
+        </a>
+  </li>
+
+        
+  <li class="li-footer__item font-sans text-xs text-color-text-low-emphasis flex flex-shrink-0 justify-start p-1 relative w-50% papabear:justify-center papabear:w-auto">
+        <a class="li-footer__item-link flex items-center font-sans text-xs font-bold text-color-text-low-emphasis hover:text-color-link-hover focus:text-color-link-focus" href="https://brand.linkedin.com/policies?trk=d_flagship2_pulse_read_footer-brand-policy" data-tracking-control-name="d_flagship2_pulse_read_footer-brand-policy" data-tracking-will-navigate>
+          
+          Brand Policy
+        
+        </a>
+  </li>
+
+          
+  <li class="li-footer__item font-sans text-xs text-color-text-low-emphasis flex flex-shrink-0 justify-start p-1 relative w-50% papabear:justify-center papabear:w-auto">
+        <a class="li-footer__item-link flex items-center font-sans text-xs font-bold text-color-text-low-emphasis hover:text-color-link-hover focus:text-color-link-focus" href="https://www.linkedin.com/psettings/guest-controls?trk=d_flagship2_pulse_read_footer-guest-controls" data-tracking-control-name="d_flagship2_pulse_read_footer-guest-controls" data-tracking-will-navigate>
+          
+            Guest Controls
+          
+        </a>
+  </li>
+
+        
+  <li class="li-footer__item font-sans text-xs text-color-text-low-emphasis flex flex-shrink-0 justify-start p-1 relative w-50% papabear:justify-center papabear:w-auto">
+        <a class="li-footer__item-link flex items-center font-sans text-xs font-bold text-color-text-low-emphasis hover:text-color-link-hover focus:text-color-link-focus" href="https://www.linkedin.com/legal/professional-community-policies?trk=d_flagship2_pulse_read_footer-community-guide" data-tracking-control-name="d_flagship2_pulse_read_footer-community-guide" data-tracking-will-navigate>
+          
+          Community Guidelines
+        
+        </a>
+  </li>
+
+        
+<!---->
+          
+          
+  <li class="li-footer__item font-sans text-xs text-color-text-low-emphasis flex flex-shrink-0 justify-start p-1 relative w-50% papabear:justify-center papabear:w-auto">
+        
+              
+
+    
+    
+
+    
+
+    
+
+    <div class="collapsible-dropdown collapsible-dropdown--footer collapsible-dropdown--up flex items-center relative hyphens-auto language-selector z-2">
+<!---->
+        <ul class="collapsible-dropdown__list hidden container-raised absolute w-auto overflow-y-auto flex-col items-stretch z-1 bottom-[100%] top-auto" role="menu" tabindex="-1">
+          
+          <li class="language-selector__item" role="presentation">
+            <!-- Adding aria-label to both the li and the button because screen reader focus goes to button on desktop and li on mobile-->
+            <button aria-label="العربية (Arabic)" class="font-sans text-xs link block py-[5px] px-2 w-full hover:cursor-pointer hover:bg-color-action hover:text-color-text-on-dark focus:bg-color-action focus:text-color-text-on-dark
+                language-selector__link !font-regular" data-tracking-control-name="language-selector-ar_AE" data-locale="ar_AE" role="menuitem" lang="ar_AE">
+                العربية (Arabic)
+            </button>
+          </li>
+          <li class="language-selector__item" role="presentation">
+            <!-- Adding aria-label to both the li and the button because screen reader focus goes to button on desktop and li on mobile-->
+            <button aria-label="Čeština (Czech)" class="font-sans text-xs link block py-[5px] px-2 w-full hover:cursor-pointer hover:bg-color-action hover:text-color-text-on-dark focus:bg-color-action focus:text-color-text-on-dark
+                language-selector__link !font-regular" data-tracking-control-name="language-selector-cs_CZ" data-locale="cs_CZ" role="menuitem" lang="cs_CZ">
+                Čeština (Czech)
+            </button>
+          </li>
+          <li class="language-selector__item" role="presentation">
+            <!-- Adding aria-label to both the li and the button because screen reader focus goes to button on desktop and li on mobile-->
+            <button aria-label="Dansk (Danish)" class="font-sans text-xs link block py-[5px] px-2 w-full hover:cursor-pointer hover:bg-color-action hover:text-color-text-on-dark focus:bg-color-action focus:text-color-text-on-dark
+                language-selector__link !font-regular" data-tracking-control-name="language-selector-da_DK" data-locale="da_DK" role="menuitem" lang="da_DK">
+                Dansk (Danish)
+            </button>
+          </li>
+          <li class="language-selector__item" role="presentation">
+            <!-- Adding aria-label to both the li and the button because screen reader focus goes to button on desktop and li on mobile-->
+            <button aria-label="Deutsch (German)" class="font-sans text-xs link block py-[5px] px-2 w-full hover:cursor-pointer hover:bg-color-action hover:text-color-text-on-dark focus:bg-color-action focus:text-color-text-on-dark
+                language-selector__link !font-regular" data-tracking-control-name="language-selector-de_DE" data-locale="de_DE" role="menuitem" lang="de_DE">
+                Deutsch (German)
+            </button>
+          </li>
+          <li class="language-selector__item" role="presentation">
+            <!-- Adding aria-label to both the li and the button because screen reader focus goes to button on desktop and li on mobile-->
+            <button aria-label="English (English) selected" class="font-sans text-xs link block py-[5px] px-2 w-full hover:cursor-pointer hover:bg-color-action hover:text-color-text-on-dark focus:bg-color-action focus:text-color-text-on-dark
+                language-selector__link--selected" data-tracking-control-name="language-selector-en_US" data-locale="en_US" role="menuitem" lang="en_US">
+                <strong>English (English)</strong>
+            </button>
+          </li>
+          <li class="language-selector__item" role="presentation">
+            <!-- Adding aria-label to both the li and the button because screen reader focus goes to button on desktop and li on mobile-->
+            <button aria-label="Español (Spanish)" class="font-sans text-xs link block py-[5px] px-2 w-full hover:cursor-pointer hover:bg-color-action hover:text-color-text-on-dark focus:bg-color-action focus:text-color-text-on-dark
+                language-selector__link !font-regular" data-tracking-control-name="language-selector-es_ES" data-locale="es_ES" role="menuitem" lang="es_ES">
+                Español (Spanish)
+            </button>
+          </li>
+          <li class="language-selector__item" role="presentation">
+            <!-- Adding aria-label to both the li and the button because screen reader focus goes to button on desktop and li on mobile-->
+            <button aria-label="Français (French)" class="font-sans text-xs link block py-[5px] px-2 w-full hover:cursor-pointer hover:bg-color-action hover:text-color-text-on-dark focus:bg-color-action focus:text-color-text-on-dark
+                language-selector__link !font-regular" data-tracking-control-name="language-selector-fr_FR" data-locale="fr_FR" role="menuitem" lang="fr_FR">
+                Français (French)
+            </button>
+          </li>
+          <li class="language-selector__item" role="presentation">
+            <!-- Adding aria-label to both the li and the button because screen reader focus goes to button on desktop and li on mobile-->
+            <button aria-label="हिंदी (Hindi)" class="font-sans text-xs link block py-[5px] px-2 w-full hover:cursor-pointer hover:bg-color-action hover:text-color-text-on-dark focus:bg-color-action focus:text-color-text-on-dark
+                language-selector__link !font-regular" data-tracking-control-name="language-selector-hi_IN" data-locale="hi_IN" role="menuitem" lang="hi_IN">
+                हिंदी (Hindi)
+            </button>
+          </li>
+          <li class="language-selector__item" role="presentation">
+            <!-- Adding aria-label to both the li and the button because screen reader focus goes to button on desktop and li on mobile-->
+            <button aria-label="Bahasa Indonesia (Indonesian)" class="font-sans text-xs link block py-[5px] px-2 w-full hover:cursor-pointer hover:bg-color-action hover:text-color-text-on-dark focus:bg-color-action focus:text-color-text-on-dark
+                language-selector__link !font-regular" data-tracking-control-name="language-selector-in_ID" data-locale="in_ID" role="menuitem" lang="in_ID">
+                Bahasa Indonesia (Indonesian)
+            </button>
+          </li>
+          <li class="language-selector__item" role="presentation">
+            <!-- Adding aria-label to both the li and the button because screen reader focus goes to button on desktop and li on mobile-->
+            <button aria-label="Italiano (Italian)" class="font-sans text-xs link block py-[5px] px-2 w-full hover:cursor-pointer hover:bg-color-action hover:text-color-text-on-dark focus:bg-color-action focus:text-color-text-on-dark
+                language-selector__link !font-regular" data-tracking-control-name="language-selector-it_IT" data-locale="it_IT" role="menuitem" lang="it_IT">
+                Italiano (Italian)
+            </button>
+          </li>
+          <li class="language-selector__item" role="presentation">
+            <!-- Adding aria-label to both the li and the button because screen reader focus goes to button on desktop and li on mobile-->
+            <button aria-label="日本語 (Japanese)" class="font-sans text-xs link block py-[5px] px-2 w-full hover:cursor-pointer hover:bg-color-action hover:text-color-text-on-dark focus:bg-color-action focus:text-color-text-on-dark
+                language-selector__link !font-regular" data-tracking-control-name="language-selector-ja_JP" data-locale="ja_JP" role="menuitem" lang="ja_JP">
+                日本語 (Japanese)
+            </button>
+          </li>
+          <li class="language-selector__item" role="presentation">
+            <!-- Adding aria-label to both the li and the button because screen reader focus goes to button on desktop and li on mobile-->
+            <button aria-label="한국어 (Korean)" class="font-sans text-xs link block py-[5px] px-2 w-full hover:cursor-pointer hover:bg-color-action hover:text-color-text-on-dark focus:bg-color-action focus:text-color-text-on-dark
+                language-selector__link !font-regular" data-tracking-control-name="language-selector-ko_KR" data-locale="ko_KR" role="menuitem" lang="ko_KR">
+                한국어 (Korean)
+            </button>
+          </li>
+          <li class="language-selector__item" role="presentation">
+            <!-- Adding aria-label to both the li and the button because screen reader focus goes to button on desktop and li on mobile-->
+            <button aria-label="Bahasa Malaysia (Malay)" class="font-sans text-xs link block py-[5px] px-2 w-full hover:cursor-pointer hover:bg-color-action hover:text-color-text-on-dark focus:bg-color-action focus:text-color-text-on-dark
+                language-selector__link !font-regular" data-tracking-control-name="language-selector-ms_MY" data-locale="ms_MY" role="menuitem" lang="ms_MY">
+                Bahasa Malaysia (Malay)
+            </button>
+          </li>
+          <li class="language-selector__item" role="presentation">
+            <!-- Adding aria-label to both the li and the button because screen reader focus goes to button on desktop and li on mobile-->
+            <button aria-label="Nederlands (Dutch)" class="font-sans text-xs link block py-[5px] px-2 w-full hover:cursor-pointer hover:bg-color-action hover:text-color-text-on-dark focus:bg-color-action focus:text-color-text-on-dark
+                language-selector__link !font-regular" data-tracking-control-name="language-selector-nl_NL" data-locale="nl_NL" role="menuitem" lang="nl_NL">
+                Nederlands (Dutch)
+            </button>
+          </li>
+          <li class="language-selector__item" role="presentation">
+            <!-- Adding aria-label to both the li and the button because screen reader focus goes to button on desktop and li on mobile-->
+            <button aria-label="Norsk (Norwegian)" class="font-sans text-xs link block py-[5px] px-2 w-full hover:cursor-pointer hover:bg-color-action hover:text-color-text-on-dark focus:bg-color-action focus:text-color-text-on-dark
+                language-selector__link !font-regular" data-tracking-control-name="language-selector-no_NO" data-locale="no_NO" role="menuitem" lang="no_NO">
+                Norsk (Norwegian)
+            </button>
+          </li>
+          <li class="language-selector__item" role="presentation">
+            <!-- Adding aria-label to both the li and the button because screen reader focus goes to button on desktop and li on mobile-->
+            <button aria-label="Polski (Polish)" class="font-sans text-xs link block py-[5px] px-2 w-full hover:cursor-pointer hover:bg-color-action hover:text-color-text-on-dark focus:bg-color-action focus:text-color-text-on-dark
+                language-selector__link !font-regular" data-tracking-control-name="language-selector-pl_PL" data-locale="pl_PL" role="menuitem" lang="pl_PL">
+                Polski (Polish)
+            </button>
+          </li>
+          <li class="language-selector__item" role="presentation">
+            <!-- Adding aria-label to both the li and the button because screen reader focus goes to button on desktop and li on mobile-->
+            <button aria-label="Português (Portuguese)" class="font-sans text-xs link block py-[5px] px-2 w-full hover:cursor-pointer hover:bg-color-action hover:text-color-text-on-dark focus:bg-color-action focus:text-color-text-on-dark
+                language-selector__link !font-regular" data-tracking-control-name="language-selector-pt_BR" data-locale="pt_BR" role="menuitem" lang="pt_BR">
+                Português (Portuguese)
+            </button>
+          </li>
+          <li class="language-selector__item" role="presentation">
+            <!-- Adding aria-label to both the li and the button because screen reader focus goes to button on desktop and li on mobile-->
+            <button aria-label="Română (Romanian)" class="font-sans text-xs link block py-[5px] px-2 w-full hover:cursor-pointer hover:bg-color-action hover:text-color-text-on-dark focus:bg-color-action focus:text-color-text-on-dark
+                language-selector__link !font-regular" data-tracking-control-name="language-selector-ro_RO" data-locale="ro_RO" role="menuitem" lang="ro_RO">
+                Română (Romanian)
+            </button>
+          </li>
+          <li class="language-selector__item" role="presentation">
+            <!-- Adding aria-label to both the li and the button because screen reader focus goes to button on desktop and li on mobile-->
+            <button aria-label="Русский (Russian)" class="font-sans text-xs link block py-[5px] px-2 w-full hover:cursor-pointer hover:bg-color-action hover:text-color-text-on-dark focus:bg-color-action focus:text-color-text-on-dark
+                language-selector__link !font-regular" data-tracking-control-name="language-selector-ru_RU" data-locale="ru_RU" role="menuitem" lang="ru_RU">
+                Русский (Russian)
+            </button>
+          </li>
+          <li class="language-selector__item" role="presentation">
+            <!-- Adding aria-label to both the li and the button because screen reader focus goes to button on desktop and li on mobile-->
+            <button aria-label="Svenska (Swedish)" class="font-sans text-xs link block py-[5px] px-2 w-full hover:cursor-pointer hover:bg-color-action hover:text-color-text-on-dark focus:bg-color-action focus:text-color-text-on-dark
+                language-selector__link !font-regular" data-tracking-control-name="language-selector-sv_SE" data-locale="sv_SE" role="menuitem" lang="sv_SE">
+                Svenska (Swedish)
+            </button>
+          </li>
+          <li class="language-selector__item" role="presentation">
+            <!-- Adding aria-label to both the li and the button because screen reader focus goes to button on desktop and li on mobile-->
+            <button aria-label="ภาษาไทย (Thai)" class="font-sans text-xs link block py-[5px] px-2 w-full hover:cursor-pointer hover:bg-color-action hover:text-color-text-on-dark focus:bg-color-action focus:text-color-text-on-dark
+                language-selector__link !font-regular" data-tracking-control-name="language-selector-th_TH" data-locale="th_TH" role="menuitem" lang="th_TH">
+                ภาษาไทย (Thai)
+            </button>
+          </li>
+          <li class="language-selector__item" role="presentation">
+            <!-- Adding aria-label to both the li and the button because screen reader focus goes to button on desktop and li on mobile-->
+            <button aria-label="Tagalog (Tagalog)" class="font-sans text-xs link block py-[5px] px-2 w-full hover:cursor-pointer hover:bg-color-action hover:text-color-text-on-dark focus:bg-color-action focus:text-color-text-on-dark
+                language-selector__link !font-regular" data-tracking-control-name="language-selector-tl_PH" data-locale="tl_PH" role="menuitem" lang="tl_PH">
+                Tagalog (Tagalog)
+            </button>
+          </li>
+          <li class="language-selector__item" role="presentation">
+            <!-- Adding aria-label to both the li and the button because screen reader focus goes to button on desktop and li on mobile-->
+            <button aria-label="Türkçe (Turkish)" class="font-sans text-xs link block py-[5px] px-2 w-full hover:cursor-pointer hover:bg-color-action hover:text-color-text-on-dark focus:bg-color-action focus:text-color-text-on-dark
+                language-selector__link !font-regular" data-tracking-control-name="language-selector-tr_TR" data-locale="tr_TR" role="menuitem" lang="tr_TR">
+                Türkçe (Turkish)
+            </button>
+          </li>
+          <li class="language-selector__item" role="presentation">
+            <!-- Adding aria-label to both the li and the button because screen reader focus goes to button on desktop and li on mobile-->
+            <button aria-label="Українська (Ukrainian)" class="font-sans text-xs link block py-[5px] px-2 w-full hover:cursor-pointer hover:bg-color-action hover:text-color-text-on-dark focus:bg-color-action focus:text-color-text-on-dark
+                language-selector__link !font-regular" data-tracking-control-name="language-selector-uk_UA" data-locale="uk_UA" role="menuitem" lang="uk_UA">
+                Українська (Ukrainian)
+            </button>
+          </li>
+          <li class="language-selector__item" role="presentation">
+            <!-- Adding aria-label to both the li and the button because screen reader focus goes to button on desktop and li on mobile-->
+            <button aria-label="简体中文 (Chinese (Simplified))" class="font-sans text-xs link block py-[5px] px-2 w-full hover:cursor-pointer hover:bg-color-action hover:text-color-text-on-dark focus:bg-color-action focus:text-color-text-on-dark
+                language-selector__link !font-regular" data-tracking-control-name="language-selector-zh_CN" data-locale="zh_CN" role="menuitem" lang="zh_CN">
+                简体中文 (Chinese (Simplified))
+            </button>
+          </li>
+          <li class="language-selector__item" role="presentation">
+            <!-- Adding aria-label to both the li and the button because screen reader focus goes to button on desktop and li on mobile-->
+            <button aria-label="正體中文 (Chinese (Traditional))" class="font-sans text-xs link block py-[5px] px-2 w-full hover:cursor-pointer hover:bg-color-action hover:text-color-text-on-dark focus:bg-color-action focus:text-color-text-on-dark
+                language-selector__link !font-regular" data-tracking-control-name="language-selector-zh_TW" data-locale="zh_TW" role="menuitem" lang="zh_TW">
+                正體中文 (Chinese (Traditional))
+            </button>
+          </li>
+<!---->      
+        </ul>
+
+          
+        <button class="language-selector__button select-none relative pr-2 font-sans text-xs font-bold text-color-text-low-emphasis hover:text-color-link-hover hover:cursor-pointer focus:text-color-link-focus focus:outline-dotted focus:outline-1" aria-expanded="false" data-tracking-control-name="footer-lang-dropdown_trigger">
+          <span class="language-selector__label-text mr-0.5 break-words">
+            Language
+          </span>
+          <icon class="language-selector__label-chevron w-2 h-2 absolute top-0 right-0" data-delayed-url="https://static.licdn.com/aero-v1/sc/h/cyolgscd0imw2ldqppkrb84vo"></icon>
+        </button>
+      
+    </div>
+  
+  
+          
+  </li>
+
+      </ul>
+
+<!---->    </footer>
+  
+  
+  
+      
+            
+  
+    
+
+    <div id="toasts" class="toasts fixed z-8 babybear:right-4 mamabear:right-4 papabear:min-h-[96px] invisible
+        top:auto bottom-4 left-4 papabear:w-[400px]
+        toasts--bottom" type="bottom">
+    
+
+    <template id="toast-template">
+      <div class="toast container-raised flex
+          toast--bottom
+          transition ease-accelerate duration-xxslow
+          " data-id="toast">
+        <div class="toast__message flex flex-1 babybear:items-center mamabear:items-center papabear:items-start py-2 px-1.5" data-id="toast__message" role="alert" tabindex="-1">
+          <div class="toast__message-content-container" data-id="toast__message-content-container">
+            <p class="toast__message-content font-sans text-sm opacity-90 inline babybear:self-center mamabear:self-center papabear:self-start" data-id="toast__message-content"></p>
+          </div>
+        </div>
+        <button class="toast__dismiss-btn cursor-pointer babybear:self-center mamabear:self-center papabear:self-start pt-3 pb-2 papabear:py-2 pl-0.5 pr-0" data-id="toast__dismiss-btn" aria-label="Close">
+          <svg width="24" height="24" class="fill-color-icon"><path d="M13 4.32 9.31 8 13 11.69 11.69 13 8 9.31 4.31 13 3 11.69 6.69 8 3 4.31 4.31 3 8 6.69 11.68 3Z"></path></svg>
+        </button>
+      </div>
+    </template>
+      <template id="toast-icon-caution">
+        <icon class="text-color-icon-caution toast__icon w-3 h-3 shrink-0 mr-2" data-delayed-url="https://static.licdn.com/aero-v1/sc/h/u6kgm8vi5s4rhtbgmjlphlp6"></icon>
+      </template>
+      <template id="toast-icon-error">
+        <icon class="text-color-icon-negative toast__icon w-3 h-3 shrink-0 mr-2" data-delayed-url="https://static.licdn.com/aero-v1/sc/h/2ffvlzyh9wb65459t9va8w2ph"></icon>
+      </template>
+      <template id="toast-icon-gdpr">
+        <icon class="text-color-icon-neutral toast__icon w-3 h-3 shrink-0 mr-2" data-delayed-url="https://static.licdn.com/aero-v1/sc/h/a0d85elrpgg38lskvq1kvzb3"></icon>
+      </template>
+      <template id="toast-icon-notify">
+        <icon class="text-color-icon-neutral toast__icon w-3 h-3 shrink-0 mr-2" data-delayed-url="https://static.licdn.com/aero-v1/sc/h/de23f5me7dfm17unsj9up4vga"></icon>
+      </template>
+      <template id="toast-icon-success">
+        <icon class="text-color-icon-positive toast__icon w-3 h-3 shrink-0 mr-2" data-delayed-url="https://static.licdn.com/aero-v1/sc/h/c44ryoszao52cyd0y87z7s0uf"></icon>
+      </template>
+    <template id="toast-cta">
+      <a class="toast__cta cta-link font-medium ml-0.5 text-sm text-inherit inline" target="_blank"></a>
+    </template>
+  </div>
+  
+<!---->
+      
+
+            <script src="https://static.licdn.com/aero-v1/sc/h/an3u8gpta43rgjny4tzujbn6p" async></script>
+<!---->          
+        
+        <script src="https://static.licdn.com/aero-v1/sc/h/dnujfszajjxceg4oth26xx6pt" async defer></script>
+<!---->      
+<!---->      
+      </body>
+    </html>
+  
+  
+  

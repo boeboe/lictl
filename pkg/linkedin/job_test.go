@@ -124,7 +124,7 @@ func TestSearchJobsPerPage(t *testing.T) {
 	// Directory containing test HTML files
 	_, filename, _, _ := runtime.Caller(0)
 	basepath := filepath.Dir(filename)
-	testDir := filepath.Join(basepath, "../..", "testdata", "job")
+	testDir := filepath.Join(basepath, "../..", "testdata", "job-search")
 
 	// Start a local HTTP server to serve the test files
 	server, addr := startLocalHTTPServer(testDir)
