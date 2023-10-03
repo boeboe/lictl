@@ -187,7 +187,7 @@ func TestGetUserFromRequest(t *testing.T) {
 			}
 			user, err := getUserFromRequest(req, false)
 			if err != nil {
-				t.Fatalf("Error in SearchJobsPerPage for file %s: %s", tt.fileName, err)
+				t.Fatalf("Error in getUserFromRequest for file %s: %s", tt.fileName, err)
 			}
 
 			if user.ConnectionCount != tt.expectedConnectionCount {

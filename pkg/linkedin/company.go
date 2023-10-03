@@ -4,8 +4,6 @@ import (
 	"fmt"
 	"log"
 	"net/http"
-	"regexp"
-	"strconv"
 	"strings"
 	"time"
 
@@ -126,7 +124,7 @@ func getCompanyFromRequest(req *http.Request, debug bool) (*Company, error) {
 	}
 
 	var company Company
-	followerCount, _ := extractCompanyFollowers(strings.TrimSpace(doc.Find(".top-card-layout__first-subline").Text()))
+	followerCount, _ := extractFollowersCount(strings.TrimSpace(doc.Find(".top-card-layout__first-subline").Text()))
 	foundedOn := strings.TrimSpace(doc.Find("div[data-test-id='about-us__foundedOn'] dd").Text())
 	headline := strings.TrimSpace(doc.Find(".top-card-layout__second-subline").Text())
 	headquarters := strings.TrimSpace(doc.Find("div[data-test-id='about-us__headquarters'] dd").Text())
@@ -156,18 +154,4 @@ func getCompanyFromRequest(req *http.Request, debug bool) (*Company, error) {
 	}
 
 	return &company, nil
-}
-
-func extractCompanyFollowers(s string) (int, error) {
-	// Define a regex pattern to match numbers
-	re := regexp.MustCompile(`(\d+,?\d*)\s*followers`)
-	match := re.FindStringSubmatch(s)
-
-	if len(match) < 2 {
-		return 0, fmt.Errorf("no match found")
-	}
-
-	// Remove commas and convert to integer
-	numStr := strings.ReplaceAll(match[1], ",", "")
-	return strconv.Atoi(numStr)
 }

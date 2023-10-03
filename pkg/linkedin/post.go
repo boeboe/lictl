@@ -4,8 +4,6 @@ import (
 	"fmt"
 	"log"
 	"net/http"
-	"regexp"
-	"strconv"
 	"strings"
 	"time"
 
@@ -138,9 +136,9 @@ func getPostFromRequest(req *http.Request, debug bool) (*Post, error) {
 		activityURN := strings.TrimSpace(s.AttrOr("data-activity-urn", ""))
 		author := strings.TrimSpace(header.Find(".leading-open").Text())
 		authorLinkedInUrl := cleanURL(strings.TrimSpace(header.Find(".leading-open").AttrOr("href", "")))
-		commmentCount, _ := extractPostComments(strings.TrimSpace(footer.Find("span[data-test-id=social-actions__comments]").Text()))
+		commmentCount, _ := extractCommentsCount(strings.TrimSpace(footer.Find("span[data-test-id=social-actions__comments]").Text()))
 		freshness := strings.Split(strings.TrimSpace(header.Find("div span time").Text()), "\n")[0]
-		likesCount, _ := extractPostLikes(strings.TrimSpace(footer.Find("span[data-test-id=social-actions__reaction-count]").Text()))
+		likesCount, _ := extractLikesCount(strings.TrimSpace(footer.Find("span[data-test-id=social-actions__reaction-count]").Text()))
 		postLink := cleanURL(doc.Find("head link").AttrOr("href", ""))
 		shareURN := strings.TrimSpace(s.AttrOr("data-attributed-urn", ""))
 
@@ -148,7 +146,7 @@ func getPostFromRequest(req *http.Request, debug bool) (*Post, error) {
 		var authorTitle string
 		if strings.Contains(authorLinkedInUrl, "linkedin.com/company") {
 			authorTitle = ""
-			companyFollowerCount, _ = extractCompanyFollowers(strings.TrimSpace(header.Find("div p").Text()))
+			companyFollowerCount, _ = extractFollowersCount(strings.TrimSpace(header.Find("div p").Text()))
 		} else {
 			authorTitle = strings.TrimSpace(header.Find("div p").Text())
 			companyFollowerCount = 0
@@ -175,24 +173,4 @@ func getPostFromRequest(req *http.Request, debug bool) (*Post, error) {
 		stopIteration = true
 	})
 	return &post, nil
-}
-
-func extractPostLikes(s string) (int, error) {
-	// Remove commas and convert to integer
-	numStr := strings.ReplaceAll(s, ",", "")
-	return strconv.Atoi(numStr)
-}
-
-func extractPostComments(s string) (int, error) {
-	// Define a regex pattern to match numbers
-	re := regexp.MustCompile(`(\d+,?\d*)\s*Comments`)
-	match := re.FindStringSubmatch(s)
-
-	if len(match) < 2 {
-		return 0, fmt.Errorf("no match found")
-	}
-
-	// Remove commas and convert to integer
-	numStr := strings.ReplaceAll(match[1], ",", "")
-	return strconv.Atoi(numStr)
 }

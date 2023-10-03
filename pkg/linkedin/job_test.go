@@ -136,7 +136,7 @@ func TestSearchJobsPerPage(t *testing.T) {
 			jobSearchURL := fmt.Sprintf("http://%s/%s", addr, tt.fileName)
 			jobs, err := GetJobsFromSearchUrl(jobSearchURL, false)
 			if err != nil {
-				t.Fatalf("Error in SearchJobsPerPage for file %s: %s", tt.fileName, err)
+				t.Fatalf("Error in GetJobsFromSearchUrl for file %s: %s", tt.fileName, err)
 			}
 
 			if len(jobs) != tt.expectedJobsCount {

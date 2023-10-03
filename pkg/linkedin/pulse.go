@@ -13,14 +13,15 @@ import (
 
 // Pulse represents the structure of a LinkedIn pulse.
 type Pulse struct {
-	Author       int    `json:"author"         csv:"author"`
-	AuthorTitle  string `json:"authorTitle"    csv:"authorTitle"`
-	CommentCount int    `json:"commmentCount"  csv:"commmentCount"`
-	HashTags     string `json:"hashTags"       csv:"hashTags"`
-	LikesCount   int    `json:"likesCount"     csv:"likesCount"`
-	PublishDate  string `json:"publishDate"    csv:"publishDate"`
-	PulseLink    string `json:"pulseLink"      csv:"pulseLink"`
-	Title        string `json:"title"          csv:"title"`
+	Author               string `json:"author"                csv:"author"`
+	AuthorLinkedInUrl    string `json:"authorLinkedInUrl"     csv:"authorLinkedInUrl"`
+	AuthorTitle          string `json:"authorTitle"           csv:"authorTitle"`
+	CommentCount         int    `json:"commmentCount"         csv:"commmentCount"`
+	AuthorFollowingCount int    `json:"authorFollowingCount"  csv:"authorFollowingCount"`
+	LikesCount           int    `json:"likesCount"            csv:"likesCount"`
+	PublishDate          string `json:"publishDate"           csv:"publishDate"`
+	PulseLink            string `json:"pulseLink"             csv:"pulseLink"`
+	Title                string `json:"title"                 csv:"title"`
 }
 
 func (p *Pulse) CsvContent() string {
@@ -122,29 +123,30 @@ func getPulseFromRequest(req *http.Request, debug bool) (*Pulse, error) {
 	}
 
 	var pulse Pulse
-	extractCompanyFollowers(strings.TrimSpace(doc.Find(".top-card-layout__first-subline").Text()))
-	// followerCount, _ := extractCompanyFollowers(strings.TrimSpace(doc.Find(".top-card-layout__first-subline").Text()))
-	// foundedOn := strings.TrimSpace(doc.Find("div[data-test-id='about-us__foundedOn'] dd").Text())
-	// headline := strings.TrimSpace(doc.Find(".top-card-layout__second-subline").Text())
-	// headquarters := strings.TrimSpace(doc.Find("div[data-test-id='about-us__headquarters'] dd").Text())
-	// industry := strings.TrimSpace(doc.Find("div[data-test-id='about-us__industry'] dd").Text())
-	// name := strings.TrimSpace(doc.Find(".top-card-layout__title").Text())
-	// size := strings.TrimSpace(doc.Find("div[data-test-id='about-us__size'] dd").Text())
-	// specialties := strings.TrimSpace(doc.Find("div[data-test-id='about-us__specialties'] dd").Text())
-	// companyType := strings.TrimSpace(doc.Find("div[data-test-id='about-us__organizationType'] dd").Text())
-	// website := strings.TrimSpace(doc.Find("div[data-test-id='about-us__website'] dd").Text())
+	header := doc.Find(".base-main-card--link")
+	footer := doc.Find(".main-publisher-card")
+	social := doc.Find(".x-social-activity")
+
+	author := strings.TrimSpace(header.Find(".base-card__full-link").Text())
+	authorLinkedInUrl := cleanURL(strings.TrimSpace(header.Find(".base-card__full-link").AttrOr("href", "")))
+	authorTitle := strings.TrimSpace(header.Find(".base-main-card__subtitle").Text())
+	commmentCount, _ := extractCommentsCount(strings.TrimSpace(social.Find("a[data-test-id='social-actions__comments']").Text()))
+	authorFollowingCount, _ := extractFollowersCount(strings.TrimSpace(footer.Find(".base-main-card__subtitle").Text()))
+	likesCount, _ := extractLikesCount(strings.TrimSpace(social.Find("span[data-test-id='social-actions__reaction-count']").Text()))
+	publishDate := strings.TrimSpace(header.Find(".base-main-card__metadata").Text())
+	pulseLink := cleanURL(doc.Find("head link").AttrOr("href", ""))
+	title := strings.TrimSpace(doc.Find(".pulse-title").Text())
 
 	pulse = Pulse{
-		// FollowerCount: followerCount,
-		// FoundedOn:     foundedOn,
-		// Headquarters:  headquarters,
-		// Headline:      headline,
-		// Industry:      industry,
-		// Name:          name,
-		// Size:          size,
-		// Specialties:   specialties,
-		// Type:          companyType,
-		// Website:       website,
+		Author:               author,
+		AuthorLinkedInUrl:    authorLinkedInUrl,
+		AuthorTitle:          authorTitle,
+		CommentCount:         commmentCount,
+		AuthorFollowingCount: authorFollowingCount,
+		LikesCount:           likesCount,
+		PublishDate:          publishDate,
+		PulseLink:            pulseLink,
+		Title:                title,
 	}
 
 	// Print the pulse for testing

@@ -231,7 +231,7 @@ func TestGetCompanyFromRequest(t *testing.T) {
 			}
 			company, err := getCompanyFromRequest(req, false)
 			if err != nil {
-				t.Fatalf("Error in SearchJobsPerPage for file %s: %s", tt.fileName, err)
+				t.Fatalf("Error in getCompanyFromRequest for file %s: %s", tt.fileName, err)
 			}
 
 			if company.FollowerCount != tt.expectedFollowerCount {

@@ -120,7 +120,7 @@ func getUserFromRequest(req *http.Request, debug bool) (*User, error) {
 	}
 
 	var user User
-	extractCompanyFollowers(strings.TrimSpace(doc.Find(".top-card-layout__first-subline").Text()))
+	extractFollowersCount(strings.TrimSpace(doc.Find(".top-card-layout__first-subline").Text()))
 	connectionCount := strings.TrimSpace(doc.Find(".top-card-layout__first-subline span").Eq(0).Text())
 	followerCount := strings.TrimSpace(doc.Find(".top-card-layout__first-subline span").Eq(1).Text())
 	userTitle := strings.TrimSpace(doc.Find(".top-card-layout__headline").Text())

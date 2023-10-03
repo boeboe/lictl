@@ -234,7 +234,7 @@ func TestGetPostFromRequest(t *testing.T) {
 			}
 			post, err := getPostFromRequest(req, false)
 			if err != nil {
-				t.Fatalf("Error in SearchJobsPerPage for file %s: %s", tt.fileName, err)
+				t.Fatalf("Error in getPostFromRequest for file %s: %s", tt.fileName, err)
 			}
 
 			if post.ActivityURN != tt.expectedActivityURN {
